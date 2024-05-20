@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Mist.Helper;
+using Mist.Pages;
+using Mist.Pages.AuthWindowPages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +25,12 @@ namespace Mist.Windows
         public AuthWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            PageManager.MainFrame = MainFrame;
+            PageManager.MainFrame.Navigate(new AuthPage());
         }
     }
 }

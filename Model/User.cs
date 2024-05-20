@@ -33,6 +33,8 @@ public partial class User
 
     public string? Bio { get; set; }
 
+    public int RoleId { get; set; }
+
     public virtual Country Country { get; set; } = null!;
 
     public virtual ICollection<Developer> Developers { get; set; } = new List<Developer>();
@@ -52,6 +54,8 @@ public partial class User
     public virtual ICollection<Message> MessageSenders { get; set; } = new List<Message>();
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+
+    public virtual Role Role { get; set; } = null!;
 
     public virtual ICollection<UserGame> UserGames { get; set; } = new List<UserGame>();
 }

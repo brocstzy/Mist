@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mist.Windows"
         mc:Ignorable="d"
-        Title="AuthWindow" Height="450" Width="800"
+        Title="Authorization" Height="400" Width="500"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        Loaded="Window_Loaded"
         >
     <Grid>
-        
+        <Frame x:Name="MainFrame"
+               NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

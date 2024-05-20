@@ -9,6 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\close.png" />
+    <None Remove="Assets\maximize.png" />
+    <None Remove="Assets\minimize.png" />
+    <None Remove="Assets\mist-transparent.png" />
+    <None Remove="Assets\restore.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
       <PrivateAssets>all</PrivateAssets>
@@ -18,8 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\" />
-    <Folder Include="Helper\" />
+    <Resource Include="Assets\close.png" />
+    <Resource Include="Assets\maximize.png" />
+    <Resource Include="Assets\minimize.png" />
+    <Resource Include="Assets\mist-transparent.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\restore.png" />
   </ItemGroup>
 
 </Project>
