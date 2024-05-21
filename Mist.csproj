@@ -12,8 +12,13 @@
     <None Remove="Assets\close.png" />
     <None Remove="Assets\maximize.png" />
     <None Remove="Assets\minimize.png" />
-    <None Remove="Assets\mist-transparent.png" />
+    <None Remove="Assets\mist-tp.png" />
+    <None Remove="Assets\mist-white-tp.png" />
+    <None Remove="Assets\mist.png" />
     <None Remove="Assets\restore.png" />
+    <None Remove="misticons\mist.jpg" />
+    <None Remove="misticons\mist.png" />
+    <None Remove="misticons\mist1.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,13 +31,34 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\close.png" />
-    <Resource Include="Assets\maximize.png" />
-    <Resource Include="Assets\minimize.png" />
-    <Resource Include="Assets\mist-transparent.png">
+    <Resource Include="Assets\close.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Assets\restore.png" />
+    <Resource Include="Assets\maximize.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\minimize.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\mist-tp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\mist-white-tp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\mist.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\restore.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="misticons\mist.jpg" />
+    <Resource Include="misticons\mist.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="misticons\mist1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

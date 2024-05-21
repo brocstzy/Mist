@@ -11,9 +11,12 @@
         AllowsTransparency="True"
         ResizeMode="NoResize"
         Loaded="Window_Loaded"
+        Background="Transparent"
         >
     <Grid>
-        <Frame x:Name="MainFrame"
-               NavigationUIVisibility="Hidden"/>
-    </Grid>
+
+            <Frame x:Name="MainFrame"
+                   NavigationUIVisibility="Hidden"/>
+        </Grid>
+
 </Window>

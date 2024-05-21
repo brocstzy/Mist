@@ -4,17 +4,109 @@
              xmlns:local="clr-namespace:Mist"
              StartupUri="Windows/AuthWindow.xaml">
     <Application.Resources>
-        
-        <Style TargetType="Button" x:Key="close_Button">
-            <Style.Triggers>
 
-            </Style.Triggers>
+        <SolidColorBrush x:Key="closeButton.MouseOver.Background" Color="#E22A27"/>
+        <SolidColorBrush x:Key="closeButton.MouseOver.Border" Color="#E22A27"/>
+        <SolidColorBrush x:Key="closeButton.Pressed.Background" Color="#E22A27"/>
+        <SolidColorBrush x:Key="closeButton.Pressed.Border" Color="#E22A27"/>
+        <SolidColorBrush x:Key="closeButton.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="closeButton.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="closeButton.Disabled.Foreground" Color="#FF838383"/>
+
+        <SolidColorBrush x:Key="defaultGray" Color="#bfbfbf"/>
+        <SolidColorBrush x:Key="hoverGray" Color="#e3e3e3"/>
+        <SolidColorBrush x:Key="clickGray" Color="#fcfcfc"/>
+
+        <FontFamily x:Key="font_light">
+            Motiva Sans Light
+        </FontFamily>
+        <FontFamily x:Key="font_regular">
+            Motiva Sans Regular
+        </FontFamily>
+        <FontFamily x:Key="font_medium">
+            Motiva Sans Medium
+        </FontFamily>
+        <FontFamily x:Key="font_bold">
+            Motiva Sans Bold
+        </FontFamily>
+
+        <ControlTemplate x:Key="ClickableLabelTemplate" TargetType="{x:Type Label}">
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="TextDecorations" Value="Underline"/>
+                </Style>
+            </ControlTemplate.Resources>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource ResourceKey=hoverGray}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+            
+            
+        </ControlTemplate>
+        
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <ControlTemplate x:Key="TextBoxTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="closeButtonTemplate" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource closeButton.MouseOver.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource closeButton.MouseOver.Border}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource closeButton.Pressed.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource closeButton.Pressed.Border}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource closeButton.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource closeButton.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource closeButton.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="Button" x:Key="titleBar_Button_Base">
+
+            <EventSetter Event="Click" Handler="TitleBarButton_Click"/>
+
             <Setter Property="Height" Value="32"/>
             <Setter Property="Width" Value="32"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="close_Button" BasedOn="{StaticResource titleBar_Button_Base}">
+
             <Setter Property="Content">
                 <Setter.Value>
                     <Image Source="/Assets/close.png"
@@ -23,8 +115,48 @@
             </Setter>
         </Style>
 
+        <Style TargetType="Button" x:Key="maximize_Button" BasedOn="{StaticResource titleBar_Button_Base}">
+
+            <Setter Property="Content">
+                <Setter.Value>
+                    <Image Source="/Assets/maximize.png"
+                           Width="16"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="minimize_Button" BasedOn="{StaticResource titleBar_Button_Base}">
+
+            <Setter Property="Content">
+                <Setter.Value>
+                    <Image Source="/Assets/minimize.png"
+                           Width="16"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="restore_Button" BasedOn="{StaticResource titleBar_Button_Base}">
+
+            <Setter Property="Content">
+                <Setter.Value>
+                    <Image Source="/Assets/restore.png"
+                           Width="16"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style TargetType="Image">
             <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="global_Label">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            
+        </Style>
+
+        <Style TargetType="Control" x:Key="global_Control">
+            
         </Style>
         
     </Application.Resources>

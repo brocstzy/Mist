@@ -1,6 +1,8 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Mist
 {
@@ -9,6 +11,13 @@ namespace Mist
     /// </summary>
     public partial class App : Application
     {
+        private void TitleBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = (Button)sender;
+            if (btn.Name.Equals("closeWindow_Button"))
+                Application.Current.Shutdown();
+            
+        }
     }
 
 }
