@@ -6,19 +6,25 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>mist_white_tp_ii2_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\close-white.png" />
     <None Remove="Assets\close.png" />
+    <None Remove="Assets\maximize-white.png" />
     <None Remove="Assets\maximize.png" />
+    <None Remove="Assets\minimize-white.png" />
     <None Remove="Assets\minimize.png" />
     <None Remove="Assets\mist-tp.png" />
     <None Remove="Assets\mist-white-tp.png" />
     <None Remove="Assets\mist.png" />
+    <None Remove="Assets\restore-white.png" />
     <None Remove="Assets\restore.png" />
-    <None Remove="misticons\mist.jpg" />
-    <None Remove="misticons\mist.png" />
-    <None Remove="misticons\mist1.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="mist_white_tp_ii2_icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,14 +33,24 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\close-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\close.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\maximize-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\maximize.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\minimize-white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\minimize.png">
@@ -49,14 +65,10 @@
     <Resource Include="Assets\mist.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\restore-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\restore.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="misticons\mist.jpg" />
-    <Resource Include="misticons\mist.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="misticons\mist1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using Mist.Model;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,7 @@ namespace Mist
     /// </summary>
     public partial class App : Application
     {
+        public static MistContext Context = new MistContext();
         private void TitleBarButton_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;

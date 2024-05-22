@@ -5,10 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Mist.Pages.AuthWindowPages"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="500"
+      d:DesignHeight="362" d:DesignWidth="500"
       Width="500" Height="400"
       Title="AuthPage"
-      MouseDown="Page_MouseDown"
       
       >
     <Page.Resources>
@@ -20,21 +19,54 @@
             <Setter Property="Height" Value="33"/>
             <Setter Property="Background" Value="#32353C"/>
             <Setter Property="BorderBrush" Value="#32353C"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="5,0,0,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="SelectionBrush" Value="#54a5d4"/>
         </Style>
         <Style TargetType="PasswordBox">
             <Setter Property="Height" Value="33"/>
             <Setter Property="Background" Value="#32353C"/>
             <Setter Property="BorderBrush" Value="#32353C"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="5,0,0,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="SelectionBrush" Value="#54a5d4"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Height" Value="40"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Width" Value="300"/>
             <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style TargetType="CheckBox">
             <Setter Property="Foreground" Value="#bfbfbf"/>
             <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
             <Setter Property="Margin" Value="-1,7.5,0,15"/>
         </Style>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <ControlTemplate x:Key="PasswordBoxTemplate" TargetType="{x:Type PasswordBox}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#393C44"/>
+                </Trigger>
+                <!--<Trigger Property="IsKeyboardFocused" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                </Trigger>-->
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Page.Resources>
 
     <Grid >
@@ -54,7 +86,7 @@
         <Grid Grid.Row="1" Margin="30,0,30,20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
-                <RowDefinition />
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             
@@ -81,32 +113,45 @@
                         Margin="0,15,0,0">
                 <Label Content="ИМЯ ПОЛЬЗОВАТЕЛЯ"
                        FontFamily="{StaticResource font_medium}"
-                       Foreground="#068FFF"/>
-                <TextBox Template="{DynamicResource TextBoxTemplate}" x:Name="login_textBox"/>
+                       Foreground="#068FFF"
+                       Margin="0,0,0,1"/>
+                <TextBox Template="{DynamicResource TextBoxTemplate}"
+                         x:Name="login_textBox"
+                         />
                 <Label Content="ПАРОЛЬ"
-                       Margin="0,7.5,0,0"/>
-                <PasswordBox x:Name="password_PasswordBox"/>
-                <CheckBox x:Name="saveLogin_CheckBox">
+                       Margin="0,7.5,0,1"/>
+                <PasswordBox Template="{DynamicResource PasswordBoxTemplate}" x:Name="password_PasswordBox"
+                             />
+                <CheckBox Template="{DynamicResource CheckBoxTemplate}"
+                          x:Name="saveLogin_CheckBox"
+                          HorizontalAlignment="Left">
                     <CheckBox.Content>
                         <Label Content="Запомнить меня" Margin="0,2,0,0"/>
                     </CheckBox.Content>
                 </CheckBox>
-                <Button x:Name="logIn_Button"
-                        
-                        Content="Войти"/>
+                <Button Template="{DynamicResource ButtonTemplate}"
+                        x:Name="logIn_Button"
+                        MouseEnter="logIn_Button_MouseEnter"
+                        MouseLeave="logIn_Button_MouseLeave"
+                        Content="Войти"
+                        Click="logIn_Button_Click"/>
             </StackPanel>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Label Template="{DynamicResource ClickableLabelTemplate}"
+                <Label x:Name="restoreAccount_Label"
+                       Template="{DynamicResource ClickableLabelTemplate}"
                        HorizontalAlignment="Left"
-                       VerticalAlignment="Bottom">
+                       VerticalAlignment="Bottom"
+                       MouseLeftButtonUp="restoreAccount_Label_MouseLeftButtonUp"
+                       >
                     <Label.Content>
                         <TextBlock Text="Помогите, я не могу войти"/>
                     </Label.Content>
                 </Label>
+                
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
@@ -119,9 +164,12 @@
                             <TextBlock Text="Нет аккаунта Mist?"/>
                         </Label.Content>
                     </Label>
-                    <Label Template="{DynamicResource ClickableLabelTemplate}"
+                    <Label x:Name="createAccount_Label"
+                           Template="{DynamicResource ClickableLabelTemplate}"
                            Grid.Row="1"
-                           HorizontalAlignment="Right">
+                           HorizontalAlignment="Right"
+                           MouseLeftButtonUp="createAccount_Label_MouseLeftButtonUp"
+                           >
                         <Label.Content>
                             <TextBlock Text="Создать аккаунт"/>
                         </Label.Content>

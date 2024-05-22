@@ -58,4 +58,27 @@ public partial class User
     public virtual Role Role { get; set; } = null!;
 
     public virtual ICollection<UserGame> UserGames { get; set; } = new List<UserGame>();
+
+    public User()
+    {
+
+    }
+    public User(string login,
+                string password,
+                DateTime creationDate,
+                string email,
+                string nickname,
+                decimal balance,
+                int countryId,
+                int roleId)
+    {
+        Login = login;
+        Password = password;
+        CreationDate = creationDate;
+        Email = email;
+        Nickname = nickname;
+        Balance = balance;
+        CountryId = countryId;
+        RoleId = roleId;
+    }
 }

@@ -27,7 +27,7 @@ namespace Mist.Pages.AuthWindowPages
         {
             InitializeComponent();
             SetBackground();
-            SetButtonBackground();
+            ButtonPainter.SetButtonBackground(logIn_Button);
         }
 
         public void SetBackground()
@@ -39,15 +39,6 @@ namespace Mist.Pages.AuthWindowPages
             bg.GradientStops.Add(new GradientStop(Color.FromRgb(0, 0, 0), 1.0));
             this.Background = bg;
         }
-        public void SetButtonBackground()
-        {
-            LinearGradientBrush bg = new LinearGradientBrush();
-            bg.StartPoint = new Point(0, 0.5);
-            bg.EndPoint = new Point(1, 1.5);
-            bg.GradientStops.Add(new GradientStop(Color.FromRgb(6, 143, 255), 0.0));
-            bg.GradientStops.Add(new GradientStop(Color.FromRgb(78, 79, 235), 1.0));
-            logIn_Button.Background = bg;
-        }
 
         private void titleBar_Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -55,11 +46,33 @@ namespace Mist.Pages.AuthWindowPages
                 _aw.DragMove();
         }
 
-
-
-        private void Page_MouseDown(object sender, MouseButtonEventArgs e)
+        private void logIn_Button_MouseEnter(object sender, MouseEventArgs e)
         {
-            
+            ButtonPainter.SetButtonBackgroundHover(sender);
+        }
+
+        private void logIn_Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ButtonPainter.SetButtonBackground(sender);
+        }
+
+        private void logIn_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void createAccount_Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ManageAccountWindow maw = new ManageAccountWindow(2);
+            maw.Owner = WindowManager.GetWindow<AuthWindow>();
+            maw.ShowDialog();
+        }
+
+        private void restoreAccount_Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ManageAccountWindow maw = new ManageAccountWindow(1);
+            maw.Owner = WindowManager.GetWindow<AuthWindow>();
+            maw.ShowDialog();
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mist.Windows"
         mc:Ignorable="d"
-        Title="Authorization" Height="400" Width="500"
+        Title="Authorization" Height="362" Width="500"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"

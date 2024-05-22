@@ -15,7 +15,7 @@ namespace Mist.Helper
         }
         public static Window GetWindow<TWindow>() where TWindow : Window
         {
-            return Application.Current.Windows.OfType<TWindow>().FirstOrDefault();
+            return Application.Current.Windows.OfType<TWindow>().FirstOrDefault()!;
         }
     }
 }
