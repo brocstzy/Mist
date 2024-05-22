@@ -110,7 +110,6 @@ namespace Mist.Pages.ManageAccountWindowPages
                                       nickname_TextBox.Text,
                                       Decimal.Zero,
                                       countries_ComboBox.SelectedIndex,
-                                      
                                       1));
                 mc.SaveChanges();
             }
@@ -147,11 +146,13 @@ namespace Mist.Pages.ManageAccountWindowPages
                 if (!Regex.IsMatch(e.Text, "^[a-z_@]$"))
                 { 
                     e.Handled = true;
-                    return;
                 }
-                return;
+                if (((TextBox)sender).Text.Contains("@") && e.Text == "@")
+                {
+                    e.Handled = true;
+                }
             }
-            if (!Regex.IsMatch(e.Text, "^[a-z_]$"))
+            if (!Regex.IsMatch(e.Text, "^[a-z_]$") && !(((TextBox)sender).Text.Contains("email")))
             {
                 e.Handled = true;
             }
@@ -173,6 +174,10 @@ namespace Mist.Pages.ManageAccountWindowPages
                 e.Handled = true;
             }
             
+        }
+        public void new123()
+        {
+
         }
     }
 }

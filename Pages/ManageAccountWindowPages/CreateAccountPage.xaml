@@ -28,6 +28,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="SelectionBrush" Value="#54a5d4"/>
             <Setter Property="Template" Value="{DynamicResource TextBoxTemplate}"/>
+            <EventSetter Event="CommandManager.PreviewExecuted" Handler="new123"/>
             <EventSetter Event="PreviewTextInput" Handler="TextBox_PreviewTextInput"/>
         </Style>
         <Style TargetType="PasswordBox">
@@ -282,7 +283,8 @@
                      MaxLength="30"/>
             <Label Content="Ваш никнейм"/>
             <TextBox x:Name="nickname_TextBox"
-                     Margin="0,0,0,16"/>
+                     Margin="0,0,0,16"
+                     CommandManager.PreviewExecuted="cmpe_1"/>
             <Label Content="Страна проживания"/>
             <ComboBox Template="{DynamicResource ComboBoxTemplate}" x:Name="countries_ComboBox"
                       Margin="0,0,0,16"/>
