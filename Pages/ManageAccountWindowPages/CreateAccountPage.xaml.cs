@@ -110,6 +110,7 @@ namespace Mist.Pages.ManageAccountWindowPages
                                       nickname_TextBox.Text,
                                       Decimal.Zero,
                                       countries_ComboBox.SelectedIndex,
+                                      
                                       1));
                 mc.SaveChanges();
             }
