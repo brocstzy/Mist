@@ -141,11 +141,20 @@ namespace Mist.Pages.ManageAccountWindowPages
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
+            if (((TextBox)sender).Name.Contains("email"))
+            {
+                if (!Regex.IsMatch(e.Text, "^[a-z_@]$"))
+                { 
+                    e.Handled = true;
+                    return;
+                }
+                return;
+            }
             if (!Regex.IsMatch(e.Text, "^[a-z_]$"))
             {
                 e.Handled = true;
             }
-            else if (((TextBox)sender).Text.Contains("_") && e.Text == "_")
+            if (((TextBox)sender).Text.Contains("_") && e.Text == "_")
             {
                 e.Handled = true;
             }
