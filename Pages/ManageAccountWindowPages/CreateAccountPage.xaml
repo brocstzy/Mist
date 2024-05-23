@@ -28,6 +28,11 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="SelectionBrush" Value="#54a5d4"/>
             <Setter Property="Template" Value="{DynamicResource TextBoxTemplate}"/>
+            <Setter Property="ContextMenu">
+                <Setter.Value>
+                    <ContextMenu IsEnabled="False" Visibility="Hidden"/>
+                </Setter.Value>
+            </Setter>
             <EventSetter Event="CommandManager.PreviewExecuted" Handler="TextBox_PreviewExecuted"/>
             <EventSetter Event="PreviewTextInput" Handler="TextBox_PreviewTextInput"/>
         </Style>
@@ -273,7 +278,9 @@
                      />
             <Label Content="Пароль"/>
             <PasswordBox Template="{DynamicResource PasswordBoxTemplate}" x:Name="password_PasswordBox"
-                         Margin="0,0,0,16"/>
+                         Margin="0,0,0,16"
+                         CommandManager.PreviewExecuted="TextBox_PreviewExecuted"
+                         ContextMenu="{x:Null}"/>
             <Label Content="Адрес электронной почты"/>
             <TextBox x:Name="email_TextBox"
                      Margin="0,0,0,16"

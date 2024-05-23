@@ -178,7 +178,7 @@ namespace Mist.Pages.ManageAccountWindowPages
         }
         public void TextBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            if (e.Command == ApplicationCommands.Paste && ((TextBox)sender).Name.Contains("email2"))
+            if (e.Command == ApplicationCommands.Paste && ((Control)sender).Name.Contains("email2"))
             {
                 string pastedText = Clipboard.GetText();
                 string pattern = "^[a-z]*_?[a-z]*@?[a-z]*.?[a-z]*$";
@@ -187,7 +187,6 @@ namespace Mist.Pages.ManageAccountWindowPages
                     e.Handled = true;
                     return;
                 }
-
             }
             else if (e.Command == ApplicationCommands.Paste)
                 e.Handled = true;
