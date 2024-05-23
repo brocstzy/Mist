@@ -49,15 +49,29 @@ namespace Mist.Pages.ManageAccountWindowPages
                 }
             }
         }
-        public bool AreFieldsEmpty()
+        public (bool, List<Control>) AreFieldsEmpty()
         {
-            if (String.IsNullOrWhiteSpace(login_TextBox.Text) ||
-                String.IsNullOrWhiteSpace(password_PasswordBox.Password) ||
-                String.IsNullOrWhiteSpace(email_TextBox.Text) ||
-                String.IsNullOrWhiteSpace(email2_TextBox.Text) ||
-                String.IsNullOrWhiteSpace(nickname_TextBox.Text))
-                return true;
-            return false;
+            List<Control> allBoxes =
+            [
+                login_TextBox,
+                email_TextBox,
+                email2_TextBox,
+                nickname_TextBox
+            ];
+            List<Control> emptyBoxes = new List<Control>();
+            foreach (TextBox box in allBoxes)
+            {
+                if (String.IsNullOrWhiteSpace(box.Text))
+                {
+                    emptyBoxes.Add(box);
+                }
+            }
+            if (String.IsNullOrEmpty(password_PasswordBox.Password))
+                emptyBoxes.Add(password_PasswordBox);
+
+            if (emptyBoxes.Count > 0)
+                return (true,  emptyBoxes);
+            return (false, null);
         }
         public bool IsEmailValid()
         {
@@ -80,8 +94,13 @@ namespace Mist.Pages.ManageAccountWindowPages
 
         private void createAccount_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (AreFieldsEmpty())
+            (bool, List<Control>) boxesResult = AreFieldsEmpty();
+            if (boxesResult.Item1)
             {
+                foreach (var box in boxesResult.Item2)
+                {
+                    box.BorderBrush = Brushes.Red;
+                }
                 return;
             }
             if (!IsEmailValid())
@@ -138,6 +157,10 @@ namespace Mist.Pages.ManageAccountWindowPages
         {
             if (((TextBox)sender).Name.Equals("nickname_TextBox"))
                 return;
+            else if (((Control)sender).Name.Contains("email"))
+            {
+                return;
+            }
             else
             {
                 if (((TextBox)sender).Name.Contains("email"))

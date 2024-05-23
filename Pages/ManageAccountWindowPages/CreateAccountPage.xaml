@@ -47,7 +47,6 @@
             <Setter Property="AllowDrop" Value="False"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="SelectionBrush" Value="#54a5d4"/>
-            <EventSetter Event="PreviewTextInput" Handler="PasswordBox_PreviewTextInput"/>
         </Style>
         <Style TargetType="ComboBox">
             <Setter Property="Height" Value="30"/>
