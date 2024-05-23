@@ -28,6 +28,7 @@ namespace Mist.Pages.AuthWindowPages
             InitializeComponent();
             SetBackground();
             ButtonPainter.SetButtonBackground(logIn_Button);
+            
         }
 
         public void SetBackground()

@@ -1,29 +1,14 @@
 ﻿using Mist.Helper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Mist.Model;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Net;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Web;
-using System.Globalization;
-using Newtonsoft.Json;
-using System.Text.Json.Nodes;
-using System.Text.Json;
-using System.Text.RegularExpressions;
-using System.Security.RightsManagement;
-using System.ComponentModel.DataAnnotations;
-using Mist.Model;
 
 namespace Mist.Pages.ManageAccountWindowPages
 {
@@ -39,6 +24,16 @@ namespace Mist.Pages.ManageAccountWindowPages
             GetCountryByIP();
             RefreshCountries();
             ButtonPainter.SetButtonBackground(createAccount_Button);
+            SetBackground();
+        }
+        public void SetBackground()
+        {
+            LinearGradientBrush bg = new LinearGradientBrush();
+            bg.StartPoint = new Point(0, 0);
+            bg.EndPoint = new Point(1, 1);
+            bg.GradientStops.Add(new GradientStop(Color.FromRgb(12, 11, 61), 0.0));
+            bg.GradientStops.Add(new GradientStop(Color.FromRgb(0, 0, 0), 1.0));
+            this.Background = bg;
         }
         public void RefreshCountries()
         {
@@ -141,24 +136,30 @@ namespace Mist.Pages.ManageAccountWindowPages
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (((TextBox)sender).Name.Contains("email"))
+            if (((TextBox)sender).Name.Equals("nickname_TextBox"))
+                return;
+            else
             {
-                if (!Regex.IsMatch(e.Text, "^[a-z_@]$"))
-                { 
-                    e.Handled = true;
+                if (((TextBox)sender).Name.Contains("email"))
+                {
+                    if (!Regex.IsMatch(e.Text, "^[a-z_@]$"))
+                    {
+                        e.Handled = true;
+                    }
+                    if (((TextBox)sender).Text.Contains("@") && e.Text == "@")
+                    {
+                        e.Handled = true;
+                    }
                 }
-                if (((TextBox)sender).Text.Contains("@") && e.Text == "@")
+                if (!Regex.IsMatch(e.Text, "^[a-z_]$") && !((TextBox)sender).Text.Contains("email"))
                 {
                     e.Handled = true;
                 }
-            }
-            if (!Regex.IsMatch(e.Text, "^[a-z_]$") && !(((TextBox)sender).Text.Contains("email")))
-            {
-                e.Handled = true;
-            }
-            if (((TextBox)sender).Text.Contains("_") && e.Text == "_")
-            {
-                e.Handled = true;
+                if (((TextBox)sender).Text.Contains("_") && e.Text == "_")
+                {
+                    e.Handled = true;
+                }
+
             }
         }
 
@@ -167,17 +168,29 @@ namespace Mist.Pages.ManageAccountWindowPages
             if (!Regex.IsMatch(e.Text, "^[a-z_]$"))
             {
                 e.Handled = true;
-                
+
             }
             else if (((PasswordBox)sender).Password.Contains("_") && e.Text == "_")
             {
                 e.Handled = true;
             }
-            
-        }
-        public void new123()
-        {
 
+        }
+        public void TextBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Paste && ((TextBox)sender).Name.Contains("email2"))
+            {
+                string pastedText = Clipboard.GetText();
+                string pattern = "^[a-z]*_?[a-z]*@?[a-z]*.?[a-z]*$";
+                if (!Regex.IsMatch(pastedText, pattern))
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+            }
+            else if (e.Command == ApplicationCommands.Paste)
+                e.Handled = true;
         }
     }
 }

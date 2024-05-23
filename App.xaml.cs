@@ -1,9 +1,6 @@
 ﻿using Mist.Model;
-using System.Configuration;
-using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Mist
 {
@@ -16,9 +13,11 @@ namespace Mist
         private void TitleBarButton_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;
+            var window = Window.GetWindow(btn);
             if (btn.Name.Equals("closeWindow_Button"))
-                Application.Current.Shutdown();
-            
+            {
+                window.Close();
+            }
         }
     }
 
