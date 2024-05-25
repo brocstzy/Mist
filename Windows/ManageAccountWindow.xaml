@@ -28,7 +28,8 @@
                 VerticalAlignment="Top"/>
         </Grid>
         <Grid Margin="32,0,32,32" Background="{StaticResource darkPurple}"
-              Grid.Row="1">
+              Grid.Row="1"
+              x:Name="content_Grid">
             <Frame x:Name="MainFrame"
                    NavigationUIVisibility="Hidden"/>
         </Grid>

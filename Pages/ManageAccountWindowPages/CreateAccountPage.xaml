@@ -7,9 +7,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="736" d:DesignWidth="736"
       Title="CreateAccountPage"
+      Loaded="Page_Loaded"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Page.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource global_Label}">
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+            <Setter Property="Foreground" Value="#bfbfbf"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,1"/>
+        </Style>
+        <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
             <Setter Property="Foreground" Value="#bfbfbf"/>
             <Setter Property="FontSize" Value="16"/>
@@ -33,6 +40,8 @@
                     <ContextMenu IsEnabled="False" Visibility="Hidden"/>
                 </Setter.Value>
             </Setter>
+            <EventSetter Event="PreviewKeyDown" Handler="TextBox_PreviewKeyDown"/>
+            <EventSetter Event="TextChanged" Handler="TextBox_TextChanged"/>
             <EventSetter Event="CommandManager.PreviewExecuted" Handler="TextBox_PreviewExecuted"/>
             <EventSetter Event="PreviewTextInput" Handler="TextBox_PreviewTextInput"/>
         </Style>
@@ -45,8 +54,11 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="MaxLength" Value="20"/>
             <Setter Property="AllowDrop" Value="False"/>
+            
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="SelectionBrush" Value="#54a5d4"/>
+            <EventSetter Event="PasswordChanged" Handler="PasswordBox_PasswordChanged"/>
+            <EventSetter Event="PreviewKeyDown" Handler="PasswordBox_PreviewKeyDown"/>
         </Style>
         <Style TargetType="ComboBox">
             <Setter Property="Height" Value="30"/>
@@ -284,10 +296,22 @@
             <TextBox x:Name="email_TextBox"
                      Margin="0,0,0,16"
                      MaxLength="30"/>
+            <Label Content="Некорректный адрес электронной почты"
+                   x:Name="wrongEmail_Label"
+                   Foreground="Red"
+                   Margin="-1,-16,0,16"
+                   FontSize="12"
+                   Visibility="Collapsed"/>
             <Label Content="Адрес электронной почты (повторно)"/>
             <TextBox x:Name="email2_TextBox"
                      Margin="0,0,0,16"
                      MaxLength="30"/>
+            <Label Content="Адреса не совпадают"
+                   x:Name="emailsNotMatch_Label"
+                   Foreground="Red"
+                   Margin="-1,-16,0,16"
+                   FontSize="12"
+                   Visibility="Collapsed"/>
             <Label Content="Ваш никнейм"/>
             <TextBox x:Name="nickname_TextBox"
                      Margin="0,0,0,16"
@@ -296,12 +320,29 @@
             <ComboBox Template="{DynamicResource ComboBoxTemplate}"
                       x:Name="countries_ComboBox"
                       Margin="0,0,0,16"/>
-            <CheckBox x:Name="age_CheckBox"
-                      Margin="-1,0,0,16">
-                <CheckBox.Content>
-                    <Label Content="Мне 14 или более лет, я ознакомился с EULA и принимаю TOS"/>
-                </CheckBox.Content>
-            </CheckBox>
+            <Border x:Name="checkBox_Border"
+                    BorderBrush="Red"
+                    BorderThickness="0"
+                    Margin="-1,0,0,16"
+                    HorizontalAlignment="Left"
+                    Padding="0">
+                <CheckBox x:Name="age_CheckBox"
+                      Checked="age_CheckBox_Checked"
+                      >
+                    <CheckBox.Content>
+                        <TextBlock Text="Мне 14 или более лет, я ознакомился с EULA и принимаю TOS"
+                               Margin="0,-2,0,0"
+                               x:Name="checkBox_TextBlock"/>
+                    </CheckBox.Content>
+                </CheckBox>
+            </Border>
+
+            <Label x:Name="checkBox_Label"
+                   Content="Обязательное поле"
+                   Foreground="Red"
+                   FontSize="12"
+                   Margin="0,-16,0,16"
+                   Visibility="Collapsed"/>
             <Button x:Name="createAccount_Button"
                     Content="Создать аккаунт"
                     Click="createAccount_Button_Click"

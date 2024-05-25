@@ -1,0 +1,29 @@
+﻿<Page x:Class="Mist.Pages.ManageAccountWindowPages.SuccessfulRegistrationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mist.Pages.ManageAccountWindowPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="736" d:DesignWidth="736"
+      Title="SuccessfulRegistrationPage"
+      Loaded="Page_Loaded"
+      >
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+            <Setter Property="Foreground" Value="#bfbfbf"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,25"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="64,64,128,0"
+          x:Name="main_Grid">
+        <StackPanel Orientation="Vertical">
+            <Label Content="Вы успешно зарегистрировались в Mist."/>
+            <Label x:Name="timer_Label" 
+                   Content="Автоматическое перенаправление через 3..."/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -17,7 +17,7 @@ namespace Mist.Pages.ManageAccountWindowPages
     /// </summary>
     public partial class CreateAccountPage : Page
     {
-        private string _userCountry;
+        private string _userCountry = "";
         public CreateAccountPage()
         {
             InitializeComponent();
@@ -49,7 +49,7 @@ namespace Mist.Pages.ManageAccountWindowPages
                 }
             }
         }
-        public (bool, List<Control>) AreFieldsEmpty()
+        public List<Control> GetEmptyFields()
         {
             List<Control> allBoxes =
             [
@@ -70,8 +70,8 @@ namespace Mist.Pages.ManageAccountWindowPages
                 emptyBoxes.Add(password_PasswordBox);
 
             if (emptyBoxes.Count > 0)
-                return (true,  emptyBoxes);
-            return (false, null);
+                return emptyBoxes;
+            return null;
         }
         public bool IsEmailValid()
         {
@@ -94,10 +94,10 @@ namespace Mist.Pages.ManageAccountWindowPages
 
         private void createAccount_Button_Click(object sender, RoutedEventArgs e)
         {
-            (bool, List<Control>) boxesResult = AreFieldsEmpty();
-            if (boxesResult.Item1)
+            var emptyFields = GetEmptyFields();
+            if (emptyFields != null)
             {
-                foreach (var box in boxesResult.Item2)
+                foreach (var box in emptyFields)
                 {
                     box.BorderBrush = Brushes.Red;
                 }
@@ -105,14 +105,22 @@ namespace Mist.Pages.ManageAccountWindowPages
             }
             if (!IsEmailValid())
             {
+                wrongEmail_Label.Visibility = Visibility.Visible;
+                email_TextBox.BorderBrush = Brushes.Red;
                 return;
             }
             if (!DoEmailsMatch())
             {
+                email_TextBox.BorderBrush = Brushes.Red;
+                email2_TextBox.BorderBrush = Brushes.Red;
+                emailsNotMatch_Label.Visibility = Visibility.Visible;
                 return;
             }
             if (!DoesUserAgree())
             {
+                checkBox_Label.Visibility = Visibility.Visible;
+                checkBox_Border.BorderThickness = new Thickness(1);
+                checkBox_Border.Padding = new Thickness(5);
                 return;
             }
             using (MistContext mc = new MistContext())
@@ -127,6 +135,7 @@ namespace Mist.Pages.ManageAccountWindowPages
                                       1));
                 mc.SaveChanges();
             }
+            PageManager.MainFrame.Navigate(new SuccessfulRegistrationPage());
         }
 
         private void createAccount_Button_MouseEnter(object sender, MouseEventArgs e)
@@ -165,7 +174,7 @@ namespace Mist.Pages.ManageAccountWindowPages
             {
                 if (((TextBox)sender).Name.Contains("email"))
                 {
-                    if (!Regex.IsMatch(e.Text, "^[a-z_@]$"))
+                    if (!Regex.IsMatch(e.Text, "^[a-z_@]$") || e.Text == " ")
                     {
                         e.Handled = true;
                     }
@@ -213,6 +222,47 @@ namespace Mist.Pages.ManageAccountWindowPages
             }
             else if (e.Command == ApplicationCommands.Paste)
                 e.Handled = true;
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ((Control)sender).BorderBrush = new SolidColorBrush(Color.FromRgb(50, 53, 60));
+            if (((Control)sender).Name.Contains("email_TextBox"))
+                wrongEmail_Label.Visibility = Visibility.Collapsed;
+            else if (((Control)sender).Name.Contains("email2"))
+            {
+                emailsNotMatch_Label.Visibility = Visibility.Collapsed;
+                email_TextBox.BorderBrush = new SolidColorBrush(Color.FromRgb(50, 53, 60));
+            }
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).BorderBrush = new SolidColorBrush(Color.FromRgb(50, 53, 60));
+        }
+
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
+        }
+
+        private void PasswordBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
+        }
+
+        private void age_CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            checkBox_Label.Visibility = Visibility.Collapsed;
+            checkBox_Border.BorderThickness = new Thickness(0);
+            checkBox_Border.Padding = new Thickness(0);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = null;
         }
     }
 }

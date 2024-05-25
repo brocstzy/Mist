@@ -22,9 +22,13 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Padding" Value="5,0,0,0"/>
             <Setter Property="FontSize" Value="14"/>
+            <Setter Property="MaxLength" Value="20"/>
             <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="SelectionBrush" Value="#54a5d4"/>
+
+            <EventSetter Event="PreviewTextInput" Handler="TextBox_PreviewTextInput"/>
+            <EventSetter Event="PreviewKeyDown" Handler="TextBox_PreviewKeyDown"/>
         </Style>
         <Style TargetType="PasswordBox">
             <Setter Property="Height" Value="33"/>
@@ -33,8 +37,12 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Padding" Value="5,0,0,0"/>
             <Setter Property="FontSize" Value="14"/>
+            <Setter Property="MaxLength" Value="20"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="SelectionBrush" Value="#54a5d4"/>
+            
+            <EventSetter Event="PreviewTextInput" Handler="PasswordBox_PreviewTextInput"/>
+            <EventSetter Event="PreviewKeyDown" Handler="PasswordBox_PreviewKeyDown"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Height" Value="40"/>

@@ -1,0 +1,35 @@
+﻿<Page x:Class="Mist.Pages.ManageAccountWindowPages.RAP_LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mist.Pages.ManageAccountWindowPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="736" d:DesignWidth="736"
+      Title="RAP_LoginPage">
+
+    <Grid Margin="64,64,128,0">
+        <StackPanel Orientation="Vertical">
+            <Label Content="Служба поддержки Mist"
+                   Margin="0,0,0,16"/>
+            <StackPanel Orientation="Vertical"
+                        x:Name="search_StackPanel">
+                <Label Content="Я забыл имя пользователя или пароль"/>
+                <Label Content="Введите ваш адрес электронной почты"/>
+                <Grid x:Name="captcha_Grid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    
+                </Grid>
+                <Button x:Name="search_Button"
+                        Content="Поиск"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

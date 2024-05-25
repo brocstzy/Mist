@@ -26,6 +26,7 @@ namespace Mist.Windows
         {
             InitializeComponent();
             Page = page;
+            SetBackground();
         }
 
         private void titleBar_Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -42,6 +43,16 @@ namespace Mist.Windows
             else if (Page == 2)
                 MainFrame.Navigate(new CreateAccountPage());
             
+        }
+
+        public void SetBackground()
+        {
+            LinearGradientBrush bg = new LinearGradientBrush();
+            bg.StartPoint = new Point(0, 0);
+            bg.EndPoint = new Point(1, 1);
+            bg.GradientStops.Add(new GradientStop(Color.FromRgb(12, 11, 61), 0.0));
+            bg.GradientStops.Add(new GradientStop(Color.FromRgb(0, 0, 0), 1.0));
+            content_Grid.Background = bg;
         }
     }
 }

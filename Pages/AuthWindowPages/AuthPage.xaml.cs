@@ -64,6 +64,7 @@ namespace Mist.Pages.AuthWindowPages
 
         private void createAccount_Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             ManageAccountWindow maw = new ManageAccountWindow(2);
             maw.Owner = WindowManager.GetWindow<AuthWindow>();
             maw.ShowDialog();
@@ -74,6 +75,31 @@ namespace Mist.Pages.AuthWindowPages
             ManageAccountWindow maw = new ManageAccountWindow(1);
             maw.Owner = WindowManager.GetWindow<AuthWindow>();
             maw.ShowDialog();
+        }
+
+        private void PasswordBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
+
+        private void PasswordBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
+
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
