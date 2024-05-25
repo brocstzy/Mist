@@ -1,5 +1,4 @@
-﻿using Mist.Helper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,18 +16,13 @@ using System.Windows.Shapes;
 namespace Mist.Pages.ManageAccountWindowPages
 {
     /// <summary>
-    /// Interaction logic for RAP_PhonePage.xaml
+    /// Interaction logic for RAP_SorryPage.xaml
     /// </summary>
-    public partial class RAP_PhonePage : Page
+    public partial class RAP_SorryPage : Page
     {
-        public RAP_PhonePage()
+        public RAP_SorryPage()
         {
             InitializeComponent();
-        }
-
-        private void forgotPhone_Button_Click(object sender, RoutedEventArgs e)
-        {
-            PageManager.MainFrame.Navigate(new RAP_SorryPage());
         }
     }
 }

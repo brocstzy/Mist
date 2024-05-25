@@ -5,10 +5,52 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Mist.Pages.ManageAccountWindowPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="736" d:DesignWidth="736"
       Title="RAP_EmailPage">
+    <Page.Resources>
+        <Style TargetType="Label" x:Key="local_Label" BasedOn="{StaticResource global_Label}">
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+            <Setter Property="Foreground" Value="#bfbfbf"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,0,0,1"/>
+        </Style>
+        <Style TargetType="Label" x:Key="header_Label" BasedOn="{StaticResource local_Label}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+        <Style TargetType="Label" x:Key="header2_Label" BasedOn="{StaticResource local_Label}">
+            <Setter Property="FontSize" Value="19"/>
+            <Setter Property="Foreground" Value="#5eafde"/>
+        </Style>
 
-    <Grid>
-        
+    </Page.Resources>
+
+    <Grid Margin="64,64,128,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top">
+        <StackPanel Orientation="Vertical">
+            <Label Content="Служба поддержки Mist"
+                   Style="{StaticResource header_Label}"
+                   Margin="0,0,0,16"
+                   />
+            <StackPanel Orientation="Vertical"
+                        x:Name="search_StackPanel"
+                        Background="DarkSlateBlue">
+                <StackPanel Orientation="Vertical"
+                            Margin="20,20,50,20">
+                    <Label Content="Я забыл имя пользователя или пароль"
+                           Margin="0,0,0,10"
+                       Style="{StaticResource header2_Label}"/>
+                    <Label Content="Введите адрес электронной почты"
+                       Style="{StaticResource local_Label}"/>
+                    <TextBox x:Name="email_TextBox"/>
+                    <Button x:Name="search_Button"
+                        Content="Поиск"/>
+                    <Button x:Name="forgotEmail_Button"
+                        Content="Я не помню адрес электронной почты"
+                        Click="forgotEmail_Button_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

@@ -7,15 +7,26 @@
       mc:Ignorable="d" 
       d:DesignHeight="736" d:DesignWidth="736"
       Title="RAP_LoginPage">
+    <Page.Resources>
+        <Style TargetType="Label" BasedOn="{StaticResource global_Label}">
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+            <Setter Property="Foreground" Value="#bfbfbf"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,1"/>
+        </Style>
+    </Page.Resources>
 
-    <Grid Margin="64,64,128,0">
+    <Grid Margin="64,64,128,0"
+          HorizontalAlignment="Left">
         <StackPanel Orientation="Vertical">
             <Label Content="Служба поддержки Mist"
                    Margin="0,0,0,16"/>
             <StackPanel Orientation="Vertical"
                         x:Name="search_StackPanel">
                 <Label Content="Я забыл имя пользователя или пароль"/>
-                <Label Content="Введите ваш адрес электронной почты"/>
+                <Label Content="Введите ваше имя пользователя"
+                       />
+                <TextBox x:Name="username_TextBox"/>
                 <Grid x:Name="captcha_Grid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -25,10 +36,21 @@
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
-                    
+                    <Image x:Name="captcha_Image"
+                           Grid.RowSpan="2"
+                           Width="100"
+                           Height="30"/>
+                    <Label Content="Введите код с картинки:"
+                           Grid.Column="1"/>
+                    <TextBox x:Name="captcha_TextBox"
+                             Grid.Column="1"
+                             Grid.Row="1"/>
                 </Grid>
                 <Button x:Name="search_Button"
                         Content="Поиск"/>
+                <Button x:Name="forgotUsername_Button"
+                        Content="Я не помню имя пользователя"
+                        Click="forgotUsername_Button_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

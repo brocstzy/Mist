@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mist.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace Mist.Pages.ManageAccountWindowPages
         public RAP_EmailPage()
         {
             InitializeComponent();
+        }
+
+        private void forgotEmail_Button_Click(object sender, RoutedEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new RAP_PhonePage());
         }
     }
 }

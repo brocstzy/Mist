@@ -1,4 +1,4 @@
-﻿<Page x:Class="Mist.Pages.ManageAccountWindowPages.RAP_PhonePage"
+﻿<Page x:Class="Mist.Pages.ManageAccountWindowPages.RAP_SorryPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,16 +6,24 @@
       xmlns:local="clr-namespace:Mist.Pages.ManageAccountWindowPages"
       mc:Ignorable="d" 
       d:DesignHeight="736" d:DesignWidth="736"
-      Title="RAP_PhonePage">
+      Title="RAP_SorryPage">
     <Page.Resources>
-        <Style TargetType="Label" BasedOn="{StaticResource global_Label}">
+        <Style TargetType="Label" x:Key="local_Label" BasedOn="{StaticResource global_Label}">
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+            <Setter Property="Foreground" Value="#bfbfbf"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,1"/>
+        </Style>
+        <Style TargetType="Label" x:Key="header_Label" BasedOn="{StaticResource local_Label}">
+            
+        </Style>
+        <Style TargetType="TextBlock" >
             <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
             <Setter Property="Foreground" Value="#bfbfbf"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Margin" Value="0,0,0,1"/>
         </Style>
     </Page.Resources>
-
     <Grid Margin="64,64,128,0"
           HorizontalAlignment="Left">
         <StackPanel Orientation="Vertical">
@@ -24,13 +32,9 @@
             <StackPanel Orientation="Vertical"
                         x:Name="search_StackPanel">
                 <Label Content="Я забыл имя пользователя или пароль"/>
-                <Label Content="Введите номер телефона"/>
-                <TextBox x:Name="phone_TextBox"/>
-                <Button x:Name="search_Button"
-                        Content="Поиск"/>
-                <Button x:Name="forgotPhone_Button"
-                        Content="Я не помню номер телефона"
-                        Click="forgotPhone_Button_Click"/>
+
+                <TextBlock Text="К сожалению, вы не предоставили нам достаточно информации, чтобы мы смогли восстановить ваш аккаунт."
+                           TextWrapping="Wrap"/>
             </StackPanel>
         </StackPanel>
     </Grid>
