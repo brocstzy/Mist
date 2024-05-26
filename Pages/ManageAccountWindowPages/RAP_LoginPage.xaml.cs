@@ -39,10 +39,43 @@ namespace Mist.Pages.ManageAccountWindowPages
             search_StackPanel.Background = bg;
         }
 
+        public List<Control> GetEmptyFields()
+        {
+            List<Control> allFields =
+            [
+                username_TextBox,
+                captcha_TextBox
+            ];
+            List<Control> emptyFields = new List<Control>();
+            foreach (TextBox control in allFields)
+            {
+                if (String.IsNullOrWhiteSpace(control.Text))
+                {
+                    emptyFields.Add(control);
+                }
+            }
+            return emptyFields;
+
+        }
+
 
         private void forgotUsername_Button_Click(object sender, RoutedEventArgs e)
         {
             PageManager.MainFrame.Navigate(new RAP_EmailPage());
+        }
+
+        private void search_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var emptyFields = GetEmptyFields();
+            if (emptyFields.Any())
+            {
+                foreach (TextBox control in emptyFields)
+                {
+                    control.BorderBrush = Brushes.Red;
+                    control.BorderThickness = new Thickness(1);
+                }
+                return;
+            }
         }
     }
 }

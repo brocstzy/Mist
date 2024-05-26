@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Mist.Pages.ManageAccountWindowPages"
+      xmlns:global="clr-namespace:Mist"
+      xmlns:helper="clr-namespace:Mist.Helper"
       mc:Ignorable="d" 
       d:DesignHeight="736" d:DesignWidth="736"
       Title="RAP_LoginPage">
@@ -33,6 +35,8 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Padding" Value="5,0,0,0"/>
             <Setter Property="MaxLength" Value="30"/>
+
+            <EventSetter Event="TextChanged" Handler="{x:Static helper:EventHandlers.CommonTextChangedHandler}"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
@@ -136,9 +140,10 @@
                              Grid.Row="1"/>
                     </Grid>
                     <Button x:Name="search_Button"
-                        Content="Поиск"
-                        Template="{DynamicResource ButtonTemplate1}"
-                            Margin="0,10,0,5"/>
+                            Content="Поиск"
+                            Template="{DynamicResource ButtonTemplate1}"
+                            Margin="0,10,0,5"
+                            Click="search_Button_Click"/>
                     <Button x:Name="forgotUsername_Button"
                         Content="Я не помню имя пользователя"
                         Click="forgotUsername_Button_Click"

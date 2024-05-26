@@ -1,5 +1,5 @@
 ﻿using Mist.Model;
-using System.Drawing;
+using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,10 +23,10 @@ namespace Mist
             }
         }
 
-        private void CommonTextChangedHandler(object sender, TextChangedEventArgs e)
+        public static void CommonTextChangedHandler(object sender, TextChangedEventArgs e)
         {
-            sender.BorderThickness = new Thickness(0.5);
-            sender.BorderBrush = Brushes.Black;
+            ((Control)sender).BorderThickness = new Thickness(0.5);
+            ((Control)sender).BorderBrush = Brushes.Black;
         }
     }
 

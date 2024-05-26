@@ -34,8 +34,8 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Padding" Value="5,0,0,0"/>
             <Setter Property="MaxLength" Value="30"/>
-
-            <EventSetter Event="TextChanged" Handler=""/>
+            
+            
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
