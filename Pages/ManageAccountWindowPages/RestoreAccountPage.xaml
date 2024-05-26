@@ -9,7 +9,7 @@
       Title="RestoreAccountPage">
 
     <Page.Resources>
-        <Style TargetType="Label">
+        <Style TargetType="Label" >
             <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="22"/>
@@ -57,7 +57,8 @@
           Margin="64,64,128,0">
         <StackPanel Orientation="Vertical">
             <Label Content="Служба поддержки Mist"
-                   Margin="0,0,0,16"/>
+                   Margin="0,0,0,16"
+                   Padding="0"/>
             <Button Template="{DynamicResource ButtonTemplate1}" x:Name="lostAccount_Button"
                     HorizontalContentAlignment="Stretch"
                     Width="540"

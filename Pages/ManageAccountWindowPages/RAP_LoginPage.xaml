@@ -8,49 +8,143 @@
       d:DesignHeight="736" d:DesignWidth="736"
       Title="RAP_LoginPage">
     <Page.Resources>
-        <Style TargetType="Label" BasedOn="{StaticResource global_Label}">
+        <Style TargetType="Label" x:Key="local_Label" BasedOn="{StaticResource global_Label}">
             <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
             <Setter Property="Foreground" Value="#bfbfbf"/>
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="0,0,0,1"/>
         </Style>
+        <Style TargetType="Label" x:Key="header_Label" BasedOn="{StaticResource local_Label}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+        <Style TargetType="Label" x:Key="header2_Label" BasedOn="{StaticResource local_Label}">
+            <Setter Property="FontSize" Value="19"/>
+            <Setter Property="Foreground" Value="#5eafde"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_regular}"/>
+            <Setter Property="Background" Value="#324965"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="5,0,0,0"/>
+            <Setter Property="MaxLength" Value="30"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
+            <Setter Property="Background" Value="#264963"/>
+            <Setter Property="Foreground" Value="#6abcd9"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="8,5"/>
+        </Style>
+
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <ControlTemplate x:Key="ButtonTemplate1" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <ControlTemplate x:Key="TextBoxTemplate1" TargetType="{x:Type TextBoxBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+
+                </Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="true">
+
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Page.Resources>
 
     <Grid Margin="64,64,128,0"
           HorizontalAlignment="Left">
         <StackPanel Orientation="Vertical">
             <Label Content="Служба поддержки Mist"
-                   Margin="0,0,0,16"/>
+                   Margin="0,0,0,32"
+                   Style="{StaticResource header_Label}"/>
             <StackPanel Orientation="Vertical"
                         x:Name="search_StackPanel">
-                <Label Content="Я забыл имя пользователя или пароль"/>
-                <Label Content="Введите ваше имя пользователя"
+                <StackPanel Orientation="Vertical"
+                            Margin="20,20,50,20">
+                    <Label Content="Я забыл имя пользователя или пароль"
+                       Style="{StaticResource header2_Label}"
+                           Margin="0,0,0,10"/>
+                    <Label Content="Введите ваше имя пользователя"
+                       Style="{StaticResource local_Label}"
+                           Margin="0,0,0,5"
                        />
-                <TextBox x:Name="username_TextBox"/>
-                <Grid x:Name="captcha_Grid">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <Image x:Name="captcha_Image"
+                    <TextBox x:Name="username_TextBox"
+                         Template="{DynamicResource TextBoxTemplate1}"
+                             Margin="0,0,0,10"/>
+                    <Grid x:Name="captcha_Grid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Image x:Name="captcha_Image"
                            Grid.RowSpan="2"
                            Width="100"
                            Height="30"/>
-                    <Label Content="Введите код с картинки:"
+                        <Label Content="Введите код с картинки:"
+                           Style="{StaticResource local_Label}"
                            Grid.Column="1"/>
-                    <TextBox x:Name="captcha_TextBox"
+                        <TextBox x:Name="captcha_TextBox"
+                             Template="{DynamicResource TextBoxTemplate1}"
+                                 MaxLength="5"
                              Grid.Column="1"
                              Grid.Row="1"/>
-                </Grid>
-                <Button x:Name="search_Button"
-                        Content="Поиск"/>
-                <Button x:Name="forgotUsername_Button"
+                    </Grid>
+                    <Button x:Name="search_Button"
+                        Content="Поиск"
+                        Template="{DynamicResource ButtonTemplate1}"
+                            Margin="0,10,0,5"/>
+                    <Button x:Name="forgotUsername_Button"
                         Content="Я не помню имя пользователя"
-                        Click="forgotUsername_Button_Click"/>
+                        Click="forgotUsername_Button_Click"
+                        Template="{DynamicResource ButtonTemplate1}"/>
+                </StackPanel>
+
             </StackPanel>
         </StackPanel>
     </Grid>

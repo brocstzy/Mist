@@ -26,6 +26,17 @@ namespace Mist.Pages.ManageAccountWindowPages
             InitializeComponent();
             var captcha = Captcha.Create();
             captcha_Image.Source = Captcha.ImageSourceFromBitmap(captcha.Image);
+            SetBackground();
+        }
+
+        private void SetBackground()
+        {
+            LinearGradientBrush bg = new LinearGradientBrush();
+            bg.StartPoint = new Point(0, 0);
+            bg.EndPoint = new Point(1, 1);
+            bg.GradientStops.Add(new GradientStop(Color.FromRgb(36, 53, 74), 0.0));
+            bg.GradientStops.Add(new GradientStop(Color.FromRgb(11, 25, 41), 1.0));
+            search_StackPanel.Background = bg;
         }
 
 

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Mist.Pages.AuthWindowPages"
+      xmlns:helper="clr-namespace:Mist.Helper"
       mc:Ignorable="d" 
       d:DesignHeight="362" d:DesignWidth="500"
       Width="500" Height="400"
@@ -91,6 +92,7 @@
             <Label Content=""/>
             <Button Template="{DynamicResource closeButtonTemplate}" x:Name="closeWindow_Button"
                     HorizontalAlignment="Right"
+                    helper:ButtonHelper.ButtonName="Close"
                     Style="{StaticResource close_Button}"/>
         </Grid>
         <Grid Grid.Row="1" Margin="30,0,30,20">

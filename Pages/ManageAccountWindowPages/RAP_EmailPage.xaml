@@ -34,6 +34,8 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Padding" Value="5,0,0,0"/>
             <Setter Property="MaxLength" Value="30"/>
+
+            <EventSetter Event="TextChanged" Handler=""/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
@@ -43,6 +45,8 @@
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Padding" Value="8,5"/>
+            
+            
         </Style>
 
         <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
@@ -104,7 +108,7 @@
                    />
             <StackPanel Orientation="Vertical"
                         x:Name="search_StackPanel"
-                        Background="DarkSlateBlue">
+                        >
                 <StackPanel Orientation="Vertical"
                             Margin="20,20,50,20">
                     <Label Content="Я забыл имя пользователя или пароль"
