@@ -29,6 +29,7 @@
 
             <EventSetter Event="PreviewTextInput" Handler="TextBox_PreviewTextInput"/>
             <EventSetter Event="PreviewKeyDown" Handler="TextBox_PreviewKeyDown"/>
+            <EventSetter Event="TextChanged" Handler="TextBox_TextChanged"/>
         </Style>
         <Style TargetType="PasswordBox">
             <Setter Property="Height" Value="33"/>
@@ -43,6 +44,7 @@
             
             <EventSetter Event="PreviewTextInput" Handler="PasswordBox_PreviewTextInput"/>
             <EventSetter Event="PreviewKeyDown" Handler="PasswordBox_PreviewKeyDown"/>
+            <EventSetter Event="PasswordChanged" Handler="PasswordBox_PasswordChanged"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Height" Value="40"/>

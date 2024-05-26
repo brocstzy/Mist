@@ -12,6 +12,7 @@
         ResizeMode="NoResize"
         Loaded="Window_Loaded"
         Background="Transparent"
+        
         >
     <Grid>
 

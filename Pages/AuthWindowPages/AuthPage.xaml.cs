@@ -30,6 +30,15 @@ namespace Mist.Pages.AuthWindowPages
             ButtonPainter.SetButtonBackground(logIn_Button);
             
         }
+        public List<Control> GetEmptyFields()
+        {
+            List<Control> emptyControls = new List<Control>();
+            if (String.IsNullOrWhiteSpace(login_textBox.Text))
+                emptyControls.Add(login_textBox);
+            if (String.IsNullOrWhiteSpace(password_PasswordBox.Password))
+                emptyControls.Add(password_PasswordBox);
+            return emptyControls;
+        }
 
         public void SetBackground()
         {
@@ -59,7 +68,17 @@ namespace Mist.Pages.AuthWindowPages
 
         private void logIn_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            var emptyFields = GetEmptyFields();
+            if (emptyFields.Any())
+            {
+                foreach (var field in emptyFields)
+                {
+                    ((Control)field).BorderBrush = Brushes.Red;
+                }
+                return;
+            }
+            new MainWindow().Show();
+            WindowManager.Close<AuthWindow>();
         }
 
         private void createAccount_Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -100,6 +119,16 @@ namespace Mist.Pages.AuthWindowPages
             {
                 e.Handled = true;
             }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ((Control)sender).BorderBrush = new SolidColorBrush(Color.FromRgb(50, 53, 60));
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ((Control)sender).BorderBrush = new SolidColorBrush(Color.FromRgb(50, 53, 60));
         }
     }
 }

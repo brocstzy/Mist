@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Mist.Pages.ManageAccountWindowPages"
       mc:Ignorable="d" 
       d:DesignHeight="736" d:DesignWidth="736"
-      Title="RAP_EmailPage">
+      Title="RAP_EmailPage"
+      KeyDown="Page_KeyDown">
     <Page.Resources>
         <Style TargetType="Label" x:Key="local_Label" BasedOn="{StaticResource global_Label}">
             <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
@@ -32,15 +33,18 @@
             <Setter Property="BorderThickness" Value="0.5"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Padding" Value="5,0,0,0"/>
+            <Setter Property="MaxLength" Value="30"/>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="Height" Value="22"/>
             <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
             <Setter Property="Background" Value="#264963"/>
             <Setter Property="Foreground" Value="#6abcd9"/>
             <Setter Property="BorderThickness" Value="0.5"/>
             <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="8,5"/>
         </Style>
+
         <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
         <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
         <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
@@ -110,11 +114,14 @@
                            Margin="0,0,0,5"
                        Style="{StaticResource local_Label}"/>
                     <TextBox Template="{DynamicResource TextBoxTemplate1}" x:Name="email_TextBox"
-                             Margin="0,0,0,10"/>
+                             Margin="0,0,0,10"
+                             TextChanged="email_TextBox_TextChanged"/>
                     <Button Template="{DynamicResource ButtonTemplate1}" x:Name="search_Button"
-                        Content="Поиск"
-                            Margin="0,0,0,5"/>
-                    <Button x:Name="forgotEmail_Button"
+                            Content="Поиск"
+                            Margin="0,0,0,5"
+                            Click="search_Button_Click">
+                        </Button>
+                        <Button x:Name="forgotEmail_Button"
                             Template="{DynamicResource ButtonTemplate1}"
                         Content="Я не помню адрес электронной почты"
                         Click="forgotEmail_Button_Click"/>
