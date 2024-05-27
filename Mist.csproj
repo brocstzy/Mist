@@ -16,6 +16,7 @@
     <None Remove="Assets\maximize.png" />
     <None Remove="Assets\minimize-white.png" />
     <None Remove="Assets\minimize.png" />
+    <None Remove="Assets\mist-gray-tp.png" />
     <None Remove="Assets\mist-tp.png" />
     <None Remove="Assets\mist-white-tp.png" />
     <None Remove="Assets\mist.png" />
@@ -55,6 +56,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\minimize.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\mist-gray-tp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\mist-tp.png">

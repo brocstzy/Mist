@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Mist.Pages.ManageAccountWindowPages"
       mc:Ignorable="d" 
       d:DesignHeight="736" d:DesignWidth="736"
-      Title="RAP_PhonePage">
+      Title="RAP_PhonePage"
+      KeyDown="Page_KeyDown">
     <Page.Resources>
         <Style TargetType="Label" x:Key="local_Label" BasedOn="{StaticResource global_Label}">
             <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
@@ -33,6 +34,8 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Padding" Value="5,0,0,0"/>
             <Setter Property="MaxLength" Value="30"/>
+
+            <EventSetter Event="TextChanged" Handler="TextBox_TextChanged"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
@@ -115,7 +118,8 @@
                     <Button x:Name="search_Button"
                         Content="Поиск"
                             Template="{DynamicResource ButtonTemplate1}"
-                            Margin="0,0,0,5"/>
+                            Margin="0,0,0,5"
+                            Click="search_Button_Click"/>
                     <Button x:Name="forgotPhone_Button"
                         Content="Я не помню номер телефона"
                         Click="forgotPhone_Button_Click"

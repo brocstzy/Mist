@@ -8,13 +8,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1600"
         AllowsTransparency="True"
-        Background="Transparent"
+        Background="#192330"
         BorderThickness="0"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
         Activated="Window_Activated"
         WindowStartupLocation="CenterScreen"
+        SizeChanged="Window_SizeChanged"
         >
+    <Window.Resources>
+        <ResourceDictionary Source="MainWindowStyles.xaml"/>
+    </Window.Resources>
     <Grid
         >
         <Grid.RowDefinitions>
@@ -23,7 +27,39 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid x:Name="titleBar_Grid"
-              Height="32">
+              Height="32"
+              Background="#192330"
+              MouseDown="titleBar_Grid_MouseDown">
+            <Label Content=""/>
+            <StackPanel Orientation="Horizontal"
+                        x:Name="titleBar_StackPanel"
+                        Tag="TitleBar">
+                <Label x:Name="mist_Label"
+                       Tag="TitleBar"
+                       Margin="15,0,0,0">
+                    <Label.Content>
+                        <StackPanel Orientation="Horizontal"
+                                    Tag="TitleBar"
+                                    VerticalAlignment="Center">
+                            <Image x:Name="mist_Image"
+                                   Source="/Assets/mist-gray-tp.png"
+                                   Height="24"
+                                   Margin="0,0,5,0"/>
+                            <Label Content="Mist"/>
+                        </StackPanel>
+                    </Label.Content>
+                </Label>
+                <Label x:Name="view_Label"
+                       Content="Вид"/>
+                <Label x:Name="friends_Label"
+                       Content="Друзья"/>
+                <Label x:Name="games_Label"
+                       Content="Игры"/>
+                <Label x:Name="help_Label"
+                       Content="Справка"
+                       />
+
+            </StackPanel>
             <StackPanel x:Name="resizeButtons_StackPanel"
                         Orientation="Horizontal"
                         HorizontalAlignment="Right">
@@ -51,8 +87,24 @@
                Grid.Row="1"/>
         <Grid x:Name="bottom_Grid"
               Height="50"
-              Grid.Row="2">
+              Grid.Row="2"
+              Background="#192330">
             
         </Grid>
+        <StackPanel x:Name="mist_Label_StackPanel"
+                    Orientation="Vertical"
+                    Tag="DropDown"
+                    Grid.RowSpan="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    
+                    >
+            <Label Content="Войти в другой аккаунт"/>
+                <Label Content="Выйти из аккаунта"/>
+                <Separator/>
+                <Label Content="Настройки"/>
+                <Separator/>
+                <Label Content="Выйти"/>
+        </StackPanel>
     </Grid>
 </Window>

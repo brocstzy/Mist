@@ -77,5 +77,17 @@ namespace Mist.Pages.ManageAccountWindowPages
                 return;
             }
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ((Control)sender).BorderThickness = new Thickness(0.5);
+            ((Control)sender).BorderBrush = Brushes.Black;
+        }
+
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+                search_Button_Click(sender, e);
+        }
     }
 }

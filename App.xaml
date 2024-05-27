@@ -7,7 +7,10 @@
              StartupUri="Windows/AuthWindow.xaml">
     <Application.Resources>
 
-        <SolidColorBrush x:Key="darkPurple" Color="#070F2B"/>
+            <helper:WorkAreaWidthMatchConverter x:Key="WorkAreaWidthMatchConverter"/>
+            <helper:WorkAreaHeightMatchConverter x:Key="WorkAreaHeightMatchConverter"/>
+
+            <SolidColorBrush x:Key="darkPurple" Color="#070F2B"/>
         <SolidColorBrush x:Key="mediumPurple" Color="#1B1A55"/>
         <SolidColorBrush x:Key="grayPurple" Color="#535C91"/>
         <SolidColorBrush x:Key="lightPurple" Color="#9290C3"/>
@@ -259,9 +262,18 @@
                     </Setter>
                 </Trigger>-->
                 <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#3d4450"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#3d4450"/>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsPressed" Value="true"/>
+                        <Condition Property="helper:ButtonHelper.ButtonName" Value="Close"/>
+                    </MultiTrigger.Conditions>
                     <Setter Property="Background" TargetName="border" Value="{StaticResource closeButton.Pressed.Background}"/>
                     <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource closeButton.Pressed.Border}"/>
-                </Trigger>
+                </MultiTrigger>
+
                 <Trigger Property="IsEnabled" Value="false">
                     <Setter Property="Background" TargetName="border" Value="{StaticResource closeButton.Disabled.Background}"/>
                     <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource closeButton.Disabled.Border}"/>
@@ -335,6 +347,8 @@
         <Style TargetType="Control" x:Key="global_Control">
             
         </Style>
+
+
         
     </Application.Resources>
 </Application>

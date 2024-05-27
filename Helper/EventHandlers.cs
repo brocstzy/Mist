@@ -9,9 +9,9 @@ using System.Windows.Media;
 
 namespace Mist.Helper
 {
-    public static class EventHandlers
+    public class EventHandlers
     {
-        public static readonly TextChangedEventHandler CommonTextChangedHandler = new TextChangedEventHandler(OnCommonTextChanged);
+        public static TextChangedEventHandler CommonTextChangedHandler = new TextChangedEventHandler(OnCommonTextChanged);
         public static void OnCommonTextChanged(object sender, TextChangedEventArgs e)
         {
             ((Control)sender).BorderThickness = new Thickness(0.5);

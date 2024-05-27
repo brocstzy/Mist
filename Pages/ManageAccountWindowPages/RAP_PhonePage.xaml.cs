@@ -37,9 +37,38 @@ namespace Mist.Pages.ManageAccountWindowPages
             search_StackPanel.Background = bg;
         }
 
+        public Control GetEmptyFields()
+        {
+            if (String.IsNullOrWhiteSpace(phone_TextBox.Text))
+                return phone_TextBox;
+            return null;
+        }
+
         private void forgotPhone_Button_Click(object sender, RoutedEventArgs e)
         {
             PageManager.MainFrame.Navigate(new RAP_SorryPage());
+        }
+
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+                search_Button_Click(sender, e);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ((Control)sender).BorderThickness = new Thickness(0.5);
+            ((Control)sender).BorderBrush = Brushes.Black;
+        }
+
+        private void search_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var emptyFields = GetEmptyFields();
+            if (emptyFields != null)
+            {
+                ((Control)emptyFields).BorderBrush = Brushes.Red;
+                ((Control)emptyFields).BorderThickness = new Thickness(1);
+            }
         }
     }
 }

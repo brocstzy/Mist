@@ -1,0 +1,73 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:helper="clr-namespace:Mist.Helper">
+
+    <Style TargetType="Label">
+        
+        <Style.Triggers>
+            
+            <!--Style for titlebar labels-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type UIElement}}}" Value="TitleBar"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Height" Value="32"/>
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="Margin" Value="0,0,20,0"/>
+                    <Setter Property="Foreground" Value="#bfbfbf"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <!--MouseOver trigger for titlebar labels-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type UIElement}}}" Value="TitleBar"/>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </MultiDataTrigger.Setters>
+                <MultiDataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.15"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Label.Foreground).(SolidColorBrush.Color)" To="#bfbfbf" Duration="0:0:0.15"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.ExitActions>
+            </MultiDataTrigger>
+
+            <!--Style for dropdown labels-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type UIElement}}}" Value="DropDown"/>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Padding" Value="10,7.5"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontFamily" Value="{StaticResource font_bold}"/>
+                <Setter Property="Background" Value="#3d4450"/>
+                <Setter Property="Foreground" Value="#bfbfbf"/>
+            </MultiDataTrigger>
+            
+           
+            
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="Separator">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Height" Value="1"/>
+    </Style>
+</ResourceDictionary>

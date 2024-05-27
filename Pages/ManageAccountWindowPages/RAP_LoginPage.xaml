@@ -8,7 +8,8 @@
       xmlns:helper="clr-namespace:Mist.Helper"
       mc:Ignorable="d" 
       d:DesignHeight="736" d:DesignWidth="736"
-      Title="RAP_LoginPage">
+      Title="RAP_LoginPage"
+      KeyDown="Page_KeyDown">
     <Page.Resources>
         <Style TargetType="Label" x:Key="local_Label" BasedOn="{StaticResource global_Label}">
             <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
@@ -36,7 +37,7 @@
             <Setter Property="Padding" Value="5,0,0,0"/>
             <Setter Property="MaxLength" Value="30"/>
 
-            <EventSetter Event="TextChanged" Handler="{x:Static helper:EventHandlers.CommonTextChangedHandler}"/>
+            <EventSetter Event="TextChanged" Handler="TextBox_TextChanged"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>

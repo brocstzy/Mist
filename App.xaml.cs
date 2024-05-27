@@ -21,6 +21,17 @@ namespace Mist
             {
                 window.Close();
             }
+            else if (btn.Name.Equals("minimizeWindow_Button"))
+            {
+                window.WindowState = WindowState.Minimized;
+            }
+            else if (btn.Name.Equals("maximizeWindow_Button"))
+            {
+                window.Width = SystemParameters.WorkArea.Width;
+                window.Height = SystemParameters.WorkArea.Height;
+                window.Top = SystemParameters.WorkArea.Top;
+                window.Left = SystemParameters.WorkArea.Left;
+            }
         }
 
         public static void CommonTextChangedHandler(object sender, TextChangedEventArgs e)
