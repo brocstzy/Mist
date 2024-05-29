@@ -29,14 +29,15 @@
         <Grid x:Name="titleBar_Grid"
               Height="32"
               Background="#192330"
-              MouseDown="titleBar_Grid_MouseDown">
-            <Label Content=""/>
+              MouseDown="titleBar_Grid_MouseDown" Grid.ColumnSpan="2">
+            <TextBlock Text=""/>
             <StackPanel Orientation="Horizontal"
                         x:Name="titleBar_StackPanel"
                         Tag="TitleBar">
                 <Label x:Name="mist_Label"
                        Tag="TitleBar"
-                       Margin="15,0,0,0">
+                       Margin="15,0,0,0"
+                       >
                     <Label.Content>
                         <StackPanel Orientation="Horizontal"
                                     Tag="TitleBar"
@@ -84,27 +85,44 @@
         </Grid>
         <Frame x:Name="MainFrame"
                NavigationUIVisibility="Hidden"
-               Grid.Row="1"/>
+               Grid.Row="1" Grid.ColumnSpan="2"/>
         <Grid x:Name="bottom_Grid"
               Height="50"
               Grid.Row="2"
-              Background="#192330">
-            
+              Background="#192330" Grid.ColumnSpan="2">
+
         </Grid>
+
         <StackPanel x:Name="mist_Label_StackPanel"
                     Orientation="Vertical"
                     Tag="DropDown"
-                    Grid.RowSpan="3"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    
+                    VerticalAlignment="Center"
+                    Visibility="Collapsed"
                     >
             <Label Content="Войти в другой аккаунт"/>
-                <Label Content="Выйти из аккаунта"/>
-                <Separator/>
-                <Label Content="Настройки"/>
-                <Separator/>
-                <Label Content="Выйти"/>
+            <Label Content="Выйти из аккаунта"/>
+            <Separator/>
+            <Label Content="Настройки"/>
+            <Separator/>
+            <Label Content="Выйти"/>
+        </StackPanel>
+
+        <StackPanel x:Name="view_Label_StackPanel"
+                    Orientation="Vertical"
+                    Tag="DropDown"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Visibility="Collapsed"
+                    Grid.RowSpan="3"
+                    >
+            <Label Content="Библиотека"/>
+            <Label Content="Загрузки"/>
+            <Separator/>
+            <Label Content="Друзья и чат"/>
+            <Label Content="Инвентарь"/>
+            <Separator/>
+            <Label Content="Скриншоты"/>
         </StackPanel>
     </Grid>
 </Window>

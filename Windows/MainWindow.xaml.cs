@@ -42,6 +42,7 @@ namespace Mist.Windows
             {
                 _mw.DragMove();
             }
+            
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
