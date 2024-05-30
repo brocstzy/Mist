@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Mist.Windows
 {
@@ -13,16 +14,29 @@ namespace Mist.Windows
             InitializeComponent();
         }
 
-        protected void DropdownLabel_Click(object sender, MouseButtonEventArgs e)
+        protected void TitleBarLabel_Click(object sender, MouseButtonEventArgs e)
         {
-            if (e.ButtonState == e.LeftButton)
+            var parent = VisualTreeHelper.GetParent((DependencyObject)sender) as StackPanel;
+            var parentTag = parent.Tag;
+            if (parentTag != null)
             {
-                _mw = WindowManager.GetWindow<MainWindow>();
-                Label label = ((Label)sender);
-                StackPanel stackpanel = (StackPanel)_mw.FindName(label.Name + "_StackPanel");
-                if (label.Name.Equals("REPLACE_LABEL"))
-                    stackpanel = (StackPanel)_mw.FindName("mist_Label_StackPanel");
-                AdjustStackPanel(label, stackpanel);
+                if (parentTag.Equals("TitleBar") || parentTag.Equals("Profile"))
+                {
+                    if (e.ButtonState == e.LeftButton)
+                    {
+                        _mw = WindowManager.GetWindow<MainWindow>();
+                        Label label = ((Label)sender);
+                        StackPanel stackpanel = (StackPanel)_mw.FindName(label.Name + "_StackPanel");
+                        if (label.Name.Equals("REPLACE_LABEL"))
+                            stackpanel = (StackPanel)_mw.FindName("mist_Label_StackPanel");
+                        if (label.Name.Equals("nickname_Label") || label.Name.Equals("balance_Label"))
+                        {
+                            stackpanel = (StackPanel)_mw.FindName("profile_Label_StackPanel");
+                            label = (Label)_mw.FindName("profile_Label");
+                        }
+                        AdjustStackPanel(label, stackpanel);
+                    }
+                }
             }
         }
 
@@ -30,7 +44,7 @@ namespace Mist.Windows
         {
             Point labelPoint = label.TransformToAncestor(_mw).Transform(new Point(0, 0));
             Thickness margin = stackpanel.Margin;
-            margin = new Thickness(labelPoint.X, label.ActualHeight, 0, 0);
+            margin = new Thickness(labelPoint.X, label.ActualHeight + labelPoint.Y, 0, 0);
             stackpanel.Margin = margin;
             stackpanel.Visibility = Visibility.Visible;
         }

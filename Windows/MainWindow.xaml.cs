@@ -1,4 +1,6 @@
 ﻿using Mist.Helper;
+using Mist.Model;
+using Mist.Pages.MainWindowPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,15 +24,43 @@ namespace Mist.Windows
     public partial class MainWindow : Window
     {
         private Window _mw = new Window();
+        private User CurrentUser = App.CurrentUser;
 
         public List<StackPanel> stackpanels = new List<StackPanel>();
         public List<Label> titleBarLabels = new List<Label>();
         public List<Label> dropDownLabels = new List<Label>();
         public List<Control> controls = new List<Control>();
+
+        public Label activeLabel = new Label();
         public MainWindow()
         {
             InitializeComponent();
             FillHelperLists();
+            SetUserData();
+            AddLabelEvents();
+            
+        }
+
+        public void SetUserData()
+        {
+            pfp_Image.Source = ImageHelper.GetUserPFP(App.CurrentUser);
+            nickname_Label.Content = CurrentUser.Nickname + "  ∨";
+            balance_Label.Content = CurrentUser.Balance.ToString() + " $";
+        }
+
+        public void AddLabelEvents()
+        {
+            store_Label.PreviewMouseLeftButtonDown += TopLabel_PreviewMouseLeftButtonDown;
+            library_Label.PreviewMouseLeftButtonDown += TopLabel_PreviewMouseLeftButtonDown;
+            community_Label.PreviewMouseLeftButtonDown += TopLabel_PreviewMouseLeftButtonDown;
+            gigaProfile_Label.PreviewMouseLeftButtonDown += TopLabel_PreviewMouseLeftButtonDown;
+        }
+
+        private void TopLabel_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ResetLabelColor();
+            activeLabel = (Label)sender;
+            SetLabelColor();
         }
 
         public void FillHelperLists()
@@ -41,7 +71,8 @@ namespace Mist.Windows
                 view_Label_StackPanel,
                 friends_Label_StackPanel,
                 games_Label_StackPanel,
-                help_Label_StackPanel
+                help_Label_StackPanel,
+                profile_Label_StackPanel
             });
             titleBarLabels.AddRange(new List<Label>
             {
@@ -66,10 +97,7 @@ namespace Mist.Windows
         private void Window_Activated(object sender, EventArgs e)
         {
             _mw = WindowManager.GetWindow<MainWindow>();
-            Point mistPoint = mist_Label.TransformToAncestor(this).Transform(new Point(0,0));
-            Thickness margin = mist_Label_StackPanel.Margin;
-            margin = new Thickness(mistPoint.X, mist_Label.ActualHeight, 0, 0);
-            mist_Label_StackPanel.Margin = margin;
+            PageManager.MainFrame = MainFrame;
         }
 
         private void titleBar_Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -83,9 +111,19 @@ namespace Mist.Windows
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //if (this.ActualWidth == SystemParameters.WorkArea.Width &&
-            //    this.ActualHeight == SystemParameters.WorkArea.Height)
-            //    this.ResizeMode = ResizeMode.NoResize;
+            if (Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().Width == SystemParameters.WorkArea.Width &&
+                Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().Height == SystemParameters.WorkArea.Height &&
+                Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().Top == 0 &&
+                Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().Left == 0)
+            {
+                maximizeWindow_Button.Visibility = Visibility.Collapsed;
+                restoreWindow_Button.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                maximizeWindow_Button.Visibility = Visibility.Visible;
+                restoreWindow_Button.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -105,6 +143,38 @@ namespace Mist.Windows
         {
             WindowManager.Close<MainWindow>();
             new MainWindow().Show();
+        }
+
+        public void ResetLabelColor()
+        {
+            if (activeLabel != null)
+                activeLabel.Foreground = new SolidColorBrush(Color.FromRgb(217, 217, 217));
+
+        }
+        public void SetLabelColor()
+        {
+            if (activeLabel != null)
+                activeLabel.Foreground = new SolidColorBrush(Color.FromRgb(6, 143, 255));
+        }
+
+        private void store_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new StorePage());
+        }
+
+        private void library_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new LibraryPage());
+        }
+
+        private void community_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new CommunityPage());
+        }
+
+        private void gigaProfile_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new ProfilePage());
         }
     }
 }

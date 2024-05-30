@@ -5,8 +5,9 @@
                     x:ClassModifier="public">
 
     <Style TargetType="Label">
-        <EventSetter Event="MouseDown" Handler="DropdownLabel_Click"/>
+        <EventSetter Event="MouseDown" Handler="TitleBarLabel_Click"/>
         <Style.Triggers>
+            
             <!--Style for titlebar labels-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
@@ -73,9 +74,43 @@
                     <Setter Property="Foreground" Value="#3d4450"/>
                 </MultiDataTrigger.Setters>
             </MultiDataTrigger>
-
             
-        
+            <!--Style for Profile labels-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type UIElement}}}" Value="Profile"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <!--Style for Top labels-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type UIElement}}}" Value="top"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
+                    <Setter Property="Foreground" Value="#d9d9d9"/>
+                    <Setter Property="FontSize" Value="22"/>
+                    <Setter Property="Padding" Value="10" />
+                    <Setter Property="Margin" Value="15,0,0,0"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+
+            <!--MouseOver trigger for Top labels-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type UIElement}}}" Value="top"/>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
 
 
         </Style.Triggers>

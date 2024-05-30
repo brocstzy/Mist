@@ -9,7 +9,9 @@
       d:DesignHeight="362" d:DesignWidth="500"
       Width="500" Height="400"
       Title="AuthPage"
-      
+      KeyDown="Page_KeyDown"
+      PreviewKeyDown="Page_PreviewKeyDown"
+      Loaded="Page_Loaded"
       >
     <Page.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource global_Label}">
@@ -130,6 +132,10 @@
                 <TextBox Template="{DynamicResource TextBoxTemplate}"
                          x:Name="login_textBox"
                          />
+                <Label Content="Неправильное имя пользователя или пароль"
+                       Foreground="Red"
+                       Visibility="Collapsed"
+                       x:Name="incorrectPassword_Label"/>
                 <Label Content="ПАРОЛЬ"
                        Margin="0,7.5,0,1"/>
                 <PasswordBox Template="{DynamicResource PasswordBoxTemplate}" x:Name="password_PasswordBox"

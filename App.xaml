@@ -345,10 +345,8 @@
         </Style>
 
         <Style TargetType="Control" x:Key="global_Control">
-            
+
         </Style>
 
-
-        
     </Application.Resources>
 </Application>

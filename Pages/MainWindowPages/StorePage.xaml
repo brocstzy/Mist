@@ -1,0 +1,45 @@
+﻿<Page x:Class="Mist.Pages.MainWindowPages.StorePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mist.Pages.MainWindowPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1920"
+      Title="StorePage"
+      Loaded="Page_Loaded"
+      SizeChanged="Page_SizeChanged">
+
+    <Grid x:Name="background_Grid">
+        <Grid x:Name="main_Grid"
+              Margin="480,15,480,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="search_TextBox"/>
+                <Button x:Name="search_Button"
+                        Grid.Column="1"
+                        Content="Искать"
+                        HorizontalAlignment="Left"/>
+                <Label Content="Сортировать по:"
+                          Grid.Column="2"/>
+                <ComboBox x:Name="sort_ComboBox"
+                          Grid.Column="3"/>
+                
+            </Grid>
+            <StackPanel x:Name="games_StackPanel"
+                        Orientation="Vertical"
+                        Grid.Row="1">
+                
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Mist.UserControls.StoreGameUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mist.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="960"
+             Width="960"
+             >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
+        </Grid.ColumnDefinitions>
+        <Image x:Name="game_Image"/>
+        <Label x:Name="gameName_Label"
+               Grid.Column="1"/>
+        <Label x:Name="releaseDate_Label"
+               Grid.Column="2"/>
+        <Image x:Name="review_Image"
+               Grid.Column="3"/>
+        <Label x:Name="salePercent_Label"
+               Grid.Column="4"/>
+        <Grid Grid.Column="5"
+              HorizontalAlignment="Right">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label x:Name="previousPrice_Label" Grid.Row="0"/>
+            <Label x:Name="newPrice_Label" Grid.Row="1"/>
+            <Label x:Name="price_Label" Grid.Row="1"/>
+        </Grid>
+    </Grid>
+</UserControl>

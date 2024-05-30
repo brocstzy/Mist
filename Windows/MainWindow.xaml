@@ -17,6 +17,8 @@
         SizeChanged="Window_SizeChanged"
         Loaded="Window_Loaded"
         PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"
+        MinWidth="1080"
+        MinHeight="675"
         >
     <Window.Resources>
         <ResourceDictionary Source="MainWindowStyles.xaml"/>
@@ -24,6 +26,7 @@
     <Grid
         >
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition />
             <RowDefinition Height="auto"/>
@@ -43,7 +46,8 @@
                     <Label.Content>
                         <StackPanel Orientation="Horizontal"
                                     Tag="TitleBar"
-                                    VerticalAlignment="Center">
+                                    VerticalAlignment="Center"
+                                    x:Name="REPLACE_STACKPANEL">
                             <Image x:Name="mist_Image"
                                    Source="/Assets/mist-gray-tp.png"
                                    Height="24"
@@ -64,34 +68,79 @@
                        />
 
             </StackPanel>
-            <StackPanel x:Name="resizeButtons_StackPanel"
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Label x:Name="profile_Label"
+                           VerticalAlignment="Bottom"
+                           Height="28"
+                           Padding="0"
+                           Background="#28394f"
+                               Tag="Profile"
+                               Margin="0,0,10,0">
+                        <Label.Content>
+                            <StackPanel Orientation="Horizontal"
+                                        x:Name="profile_StackPanel"
+                                        Tag="Profile">
+                                <Image x:Name="pfp_Image"
+                               Height="28"/>
+                                <Label x:Name="nickname_Label"
+                               Content="Sample_Nickname"
+                                       Foreground="DeepSkyBlue"
+                                       Margin="5,0,0,0"/>
+                                <Label x:Name="balance_Label"
+                                       Content="0.00 руб."
+                                       Foreground="LightGray"/>
+                            </StackPanel>
+                        </Label.Content>
+                    </Label>
+                    <StackPanel x:Name="resizeButtons_StackPanel"
                         Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <Button x:Name="minimizeWindow_Button"
+                    <Button x:Name="minimizeWindow_Button"
                         Style="{StaticResource minimize_Button}"
                         helper:ButtonHelper.ButtonName="Minimize"
                         Template="{DynamicResource closeButtonTemplate}"/>
-                <Button x:Name="restoreWindow_Button"
+                    <Button x:Name="restoreWindow_Button"
                         Style="{StaticResource restore_Button}"
                         helper:ButtonHelper.ButtonName="Restore"
                         Template="{DynamicResource closeButtonTemplate}"
                         Visibility="Collapsed"/>
-                <Button x:Name="maximizeWindow_Button"
+                    <Button x:Name="maximizeWindow_Button"
                         Style="{StaticResource maximize_Button}"
                         helper:ButtonHelper.ButtonName="Maximize"
                         Template="{DynamicResource closeButtonTemplate}"/>
-                <Button x:Name="closeWindow_Button"
+                    <Button x:Name="closeWindow_Button"
                         Style="{StaticResource close_Button}"
                         helper:ButtonHelper.ButtonName="Close"
                         Template="{DynamicResource closeButtonTemplate}"/>
+                </StackPanel>
             </StackPanel>
+
         </Grid>
+        <StackPanel x:Name="top_StackPanel"
+                    Orientation="Horizontal"
+                    Grid.Row="1"
+                    Tag="top">
+            <Label Content="МАГАЗИН"
+                   x:Name="store_Label"
+                   MouseLeftButtonDown="store_Label_MouseLeftButtonDown"/>
+            <Label Content="БИБЛИОТЕКА"
+                   x:Name="library_Label"
+                   MouseLeftButtonDown="library_Label_MouseLeftButtonDown"/>
+            <Label Content="СООБЩЕСТВО"
+                   x:Name="community_Label"
+                   MouseLeftButtonDown="community_Label_MouseLeftButtonDown"/>
+            <Label Content="ПРОФИЛЬ"
+                   x:Name="gigaProfile_Label"
+                   MouseLeftButtonDown="gigaProfile_Label_MouseLeftButtonDown"/>
+            
+        </StackPanel>
         <Frame x:Name="MainFrame"
                NavigationUIVisibility="Hidden"
-               Grid.Row="1" Grid.ColumnSpan="2"/>
+               Grid.Row="2" />
         <Grid x:Name="bottom_Grid"
               Height="50"
-              Grid.Row="2"
+              Grid.Row="3"
               Background="#192330" Grid.ColumnSpan="2">
 
         </Grid>
@@ -102,7 +151,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Visibility="Collapsed"
-                    Grid.RowSpan="3"
+                    Grid.RowSpan="4"
                     >
             <Label Content="Войти в другой аккаунт"/>
             <Label Content="Выйти из аккаунта"
@@ -120,7 +169,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Visibility="Collapsed"
-                    Grid.RowSpan="3"
+                    Grid.RowSpan="4"
                     >
             <Label Content="Библиотека"/>
             <Label Content="Загрузки"/>
@@ -136,7 +185,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Visibility="Collapsed"
-                    Grid.RowSpan="3"
+                    Grid.RowSpan="4"
                     >
             <Label x:Name="viewFriendsList_Label" Content="Список друзей"/>
             <Separator/>
@@ -153,7 +202,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Visibility="Collapsed"
-                    Grid.RowSpan="3"
+                    Grid.RowSpan="4"
                     >
             <Label Content="Перейти в библиотеку"/>
         </StackPanel>
@@ -163,13 +212,27 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Visibility="Collapsed"
-                    Grid.RowSpan="3"
+                    Grid.RowSpan="4"
                     >
             <Label Content="Служба поддержки Mist"/>
             <Separator/>
             <Label Content="Сведения о системе"/>
             <Separator/>
             <Label Content="О Mist"/>
+        </StackPanel>
+        <StackPanel x:Name="profile_Label_StackPanel"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Grid.RowSpan="4"
+                    Tag="DropDown"
+                    Visibility="Collapsed">
+            <Label Content="Мой профиль"
+                   x:Name="myProfile_Label"/>
+            <Label Content="Детали аккаунта: "
+                   x:Name="accountDetails_Label"/>
+            <Label Content="Мой кошелек: "
+                   x:Name="myWallet_Label"/>
         </StackPanel>
     </Grid>
 </Window>

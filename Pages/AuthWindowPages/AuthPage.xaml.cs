@@ -77,8 +77,22 @@ namespace Mist.Pages.AuthWindowPages
                 }
                 return;
             }
-            new MainWindow().Show();
-            WindowManager.Close<AuthWindow>();
+            else
+            {
+                var user = App.Context.Users.Where(x => x.Login.Equals(login_textBox.Text) && x.Password.Equals(password_PasswordBox.Password)).FirstOrDefault();
+                if (user != null)
+                {
+                    App.CurrentUser = user;
+                    new MainWindow().Show();
+                    WindowManager.Close<AuthWindow>();
+                }
+                else
+                {
+                    incorrectPassword_Label.Visibility = Visibility.Visible;
+                    login_textBox.BorderBrush = Brushes.Red;
+                    password_PasswordBox.BorderBrush = Brushes.Red;
+                }
+            }
         }
 
         private void createAccount_Label_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -124,11 +138,34 @@ namespace Mist.Pages.AuthWindowPages
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             ((Control)sender).BorderBrush = new SolidColorBrush(Color.FromRgb(50, 53, 60));
+            incorrectPassword_Label.Visibility = Visibility.Collapsed;
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             ((Control)sender).BorderBrush = new SolidColorBrush(Color.FromRgb(50, 53, 60));
+            incorrectPassword_Label.Visibility = Visibility.Collapsed;
+        }
+
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                logIn_Button_Click(sender, e);
+            }
+        }
+
+        private void Page_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                logIn_Button_Click(sender, e);
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            login_textBox.Focus();
         }
     }
 }

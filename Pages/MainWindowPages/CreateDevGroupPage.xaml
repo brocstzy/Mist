@@ -1,0 +1,41 @@
+﻿<Page x:Class="Mist.Pages.MainWindowPages.CreateDevGroupPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mist.Pages.MainWindowPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1920"
+      Title="CreateDevGroupPage"
+      SizeChanged="Page_SizeChanged">
+
+    <Grid x:Name="main_Grid"
+          Margin="480,15,480,0">
+        <StackPanel Orientation="Vertical">
+            <Label Content="Создать группу разработчика"
+                   Background="Gray"
+                   Padding="50,50"/>
+            <TextBlock Text="Группа разработчика нужна, чтобы вы смогли выкладывать свои игры на площадку Mist от её лица. Пользователи смогут подписаться на вашу группу, получая уведомления каждый раз, когда вы выпускаете новую игру, а также общаться с вами"
+                       TextWrapping="Wrap"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Имя группы:"/>
+                <TextBox x:Name="groupName_TextBox"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Аватар группы:"/>
+                <Button x:Name="choosePfp_Button"
+                        Click="choosePfp_Button_Click"
+                        Content="Выбрать файл..."/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Изображение заднего фона группы:"/>
+                <Button x:Name="chooseBackgroundPfp_Button"
+                        Click="chooseBackgroundPfp_Button_Click"
+                        Content="Выбрать файл..."/>
+            </StackPanel>
+            <Button x:Name="createDevGroup_Button"
+                    Content="Создать"
+                    Click="createDevGroup_Button_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>
