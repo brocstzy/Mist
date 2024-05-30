@@ -5,10 +5,32 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Mist.Pages.MainWindowPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="900" d:DesignWidth="1920"
       Title="CreateGroupPage">
 
-    <Grid>
-        
+    <Grid x:Name="main_Grid"
+          Margin="480,15,480,0">
+        <StackPanel Orientation="Vertical">
+            <Label Content="Создать группу"
+                   Background="Gray"
+                   Padding="50,50"/>
+            <TextBlock Text="Создавайте группы, чтобы вам было проще общаться с друзьями, согласовывать время для совместных игр и даже планировать обед! Группы могут быть настолько случайными или соревновательными, насколько вы хотите — вам не нужно играть матчи или участвовать в турнирах — создавайте группы для разных групп друзей, чтобы знакомиться с новыми людьми или организовывать встречи в вашем районе."
+                        TextWrapping="Wrap"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Имя группы:"/>
+                <TextBox x:Name="groupName_TextBox"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Аватар группы:"/>
+                <Button x:Name="choosePfp_Button"
+                        Click="choosePfp_Button_Click"
+                        Content="Выбрать файл..."/>
+            </StackPanel>
+            <CheckBox x:Name="privateGroup_CheckBox"
+                      Content="Частная группа"/>
+            <Button x:Name="createGroup_Button"
+                    Content="Создать"
+                    Click="createGroup_Button_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

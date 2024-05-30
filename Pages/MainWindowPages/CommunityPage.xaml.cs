@@ -28,7 +28,7 @@ namespace Mist.Pages.MainWindowPages
 
         private void createGroup_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            PageManager.MainFrame.Navigate(new CreateGroupPage());
         }
 
         private void createDevGroup_Button_Click(object sender, RoutedEventArgs e)

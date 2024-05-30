@@ -20,4 +20,16 @@ public partial class Developer
     public virtual ICollection<Game> Games { get; set; } = new List<Game>();
 
     public virtual User Owner { get; set; } = null!;
+    public Developer()
+    {
+
+    }
+    public Developer(int ownerId, byte[]? pfp, byte[]? backgroundImage, string name, string bio, ICollection<Game> games, User owner)
+    {
+        OwnerId = ownerId;
+        Pfp = pfp;
+        BackgroundImage = backgroundImage;
+        Name = name;
+        Bio = bio;
+    }
 }

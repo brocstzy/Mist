@@ -24,5 +24,10 @@ namespace Mist.Pages.MainWindowPages
         {
             InitializeComponent();
         }
+
+        private void createGroup_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
