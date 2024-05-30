@@ -15,6 +15,8 @@
         Activated="Window_Activated"
         WindowStartupLocation="CenterScreen"
         SizeChanged="Window_SizeChanged"
+        Loaded="Window_Loaded"
+        PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"
         >
     <Window.Resources>
         <ResourceDictionary Source="MainWindowStyles.xaml"/>
@@ -46,7 +48,8 @@
                                    Source="/Assets/mist-gray-tp.png"
                                    Height="24"
                                    Margin="0,0,5,0"/>
-                            <Label Content="Mist"/>
+                            <Label Content="Mist"
+                                   x:Name="REPLACE_LABEL"/>
                         </StackPanel>
                     </Label.Content>
                 </Label>
@@ -97,11 +100,14 @@
                     Orientation="Vertical"
                     Tag="DropDown"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     Visibility="Collapsed"
+                    Grid.RowSpan="3"
                     >
             <Label Content="Войти в другой аккаунт"/>
-            <Label Content="Выйти из аккаунта"/>
+            <Label Content="Выйти из аккаунта"
+                   x:Name="logOut_Label"
+                   MouseLeftButtonDown="logOut_Label_MouseLeftButtonDown"/>
             <Separator/>
             <Label Content="Настройки"/>
             <Separator/>
@@ -123,6 +129,47 @@
             <Label Content="Инвентарь"/>
             <Separator/>
             <Label Content="Скриншоты"/>
+        </StackPanel>
+        <StackPanel x:Name="friends_Label_StackPanel"
+                    Orientation="Vertical"
+                    Tag="DropDown"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Visibility="Collapsed"
+                    Grid.RowSpan="3"
+                    >
+            <Label x:Name="viewFriendsList_Label" Content="Список друзей"/>
+            <Separator/>
+            <Label Content="Добавить друга"/>
+            <Label Content="Изменить имя профиля/аватар"/>
+            <Separator/>
+            <Label Content="В сети"/>
+            <Label Content="Нет на месте"/>
+            <Label Content="Невидимка"/>
+        </StackPanel>
+        <StackPanel x:Name="games_Label_StackPanel"
+                    Orientation="Vertical"
+                    Tag="DropDown"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Visibility="Collapsed"
+                    Grid.RowSpan="3"
+                    >
+            <Label Content="Перейти в библиотеку"/>
+        </StackPanel>
+        <StackPanel x:Name="help_Label_StackPanel"
+                    Orientation="Vertical"
+                    Tag="DropDown"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Visibility="Collapsed"
+                    Grid.RowSpan="3"
+                    >
+            <Label Content="Служба поддержки Mist"/>
+            <Separator/>
+            <Label Content="Сведения о системе"/>
+            <Separator/>
+            <Label Content="О Mist"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -7,7 +7,6 @@
     <Style TargetType="Label">
         <EventSetter Event="MouseDown" Handler="DropdownLabel_Click"/>
         <Style.Triggers>
-
             <!--Style for titlebar labels-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
