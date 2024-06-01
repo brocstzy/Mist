@@ -49,6 +49,8 @@ public partial class User
 
     public virtual ICollection<Friendship> FriendshipSenders { get; set; } = new List<Friendship>();
 
+    public virtual ICollection<Group> Groups { get; set; } = new List<Group>();
+
     public virtual ICollection<Message> MessageRecipients { get; set; } = new List<Message>();
 
     public virtual ICollection<Message> MessageSenders { get; set; } = new List<Message>();
@@ -58,7 +60,6 @@ public partial class User
     public virtual Role Role { get; set; } = null!;
 
     public virtual ICollection<UserGame> UserGames { get; set; } = new List<UserGame>();
-
     public User()
     {
 

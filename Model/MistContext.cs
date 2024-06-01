@@ -26,7 +26,13 @@ public partial class MistContext : DbContext
 
     public virtual DbSet<Game> Games { get; set; }
 
+    public virtual DbSet<GameImage> GameImages { get; set; }
+
     public virtual DbSet<GameSysReq> GameSysReqs { get; set; }
+
+    public virtual DbSet<GameVideo> GameVideos { get; set; }
+
+    public virtual DbSet<Group> Groups { get; set; }
 
     public virtual DbSet<Message> Messages { get; set; }
 
@@ -248,6 +254,9 @@ public partial class MistContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("name");
             entity.Property(e => e.ReleaseDate).HasColumnName("release_date");
+            entity.Property(e => e.StoreSmallImage)
+                .HasColumnType("mediumblob")
+                .HasColumnName("store_small_image");
             entity.Property(e => e.UsdPrice)
                 .HasPrecision(5, 2)
                 .HasColumnName("usd_price");
@@ -259,6 +268,28 @@ public partial class MistContext : DbContext
                 .HasForeignKey(d => d.DeveloperId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_game_developer_id");
+        });
+
+        modelBuilder.Entity<GameImage>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("game_image");
+
+            entity.HasIndex(e => e.GameId, "fk_game_image_game_id_idx");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
+            entity.Property(e => e.GameId).HasColumnName("game_id");
+            entity.Property(e => e.Image)
+                .HasColumnType("mediumblob")
+                .HasColumnName("image");
+
+            entity.HasOne(d => d.Game).WithMany(p => p.GameImages)
+                .HasForeignKey(d => d.GameId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_game_image_game_id");
         });
 
         modelBuilder.Entity<GameSysReq>(entity =>
@@ -299,6 +330,58 @@ public partial class MistContext : DbContext
                 .HasForeignKey(d => d.GameId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_game_sys_req_game_id");
+        });
+
+        modelBuilder.Entity<GameVideo>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("game_video");
+
+            entity.HasIndex(e => e.GameId, "fk_game_video_game_id_idx");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
+            entity.Property(e => e.GameId).HasColumnName("game_id");
+            entity.Property(e => e.Video).HasColumnName("video");
+
+            entity.HasOne(d => d.Game).WithMany(p => p.GameVideos)
+                .HasForeignKey(d => d.GameId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_game_video_game_id");
+        });
+
+        modelBuilder.Entity<Group>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("group");
+
+            entity.HasIndex(e => e.OwnerId, "fk_group_owner_id_idx");
+
+            entity.HasIndex(e => e.Id, "id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Bio)
+                .HasMaxLength(45)
+                .HasColumnName("bio");
+            entity.Property(e => e.IsPrivate).HasColumnName("is_private");
+            entity.Property(e => e.Name)
+                .HasMaxLength(45)
+                .HasColumnName("name");
+            entity.Property(e => e.OwnerId).HasColumnName("owner_id");
+            entity.Property(e => e.Pfp)
+                .HasColumnType("mediumblob")
+                .HasColumnName("pfp");
+            entity.Property(e => e.Tag)
+                .HasMaxLength(45)
+                .HasColumnName("tag");
+
+            entity.HasOne(d => d.Owner).WithMany(p => p.Groups)
+                .HasForeignKey(d => d.OwnerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_group_owner_id");
         });
 
         modelBuilder.Entity<Message>(entity =>
