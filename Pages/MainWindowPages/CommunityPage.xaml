@@ -7,7 +7,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="1920"
       Title="CommunityPage"
-      SizeChanged="Page_SizeChanged">
+      SizeChanged="Page_SizeChanged"
+      >
 
     <Grid x:Name="background_Grid">
         <Grid x:Name="main_Grid"
@@ -16,9 +17,16 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
+            <Frame x:Name="groups_Frame"
+                   NavigationUIVisibility="Hidden"/>
             <StackPanel x:Name="sideButtons_StackPanel"
                         Orientation="Vertical"
                         Grid.Column="1">
+                <ComboBox x:Name="groupType_ComboBox"
+                          SelectionChanged="groupType_ComboBox_SelectionChanged">
+                    <ComboBoxItem>Группы</ComboBoxItem>
+                    <ComboBoxItem>Группы разработчика</ComboBoxItem>
+                </ComboBox>
                 <Button x:Name="createGroup_Button"
                         Content="Создать группу"
                         Click="createGroup_Button_Click"/>

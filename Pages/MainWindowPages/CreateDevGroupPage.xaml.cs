@@ -38,7 +38,12 @@ namespace Mist.Pages.MainWindowPages
 
         private void createDevGroup_Button_Click(object sender, RoutedEventArgs e)
         {
-            App.Context.Developers.Add(new Developer(App.CurrentUser.Id, ));
+            App.Context.Developers.Add(new Developer(App.CurrentUser.Id,
+                                                     null,
+                                                     null,
+                                                     groupName_TextBox.Text,
+                                                     bio_TextBox.Text));
+            App.Context.SaveChanges();
         }
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)

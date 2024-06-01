@@ -17,27 +17,31 @@ namespace Mist.Windows
         protected void TitleBarLabel_Click(object sender, MouseButtonEventArgs e)
         {
             var parent = VisualTreeHelper.GetParent((DependencyObject)sender) as StackPanel;
-            var parentTag = parent.Tag;
-            if (parentTag != null)
+            if (parent != null)
             {
-                if (parentTag.Equals("TitleBar") || parentTag.Equals("Profile"))
+                var parentTag = parent.Tag;
+                if (parentTag != null)
                 {
-                    if (e.ButtonState == e.LeftButton)
+                    if (parentTag.Equals("TitleBar") || parentTag.Equals("Profile"))
                     {
-                        _mw = WindowManager.GetWindow<MainWindow>();
-                        Label label = ((Label)sender);
-                        StackPanel stackpanel = (StackPanel)_mw.FindName(label.Name + "_StackPanel");
-                        if (label.Name.Equals("REPLACE_LABEL"))
-                            stackpanel = (StackPanel)_mw.FindName("mist_Label_StackPanel");
-                        if (label.Name.Equals("nickname_Label") || label.Name.Equals("balance_Label"))
+                        if (e.ButtonState == e.LeftButton)
                         {
-                            stackpanel = (StackPanel)_mw.FindName("profile_Label_StackPanel");
-                            label = (Label)_mw.FindName("profile_Label");
+                            _mw = WindowManager.GetWindow<MainWindow>();
+                            Label label = ((Label)sender);
+                            StackPanel stackpanel = (StackPanel)_mw.FindName(label.Name + "_StackPanel");
+                            if (label.Name.Equals("REPLACE_LABEL"))
+                                stackpanel = (StackPanel)_mw.FindName("mist_Label_StackPanel");
+                            if (label.Name.Equals("nickname_Label") || label.Name.Equals("balance_Label"))
+                            {
+                                stackpanel = (StackPanel)_mw.FindName("profile_Label_StackPanel");
+                                label = (Label)_mw.FindName("profile_Label");
+                            }
+                            AdjustStackPanel(label, stackpanel);
                         }
-                        AdjustStackPanel(label, stackpanel);
                     }
                 }
             }
+
         }
 
         public void AdjustStackPanel(Label label, StackPanel stackpanel)

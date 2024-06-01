@@ -33,6 +33,12 @@
                         Click="chooseBackgroundPfp_Button_Click"
                         Content="Выбрать файл..."/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Описание вашей компании:"/>
+                <TextBox x:Name="bio_TextBox"
+                         AcceptsReturn="True"/>
+
+            </StackPanel>
             <Button x:Name="createDevGroup_Button"
                     Content="Создать"
                     Click="createDevGroup_Button_Click"/>

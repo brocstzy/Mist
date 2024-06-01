@@ -1,6 +1,7 @@
 ﻿using Mist.Helper;
 using Mist.Model;
 using Mist.Pages.MainWindowPages;
+using Mist.Pages.MainWindowPages.CommunityPagePages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace Mist.Windows
 
         public void SetUserData()
         {
-            pfp_Image.Source = ImageHelper.GetUserPFP(App.CurrentUser);
+            pfp_Image.Source = ImageHelper.GetImage(App.CurrentUser.Pfp);
             nickname_Label.Content = CurrentUser.Nickname + "  ∨";
             balance_Label.Content = CurrentUser.Balance.ToString() + " $";
         }
@@ -175,6 +176,16 @@ namespace Mist.Windows
         private void gigaProfile_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Navigate(new ProfilePage());
+        }
+
+        private void addGame_Label_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new AddGamePage());
+        }
+
+        private void friends_Label_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

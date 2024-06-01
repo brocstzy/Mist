@@ -24,7 +24,7 @@ public partial class Developer
     {
 
     }
-    public Developer(int ownerId, byte[]? pfp, byte[]? backgroundImage, string name, string bio, ICollection<Game> games, User owner)
+    public Developer(int ownerId, byte[]? pfp, byte[]? backgroundImage, string name, string bio)
     {
         OwnerId = ownerId;
         Pfp = pfp;

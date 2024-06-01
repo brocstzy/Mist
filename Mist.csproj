@@ -10,9 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\add-game.png" />
     <None Remove="Assets\close-white.png" />
     <None Remove="Assets\close.png" />
     <None Remove="Assets\default-pfp.png" />
+    <None Remove="Assets\friends.png" />
     <None Remove="Assets\maximize-white.png" />
     <None Remove="Assets\maximize.png" />
     <None Remove="Assets\minimize-white.png" />
@@ -41,6 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\add-game.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\close-white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -48,6 +53,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\default-pfp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\friends.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\maximize-white.png">

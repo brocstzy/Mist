@@ -1,0 +1,168 @@
+﻿<Page x:Class="Mist.Pages.MainWindowPages.CommunityPagePages.AddGamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Mist.Pages.MainWindowPages.CommunityPagePages"
+      mc:Ignorable="d"
+      d:DesignHeight="900"
+      d:DesignWidth="1920"
+      Title="AddGamePage"
+      SizeChanged="Page_SizeChanged">
+    <Page.Resources>
+        <Style TargetType="Label"
+               x:Key="header_Label">
+            <Setter Property="FontSize"
+                    Value="22" />
+            <Setter Property="FontFamily"
+                    Value="{StaticResource font_regular}" />
+            <Setter Property="Foreground"
+                    Value="White" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource font_light}" />
+            <Setter Property="Foreground"
+                    Value="#c4c4c4" />
+            <Setter Property="FontSize"
+                    Value="14" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Width"
+                    Value="100" />
+        </Style>
+        <Style TargetType="StackPanel">
+            <Setter Property="Margin"
+                    Value="0,10,0,0" />
+        </Style>
+        <Style TargetType="Button">
+            <EventSetter Event="Click"
+                         Handler="Button_Click" />
+        </Style>
+    </Page.Resources>
+
+
+    <Grid x:Name="main_Grid"
+          Margin="480,15,480,0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Content="Добавить игру"
+                   Padding="50"
+                   Background="Gray"
+                   Style="{StaticResource header_Label}" />
+            <ScrollViewer Margin="100,20,100,0"
+                          Grid.Row="1">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Название игры:" />
+                        <TextBox x:Name="gameName_TextBox"
+                                 AcceptsReturn="True"
+                                 Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Краткое описание игры:" />
+                        <TextBox x:Name="bio_TextBox"
+                                 Height="150"
+                                 Width="200"
+                                 HorizontalAlignment="Left"
+                                 Margin="5,0,0,0" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Об игре:" />
+                        <TextBox x:Name="description_TextBox"
+                                 Height="200"
+                                 Width="500"
+                                 HorizontalAlignment="Left"
+                                 Margin="5,0,0,0"
+                                 VerticalScrollBarVisibility="Auto"
+                                 AcceptsReturn="True"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Цена:" />
+                        <TextBox x:Name="price_TextBox"
+                                 MaxLength="4"/>
+                    </StackPanel>
+                    <Label Content="Изображения игры"
+                           Margin="0,20, 0,0 "
+                           FontFamily="{StaticResource font_medium}"
+                           FontSize="16" />
+                    <Separator>
+                        <Separator.Background>
+                            <LinearGradientBrush StartPoint="0,0"
+                                                 EndPoint="1,1">
+                                <GradientStop Color="Red"
+                                              Offset="0" />
+                                <GradientStop Color="Green"
+                                              Offset="0.5" />
+                                <GradientStop Color="Blue"
+                                              Offset="1" />
+                            </LinearGradientBrush>
+                        </Separator.Background>
+                    </Separator>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Иконка в библиотеке:" />
+                        <Button x:Name="libraryIcon_Button"
+                                Content="Выбрать файл..."
+                                Tag="icon"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Лого в библиотеке:" />
+                        <Button x:Name="libraryLogo_Button"
+                                Content="Выбрать файл..."
+                                Tag="logo"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Фоновое изображение в библиотеке:" />
+                        <Button x:Name="backgroundLibraryImage_Button"
+                                Content="Выбрать файл..."
+                                Tag="back"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Вертикальное изображение в библиотеке:" />
+                        <Button x:Name="verticalLibraryImage_Button"
+                                Content="Выбрать файл..."
+                                Tag="vertical"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Изображение на главной странице в магазине:" />
+                        <Button x:Name="frontImage_Button"
+                                Content="Выбрать файл..."
+                                Tag="front"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Изображение в поиске магазина:" />
+                        <Button x:Name="frontSearchImage_Button"
+                                Content="Выбрать файл..."
+                                Tag="search"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,10,0,0">
+                        <Label Content="Скриншоты игры (до 10):" />
+                        <Button x:Name="screenshotImages_Button"
+                                Content="Выбрать файл..."
+                                Tag="multi"/>
+                    </StackPanel>
+                    <Label Content="Видео файлы игры"
+                           FontFamily="{StaticResource font_medium}"
+                           FontSize="16"
+                               />
+                    <Separator />
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Выбрите видео (до 2 штук)" />
+                        <Button Name="videos_Button"
+                                Content="Выбрать файл..."
+                                Tag="video"/>
+                    </StackPanel>
+                    <Button x:Name="addGame_Button"
+                            Content="Загрузить игру в Mist"
+                            Margin="0,50,0,0"
+                            Click="addGame_Button_Click" />
+                </StackPanel>
+            </ScrollViewer>
+            
+        </Grid>
+    </Grid>
+</Page>

@@ -38,7 +38,7 @@
             
         </Style>
         <Style TargetType="Button">
-            <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_regular}"/>
             <Setter Property="Background" Value="#264963"/>
             <Setter Property="Foreground" Value="#6abcd9"/>
             <Setter Property="BorderThickness" Value="0.5"/>

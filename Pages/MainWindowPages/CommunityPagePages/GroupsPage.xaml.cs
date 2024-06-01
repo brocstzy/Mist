@@ -13,26 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Mist.Pages.MainWindowPages
+namespace Mist.Pages.MainWindowPages.CommunityPagePages
 {
     /// <summary>
-    /// Interaction logic for CreateGroupPage.xaml
+    /// Interaction logic for GroupsPage.xaml
     /// </summary>
-    public partial class CreateGroupPage : Page
+    public partial class GroupsPage : Page
     {
-        public CreateGroupPage()
+        public GroupsPage()
         {
             InitializeComponent();
-        }
-
-        private void createGroup_Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void choosePfp_Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

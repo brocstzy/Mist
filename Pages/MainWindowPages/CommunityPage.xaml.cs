@@ -1,4 +1,5 @@
 ﻿using Mist.Helper;
+using Mist.Pages.MainWindowPages.CommunityPagePages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace Mist.Pages.MainWindowPages
         public CommunityPage()
         {
             InitializeComponent();
+
         }
 
         private void createGroup_Button_Click(object sender, RoutedEventArgs e)
@@ -41,6 +43,18 @@ namespace Mist.Pages.MainWindowPages
             var m = this.ActualWidth / 2 - 480;
             var margin = new Thickness(m, 15, m, 0);
             main_Grid.Margin = margin;
+        }
+
+        private void groupType_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (groupType_ComboBox.SelectedIndex == 0)
+            {
+                groups_Frame.Navigate(new GroupsPage());
+            }
+            else
+            {
+                groups_Frame.Navigate(new DevGroupsPage());
+            }
         }
     }
 }

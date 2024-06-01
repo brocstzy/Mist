@@ -137,12 +137,56 @@
         </StackPanel>
         <Frame x:Name="MainFrame"
                NavigationUIVisibility="Hidden"
-               Grid.Row="2" />
+               Grid.Row="2"
+               BorderBrush="Gray"
+               BorderThickness="1"
+               Margin="-1,0"/>
         <Grid x:Name="bottom_Grid"
               Height="50"
               Grid.Row="3"
-              Background="#192330" Grid.ColumnSpan="2">
-
+              Background="#192330" Grid.ColumnSpan="2"
+              VerticalAlignment="Center">
+            <Label x:Name="addGame_Label"
+                   PreviewMouseLeftButtonDown="addGame_Label_PreviewMouseLeftButtonDown"
+                   VerticalContentAlignment="Center"
+                   Margin="10,0,0,0">
+                <Label.Content>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition  />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Assets/add-game.png"
+                               Height="16"
+                               VerticalAlignment="Center"/>
+                        <TextBlock Text="Добавить игру"
+                                   VerticalAlignment="Center"
+                                   FontFamily="{StaticResource font_light}"
+                                   FontSize="16"
+                                   Foreground="#bfbfbf"
+                                   Grid.Column="1"
+                                   Margin="5,0,0,0"/>
+                    </Grid>
+                </Label.Content>
+            </Label>
+            <Label x:Name="friendsWindow_Label"
+                   PreviewMouseLeftButtonDown="friends_Label_PreviewMouseLeftButtonDown"
+                   HorizontalAlignment="Right"
+                   VerticalContentAlignment="Center"
+                   Margin="0,0,20,0">
+                <Label.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/friends.png"
+                               Height="16"/>
+                        <TextBlock Text="Друзья и чат"
+                                   FontFamily="{StaticResource font_light}"
+                                   FontSize="16"
+                                   Foreground="#bfbfbf"
+                                   Grid.Column="1"
+                                   Margin="5,0,0,0" />
+                    </StackPanel>
+                </Label.Content>
+            </Label>
         </Grid>
 
         <StackPanel x:Name="mist_Label_StackPanel"

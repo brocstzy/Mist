@@ -12,20 +12,20 @@ namespace Mist.Helper
 {
     public static class ImageHelper
     {
-        public static BitmapImage GetUserPFP(User user)
+        public static BitmapImage GetImage(byte[] image)
         {
-            if (user.Pfp == null)
+            if (image == null)
                 return new BitmapImage(new Uri(("pack://application:,,,/Assets/default-pfp.png")));
             else
             {
-                using (var stream = new MemoryStream(user.Pfp))
+                using (var stream = new MemoryStream(image))
                 {
-                    var image = new BitmapImage();
-                    image.BeginInit();
-                    image.StreamSource = stream;
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.EndInit();
-                    return image;
+                    var outputImage = new BitmapImage();
+                    outputImage.BeginInit();
+                    outputImage.StreamSource = stream;
+                    outputImage.CacheOption = BitmapCacheOption.OnLoad;
+                    outputImage.EndInit();
+                    return outputImage;
                 }
             }
         }
