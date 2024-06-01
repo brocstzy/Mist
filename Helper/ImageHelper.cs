@@ -29,5 +29,11 @@ namespace Mist.Helper
                 }
             }
         }
+        public static byte[]? CreateImage(string path)
+        {
+            if (path == null)
+                return null;
+            return File.ReadAllBytes(path);
+        }
     }
 }

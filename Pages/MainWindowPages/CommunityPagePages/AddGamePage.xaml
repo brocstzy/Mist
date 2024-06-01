@@ -37,7 +37,10 @@
         </Style>
         <Style TargetType="Button">
             <EventSetter Event="Click"
-                         Handler="Button_Click" />
+                         Handler="Button_Click"
+                         />
+            <Setter Property="Width"
+                    Value="200" />
         </Style>
     </Page.Resources>
 
@@ -57,33 +60,42 @@
                           Grid.Row="1">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
+                        <Label Content="Выберите группу разработчика:" />
+                        <ComboBox x:Name="devGroups_ComboBox"
+                                  Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
                         <Label Content="Название игры:" />
                         <TextBox x:Name="gameName_TextBox"
-                                 AcceptsReturn="True"
-                                 Width="200"/>
+                                 Tag="Название игры"
+                                 Width="300"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <Label Content="Краткое описание игры:" />
                         <TextBox x:Name="bio_TextBox"
                                  Height="150"
-                                 Width="200"
+                                 Width="400"
                                  HorizontalAlignment="Left"
-                                 Margin="5,0,0,0" />
+                                 Margin="5,0,0,0"
+                                 AcceptsReturn="True"
+                                 Tag="Краткое описание игры"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <Label Content="Об игре:" />
                         <TextBox x:Name="description_TextBox"
                                  Height="200"
-                                 Width="500"
+                                 Width="700"
                                  HorizontalAlignment="Left"
                                  Margin="5,0,0,0"
                                  VerticalScrollBarVisibility="Auto"
-                                 AcceptsReturn="True"/>
+                                 AcceptsReturn="True"
+                                 Tag="Об игре"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Цена:" />
                         <TextBox x:Name="price_TextBox"
-                                 MaxLength="4"/>
+                                 MaxLength="4"
+                                 Tag="Цена"/>
                     </StackPanel>
                     <Label Content="Изображения игры"
                            Margin="0,20, 0,0 "
@@ -156,10 +168,18 @@
                                 Content="Выбрать файл..."
                                 Tag="video"/>
                     </StackPanel>
+                    <TextBlock x:Name="error_Label"
+                           FontSize="16"
+                           FontFamily="{StaticResource font_light}"
+                           Foreground="Red"
+                           Visibility="Hidden"
+                           Margin="0,25"
+                               TextWrapping="Wrap"/>
                     <Button x:Name="addGame_Button"
                             Content="Загрузить игру в Mist"
-                            Margin="0,50,0,0"
-                            Click="addGame_Button_Click" />
+                            Margin="0,0,0,0"
+                            Click="addGame_Button_Click"
+                            Width="auto"/>
                 </StackPanel>
             </ScrollViewer>
             
