@@ -59,7 +59,8 @@ public partial class Game
                 int developerId,
                 byte[] libraryIcon,
                 byte[] frontImage,
-                byte[] storeSmallImage)
+                byte[] storeSmallImage
+                )
     {
         Name = name;
         UsdPrice = usdPrice;

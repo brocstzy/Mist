@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using Mist.Helper;
+using Mist.Model;
 using Mist.UserControls;
 using Mist.Windows;
 using System.Windows;
@@ -121,7 +122,27 @@ namespace Mist.Pages.MainWindowPages.CommunityPagePages
                 }
                 return;
             }
+            UserControl uc = devGroups_ComboBox.SelectedItem as UserControl;
+            var dev = ((DevGroupComboBoxUserControl)uc).Developer;
+            using (MistContext mc = new MistContext())
+            {
+                var game = new Game(gameName_TextBox.Text,
+                                      Decimal.Parse(price_TextBox.Text),
+                                      libraryLogo,
+                                      backgroundLibraryImage,
+                                      verticalLibraryImage,
+                                      bio_TextBox.Text,
+                                      description_TextBox.Text,
+                                      DateOnly.FromDateTime(DateTime.Now),
+                                      dev.Id,
+                                      libraryIcon,
+                                      frontImage,
+                                      frontSearchImage);
+                mc.Games.Add(game);
+                mc.SaveChanges();
 
+                
+            }
         }
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)

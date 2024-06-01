@@ -22,9 +22,11 @@ namespace Mist.UserControls
     /// </summary>
     public partial class DevGroupComboBoxUserControl : UserControl
     {
+        public Developer Developer;
         public DevGroupComboBoxUserControl(Developer developer)
         {
             InitializeComponent();
+            Developer = developer;
             image.Source = ImageHelper.GetImage(developer.Pfp);
             label.Content = developer.Name;
         }
