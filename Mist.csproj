@@ -23,8 +23,13 @@
     <None Remove="Assets\mist-tp.png" />
     <None Remove="Assets\mist-white-tp.png" />
     <None Remove="Assets\mist.png" />
+    <None Remove="Assets\mute.png" />
+    <None Remove="Assets\pause-video.png" />
+    <None Remove="Assets\play-video.png" />
+    <None Remove="Assets\preview-play.png" />
     <None Remove="Assets\restore-white.png" />
     <None Remove="Assets\restore.png" />
+    <None Remove="Assets\volume.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -83,10 +88,25 @@
     <Resource Include="Assets\mist.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\mute.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\pause-video.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\play-video.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\preview-play.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\restore-white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\restore.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\volume.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

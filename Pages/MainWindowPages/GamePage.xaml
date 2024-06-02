@@ -9,7 +9,9 @@
       d:DesignHeight="900"
       d:DesignWidth="1920"
       SizeChanged="Page_SizeChanged"
-      Title="GamePage">
+      Title="GamePage"
+      Unloaded="Page_Unloaded"
+      Loaded="Page_Loaded">
     <Page.Resources>
         <Style TargetType="Label">
             <Setter Property="Foreground"
@@ -19,19 +21,136 @@
             <Setter Property="Foreground"
                     Value="White" />
         </Style>
+        <Style TargetType="Button"
+               x:Key="mediaPlayer_Buttons">
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Padding"
+                    Value="0" />
+        </Style>
+        <Style TargetType="Label"
+               x:Key="dark_Label">
+            <Setter Property="Foreground"
+                    Value="Gray" />
+            <Setter Property="FontFamily"
+                    Value="{StaticResource font_light}" />
+        </Style>
+        <Style TargetType="TextBlock"
+               x:Key="dark_TextBlock">
+            <Setter Property="Foreground"
+                    Value="Gray" />
+            <Setter Property="FontFamily"
+                    Value="{StaticResource font_light}" />
+            <Setter Property="TextWrapping"
+                    Value="Wrap" />
+        </Style>
+        <Style TargetType="Label"
+               x:Key="pseudoHeader_Label">
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="FontFamily"
+                    Value="{StaticResource font_bold}" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            
+        </Style>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="BuyButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                                CornerRadius="3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0, 0.5"
+                             EndPoint="1, 0.5">
+            <GradientStop Color="#1b2838"
+                          Offset="0" />
+            <GradientStop Color="#273a4b"
+                          Offset="0.25" />
+            <GradientStop Color="#273a4b"
+                          Offset="0.75" />
+            <GradientStop Color="#1b2838"
+                          Offset="1" />
+
+        </LinearGradientBrush>
+    </Page.Background>
     <ScrollViewer>
         <StackPanel x:Name="main_Grid"
-                    Margin="480,15,465,0"
-                    Background="DarkGreen">
-            <Label x:Name="gameName_Label"
-                   Content="Game Name" />
+                    Margin="480,15,465,0">
+            <TextBlock x:Name="gameName_Label"
+                       Text="Game Name"
+                       FontSize="26"
+                       Margin="0,0,0,20">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Black"
+                                      Direction="320"
+                                      ShadowDepth="2"
+                                      Opacity="0.5" />
+                </TextBlock.Effect>
+            </TextBlock>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="0.333333333*" />
                 </Grid.ColumnDefinitions>
-                <Grid x:Name="media_Grid">
+                <Grid.Background>
+                    <SolidColorBrush Color="Black"
+                                     Opacity="0.3" />
+                </Grid.Background>
+                <Grid x:Name="media_Grid"
+                      Margin="10,10,0,10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.8*" />
                         <RowDefinition Height="0.2*" />
@@ -40,31 +159,130 @@
                                   LoadedBehavior="Manual"
                                   UnloadedBehavior="Manual"
                                   Width="600"
-                                  Height="338" />
-                    <StackPanel x:Name="videoControls_StackPanel"
-                                Orientation="Horizontal"
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Center">
+                                  Height="338"
+                                  MediaOpened="video_MediaElement_MediaOpened"
+                                  MediaEnded="video_MediaElement_MediaEnded"
+                                  RenderOptions.BitmapScalingMode="HighQuality" />
+                    <Image x:Name="screenshot_Image"
+                           Width="600"
+                           Height="338"
+                           Visibility="Collapsed" />
+                    <Grid x:Name="videoControls_Grid"
+                          VerticalAlignment="Bottom"
+                          Margin="0,0,0,30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
                         <Button x:Name="play_Button"
-                                Content="1"
                                 Click="play_Button_Click"
-                                Height="100"
-                                Width="50" />
+                                Height="25"
+                                Width="25"
+                                Background="Transparent"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left"
+                                Margin="5,0,0,0"
+                                Style="{StaticResource mediaPlayer_Buttons}">
+                            <Image Source="/Assets/play-video.png"
+                                   Height="25" />
+                        </Button>
                         <Button x:Name="pause_Button"
-                                Content="2"
                                 Click="pause_Button_Click"
-                                Height="50"
-                                Width="50" />
-                    </StackPanel>
+                                Height="25"
+                                Width="25"
+                                Background="Transparent"
+                                Visibility="Collapsed"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Margin="5,0,0,0"
+                                Style="{StaticResource mediaPlayer_Buttons}">
+                            <Image Source="/Assets/pause-video.png"
+                                   Height="25" />
+                        </Button>
+                        <Button x:Name="volume_Button"
+                                Height="25"
+                                HorizontalAlignment="Right"
+                                Background="Transparent"
+                                MouseEnter="volume_Button_MouseEnter"
+                                MouseLeave="volume_Button_MouseLeave"
+                                VerticalAlignment="Bottom"
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                Style="{StaticResource mediaPlayer_Buttons}">
+                            <Image Source="/Assets/volume.png"
+                                   Height="25"
+                                   Width="25" />
+                        </Button>
+                        <Slider x:Name="volume_Slider"
+                                Orientation="Horizontal"
+                                ValueChanged="volume_Slider_ValueChanged"
+                                Width="100"
+                                Maximum="100"
+                                Minimum="0"
+                                Grid.Column="2"
+                                Visibility="Collapsed"
+                                MouseLeave="volume_Slider_MouseLeave"
+                                Margin="0,3,0,0"
+                                TickFrequency="0.1" />
+                    </Grid>
+                    <Slider x:Name="video_Slider"
+                            VerticalAlignment="Bottom"
+                            ValueChanged="video_Slider_ValueChanged"
+                            PreviewMouseDown="video_Slider_MouseDown"
+                            PreviewMouseUp="video_Slider_MouseUp"
+                            Margin="0,0,0,5" />
+                    <ScrollViewer x:Name="media_ScrollViewer"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  Grid.Row="1"
+                                  Width="600"
+                                  Height="99"
+                                  PreviewMouseWheel="media_ScrollViewer_PreviewMouseWheel">
+                        <StackPanel x:Name="media_StackPanel"
+                                    Orientation="Horizontal">
+                            <StackPanel.Resources>
+                                <Style TargetType="MediaElement">
+                                    <Setter Property="Width"
+                                            Value="110" />
+                                    <Setter Property="Margin"
+                                            Value="10,10,0,10" />
+
+                                </Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Width"
+                                            Value="110" />
+                                    <Setter Property="Margin"
+                                            Value="10,10,0,10" />
+                                </Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Width"
+                                            Value="110" />
+                                    <Setter Property="Margin"
+                                            Value="10,10,0,10" />
+                                </Style>
+                            </StackPanel.Resources>
+
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
-                <StackPanel x:Name="info_StackPanel"
-                            Grid.Column="1"
-                            Margin="15,0,0,0">
+                <Grid x:Name="info_StackPanel"
+                      Grid.Column="1"
+                      Margin="15,10,10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
                     <Image x:Name="front_Image"
                            Stretch="UniformToFill" />
                     <TextBlock x:Name="bio_TextBlock"
-                               TextWrapping="Wrap" />
-                    <Grid>
+                               TextWrapping="Wrap"
+                               Grid.Row="1"
+                               Margin="0,10,0,0" />
+                    <Grid Grid.Row="2"
+                          VerticalAlignment="Bottom"
+                          Margin="0,0,0,30">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.35*" />
                             <ColumnDefinition Width="0.65*" />
@@ -75,11 +293,14 @@
                             <RowDefinition Height="1*" />
                         </Grid.RowDefinitions>
                         <Label Content="Отзывы игроков:"
-                               Grid.Row="0" />
+                               Grid.Row="0"
+                               Style="{StaticResource dark_Label}" />
                         <Label Content="Дата выпуска:"
-                               Grid.Row="1" />
+                               Grid.Row="1"
+                               Style="{StaticResource dark_Label}" />
                         <Label Content="Разработчик:"
-                               Grid.Row="2" />
+                               Grid.Row="2"
+                               Style="{StaticResource dark_Label}" />
                         <Label x:Name="reviews_Label"
                                Content="Позитивные"
                                Grid.Column="1" />
@@ -89,16 +310,15 @@
                         <Label x:Name="developer_Label"
                                Grid.Row="2"
                                Grid.Column="1" />
-                        <Separator Grid.ColumnSpan="2"
-                                   Background="Red" />
                     </Grid>
-                </StackPanel>
+                </Grid>
             </Grid>
-            <Grid Name="buyGame_Grid"
-                  Width="600"
-                  HorizontalAlignment="Left"
-                  Height="75">
-                <Grid.Background>
+            <Border Width="610"
+                    HorizontalAlignment="Left"
+                    Height="75"
+                    Margin="0,15,0,10"
+                    CornerRadius="5">
+                <Border.Background>
                     <LinearGradientBrush StartPoint="0,0.5"
                                          EndPoint="1,1.5">
                         <GradientStop Color="#2d3d4a"
@@ -106,24 +326,61 @@
                         <GradientStop Color="#586674"
                                       Offset="1" />
                     </LinearGradientBrush>
-                </Grid.Background>
-                <Label x:Name="buyGame_Label"
-                       Content="Купить игру"
-                       VerticalContentAlignment="Center"
-                       HorizontalAlignment="Left" />
-                <Button x:Name="buyGame_Button"
-                        Content="1000 руб."
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center" />
-            </Grid>
-            <Label Content="Об игре" />
-            <Separator Background="White" />
+                </Border.Background>
+                <Grid Name="buyGame_Grid">
+                    <Label x:Name="buyGame_Label"
+                           Content="Купить игру"
+                           VerticalContentAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="25,0,0,0"
+                           FontSize="18"
+                           FontFamily="{StaticResource font_medium}"/>
+                    <Button Style="{DynamicResource BuyButtonStyle}" x:Name="buyGame_Button"
+                            Content="1000 руб."
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="0,0,25,0"/>
+                </Grid>
+            </Border>
+            <Label Content="ОБ ИГРЕ"
+                   Style="{StaticResource pseudoHeader_Label}"/>
+            <Separator HorizontalAlignment="Left"
+                       Width="610">
+                <Separator.Background>
+                    <LinearGradientBrush StartPoint="0,0.5"
+                                         EndPoint="1,0.5">
+                        <GradientStop Color="White"
+                                      Offset="0" />
+                        <GradientStop Color="#273a4b"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Separator.Background>
+            </Separator>
             <TextBlock x:Name="description_TextBlock"
-                       TextWrapping="Wrap" />
-            <Label Content="Системные требования" />
-            <Separator Background="White" />
-            <Grid>
+                       TextWrapping="Wrap"
+                       HorizontalAlignment="Left"
+                       Width="610"
+                       Padding="5"
+                       />
+            <Label Content="СИСТЕМНЫЕ ТРЕБОВАНИЯ"
+                   Style="{StaticResource pseudoHeader_Label}"/>
+            <Separator 
+                       Width="610"
+                       HorizontalAlignment="Left">
+                <Separator.Background>
+                    <LinearGradientBrush StartPoint="0,0.5"
+                                         EndPoint="1,0.5">
+                        <GradientStop Color="White"
+                                      Offset="0" />
+                        <GradientStop Color="#273a4b"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Separator.Background>
+            </Separator>
+            <Grid Width="610"
+                  HorizontalAlignment="Left">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
@@ -133,9 +390,93 @@
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <Label Content="Минимальные: " />
-                <Label x:Name="" />
+                <Grid.Resources>
+                    <Style TargetType="TextBlock"
+                           BasedOn="{StaticResource dark_TextBlock}">
+                        <Setter Property="Padding"
+                                Value="5" />
+                    </Style>
+                </Grid.Resources>
+                <TextBlock Text="Операционная система:"
+                           Grid.Row="1" />
+                <TextBlock Text="ЦП:"
+                           Grid.Row="2" />
+                <TextBlock Text="Оперативная память:"
+                           Grid.Row="3" />
+                <TextBlock Text="Видеокарта:"
+                           Grid.Row="4" />
+                <TextBlock Text="Версия DirectX:"
+                           Grid.Row="5" />
+                <TextBlock Text="Диск:"
+                           Grid.Row="6" />
+                <Label Content="Минимальные: "
+                       Grid.Column="1" />
+                <TextBlock x:Name="osMin_TextBlock"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
+                <TextBlock x:Name="cpuMin_TextBlock"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
+                <TextBlock x:Name="memMin_TextBlock"
+                           Grid.Row="3"
+                           Grid.Column="1"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
+                <TextBlock x:Name="gpuMin_TextBlock"
+                           Grid.Row="4"
+                           Grid.Column="1"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
+                <TextBlock x:Name="directxMin_TextBlock"
+                           Grid.Row="5"
+                           Grid.Column="1"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
+                <TextBlock x:Name="storageMin_TextBlock"
+                           Grid.Row="6"
+                           Grid.Column="1"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
+
+                <Label Content="Рекомендованные: "
+                       Grid.Column="2" />
+                <TextBlock x:Name="osMax_TextBlock"
+                           Grid.Row="1"
+                           Grid.Column="2"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
+                <TextBlock x:Name="cpuMax_TextBlock"
+                           Grid.Row="2"
+                           Grid.Column="2"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
+                <TextBlock x:Name="memMax_TextBlock"
+                           Grid.Row="3"
+                           Grid.Column="2"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
+                <TextBlock x:Name="gpuMax_TextBlock"
+                           Grid.Row="4"
+                           Grid.Column="2"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
+                <TextBlock x:Name="directxMax_TextBlock"
+                           Grid.Row="5"
+                           Grid.Column="2"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
+                <TextBlock x:Name="storageMax_TextBlock"
+                           Grid.Row="6"
+                           Grid.Column="2"
+                           Foreground="White"
+                           FontFamily="{StaticResource font_regular}" />
             </Grid>
         </StackPanel>
     </ScrollViewer>
