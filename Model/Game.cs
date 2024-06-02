@@ -42,7 +42,6 @@ public partial class Game
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
     public virtual ICollection<UserGame> UserGames { get; set; } = new List<UserGame>();
-
     public Game()
     {
 

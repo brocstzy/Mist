@@ -278,9 +278,9 @@ public partial class MistContext : DbContext
 
             entity.HasIndex(e => e.GameId, "fk_game_image_game_id_idx");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.HasIndex(e => e.Id, "id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.GameId).HasColumnName("game_id");
             entity.Property(e => e.Image)
                 .HasColumnType("mediumblob")
@@ -340,9 +340,9 @@ public partial class MistContext : DbContext
 
             entity.HasIndex(e => e.GameId, "fk_game_video_game_id_idx");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.HasIndex(e => e.Id, "id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.GameId).HasColumnName("game_id");
             entity.Property(e => e.Video).HasColumnName("video");
 

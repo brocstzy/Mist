@@ -141,7 +141,18 @@ namespace Mist.Pages.MainWindowPages.CommunityPagePages
                 mc.Games.Add(game);
                 mc.SaveChanges();
 
-                
+                foreach (var sc in screenshots)
+                {
+                    mc.GameImages.Add(new GameImage(game.Id, sc));
+                }
+
+                foreach (var v in videos)
+                {
+                    mc.GameVideos.Add(new GameVideo(game.Id, v));
+                }
+
+                mc.SaveChanges();
+                PageManager.MainFrame.Navigate(new StorePage());
             }
         }
 

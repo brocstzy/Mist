@@ -12,4 +12,14 @@ public partial class GameVideo
     public byte[] Video { get; set; } = null!;
 
     public virtual Game Game { get; set; } = null!;
+
+    public GameVideo()
+    {
+
+    }
+    public GameVideo(int gameId, byte[] video)
+    {
+        GameId = gameId;
+        Video = video;
+    }
 }

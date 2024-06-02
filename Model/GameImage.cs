@@ -16,10 +16,9 @@ public partial class GameImage
     {
 
     }
-    public GameImage(int id, byte[] image)
+    public GameImage(int gameId, byte[] image)
     {
-        Id = id;
-        GameId = id;
+        GameId = gameId;
         Image = image;
     }
 }

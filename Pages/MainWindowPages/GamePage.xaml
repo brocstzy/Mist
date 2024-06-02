@@ -1,0 +1,142 @@
+﻿<Page x:Class="Mist.Pages.MainWindowPages.GamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Mist.Pages.MainWindowPages"
+      xmlns:vlc="clr-namespace:LibVLCSharp.WPF;assembly=LibVLCSharp.WPF"
+      mc:Ignorable="d"
+      d:DesignHeight="900"
+      d:DesignWidth="1920"
+      SizeChanged="Page_SizeChanged"
+      Title="GamePage">
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground"
+                    Value="White" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground"
+                    Value="White" />
+        </Style>
+    </Page.Resources>
+    <ScrollViewer>
+        <StackPanel x:Name="main_Grid"
+                    Margin="480,15,465,0"
+                    Background="DarkGreen">
+            <Label x:Name="gameName_Label"
+                   Content="Game Name" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="0.333333333*" />
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="media_Grid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.8*" />
+                        <RowDefinition Height="0.2*" />
+                    </Grid.RowDefinitions>
+                    <MediaElement x:Name="video_MediaElement"
+                                  LoadedBehavior="Manual"
+                                  UnloadedBehavior="Manual"
+                                  Width="600"
+                                  Height="338" />
+                    <StackPanel x:Name="videoControls_StackPanel"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Center">
+                        <Button x:Name="play_Button"
+                                Content="1"
+                                Click="play_Button_Click"
+                                Height="100"
+                                Width="50" />
+                        <Button x:Name="pause_Button"
+                                Content="2"
+                                Click="pause_Button_Click"
+                                Height="50"
+                                Width="50" />
+                    </StackPanel>
+                </Grid>
+                <StackPanel x:Name="info_StackPanel"
+                            Grid.Column="1"
+                            Margin="15,0,0,0">
+                    <Image x:Name="front_Image"
+                           Stretch="UniformToFill" />
+                    <TextBlock x:Name="bio_TextBlock"
+                               TextWrapping="Wrap" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.35*" />
+                            <ColumnDefinition Width="0.65*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Label Content="Отзывы игроков:"
+                               Grid.Row="0" />
+                        <Label Content="Дата выпуска:"
+                               Grid.Row="1" />
+                        <Label Content="Разработчик:"
+                               Grid.Row="2" />
+                        <Label x:Name="reviews_Label"
+                               Content="Позитивные"
+                               Grid.Column="1" />
+                        <Label x:Name="releaseDate_Label"
+                               Grid.Row="1"
+                               Grid.Column="1" />
+                        <Label x:Name="developer_Label"
+                               Grid.Row="2"
+                               Grid.Column="1" />
+                        <Separator Grid.ColumnSpan="2"
+                                   Background="Red" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+            <Grid Name="buyGame_Grid"
+                  Width="600"
+                  HorizontalAlignment="Left"
+                  Height="75">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0.5"
+                                         EndPoint="1,1.5">
+                        <GradientStop Color="#2d3d4a"
+                                      Offset="0" />
+                        <GradientStop Color="#586674"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Label x:Name="buyGame_Label"
+                       Content="Купить игру"
+                       VerticalContentAlignment="Center"
+                       HorizontalAlignment="Left" />
+                <Button x:Name="buyGame_Button"
+                        Content="1000 руб."
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center" />
+            </Grid>
+            <Label Content="Об игре" />
+            <Separator Background="White" />
+            <TextBlock x:Name="description_TextBlock"
+                       TextWrapping="Wrap" />
+            <Label Content="Системные требования" />
+            <Separator Background="White" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Label Content="Минимальные: " />
+                <Label x:Name="" />
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

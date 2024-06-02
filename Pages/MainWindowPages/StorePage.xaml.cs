@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mist.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace Mist.Pages.MainWindowPages
         public StorePage()
         {
             InitializeComponent();
+            RefreshGames();
+        }
+
+        public void RefreshGames()
+        {
+            games_ListBox.Items.Clear();
+            var games = App.Context.Games.ToList();
+            foreach (var g in games)
+            {
+                games_ListBox.Items.Add(new StoreGameUserControl(g));
+            }
         }
 
         public void SetBackground()

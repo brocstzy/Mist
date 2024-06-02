@@ -6,20 +6,23 @@
              xmlns:local="clr-namespace:Mist.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="960"
-             Width="960"
+             PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown"
              >
-    <Grid>
+    <Grid
+        Background="CadetBlue">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="20*" />
             <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="5*" />
             <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="10*" />
         </Grid.ColumnDefinitions>
-        <Image x:Name="game_Image"/>
+        <Image x:Name="game_Image"
+               Height="64"/>
         <Label x:Name="gameName_Label"
-               Grid.Column="1"/>
+               Grid.Column="1"
+               VerticalContentAlignment="Center"/>
         <Label x:Name="releaseDate_Label"
                Grid.Column="2"/>
         <Image x:Name="review_Image"
@@ -32,9 +35,13 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Label x:Name="previousPrice_Label" Grid.Row="0"/>
-            <Label x:Name="newPrice_Label" Grid.Row="1"/>
-            <Label x:Name="price_Label" Grid.Row="1"/>
+            <Label x:Name="previousPrice_Label" Grid.Row="0"
+                   Visibility="Collapsed"/>
+            <Label x:Name="newPrice_Label" Grid.Row="1"
+                   Visibility="Collapsed"/>
+            <Label x:Name="price_Label" Grid.Row="0"
+                   VerticalContentAlignment="Center"
+                   Grid.RowSpan="2"/>
         </Grid>
     </Grid>
 </UserControl>

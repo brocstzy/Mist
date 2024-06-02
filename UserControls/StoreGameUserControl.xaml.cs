@@ -1,5 +1,10 @@
-﻿using System;
+﻿using Mist.Helper;
+using Mist.Model;
+using Mist.Pages.MainWindowPages;
+using Pomelo.EntityFrameworkCore.MySql.Storage.Internal;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +25,35 @@ namespace Mist.UserControls
     /// </summary>
     public partial class StoreGameUserControl : UserControl
     {
-        public StoreGameUserControl()
+        public Game Game;
+        public StoreGameUserControl(Game game)
         {
             InitializeComponent();
-            
+            Game = game;
+            RefreshGame();
+
+        }
+
+        public void RefreshGame()
+        {
+            using (MemoryStream ms = new MemoryStream(Game.StoreSmallImage))
+            {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.StreamSource = ms;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.EndInit();
+
+                game_Image.Source = image;
+            }
+            gameName_Label.Content = Game.Name;
+            releaseDate_Label.Content = Game.ReleaseDate;
+            price_Label.Content = Game.UsdPrice;
+        }
+
+        private void UserControl_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new GamePage(Game));
         }
     }
 }
