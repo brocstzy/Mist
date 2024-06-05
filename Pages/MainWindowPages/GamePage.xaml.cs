@@ -33,8 +33,8 @@ namespace Mist.Pages.MainWindowPages
             Game = game;
             GameImages = App.Context.GameImages.Where(x => x.GameId == Game.Id).Select(x => x.Image).ToList();
             GameVideos = App.Context.GameVideos.Where(x => x.GameId == Game.Id).Select(x => x.Video).ToList();
-            GameMinSysReqs = App.Context.GameSysReqs.Where(x => x.GameId == Game.Id && x.Type == "Минимальные").First();
-            GameMaxSysReqs = App.Context.GameSysReqs.Where(x => x.GameId == Game.Id && x.Type == "Рекомендованные").First();
+            GameMinSysReqs = App.Context.GameSysReqs.Where(x => x.GameId == Game.Id && x.Type == "Минимальные").FirstOrDefault();
+            GameMaxSysReqs = App.Context.GameSysReqs.Where(x => x.GameId == Game.Id && x.Type == "Рекомендованные").FirstOrDefault();
 
             RefreshGame();
 
@@ -66,19 +66,25 @@ namespace Mist.Pages.MainWindowPages
             releaseDate_Label.Content = Game.ReleaseDate.Day + $" {CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(Game.ReleaseDate.Month).Substring(0, 3)}, " + Game.ReleaseDate.Year;
             developer_Label.Content = App.Context.Developers.Where(x => x.Id == Game.DeveloperId).First().Name;
 
-            osMin_TextBlock.Text = GameMinSysReqs.Os;
-            cpuMin_TextBlock.Text = GameMinSysReqs.Cpu;
-            memMin_TextBlock.Text = GameMinSysReqs.Memory;
-            gpuMin_TextBlock.Text = GameMinSysReqs.Gpu;
-            directxMin_TextBlock.Text = GameMinSysReqs.Directx;
-            storageMin_TextBlock.Text = GameMinSysReqs.Storage;
+            if (GameMinSysReqs != null)
+            {
+                osMin_TextBlock.Text = GameMinSysReqs.Os;
+                cpuMin_TextBlock.Text = GameMinSysReqs.Cpu;
+                memMin_TextBlock.Text = GameMinSysReqs.Memory;
+                gpuMin_TextBlock.Text = GameMinSysReqs.Gpu;
+                directxMin_TextBlock.Text = GameMinSysReqs.Directx;
+                storageMin_TextBlock.Text = GameMinSysReqs.Storage;
+            }
 
-            osMax_TextBlock.Text = GameMaxSysReqs.Os;
-            cpuMax_TextBlock.Text = GameMaxSysReqs.Cpu;
-            memMax_TextBlock.Text = GameMaxSysReqs.Memory;
-            gpuMax_TextBlock.Text = GameMaxSysReqs.Gpu;
-            directxMax_TextBlock.Text = GameMaxSysReqs.Directx;
-            storageMax_TextBlock.Text = GameMaxSysReqs.Storage;
+            if (GameMaxSysReqs != null)
+            {
+                osMax_TextBlock.Text = GameMaxSysReqs.Os;
+                cpuMax_TextBlock.Text = GameMaxSysReqs.Cpu;
+                memMax_TextBlock.Text = GameMaxSysReqs.Memory;
+                gpuMax_TextBlock.Text = GameMaxSysReqs.Gpu;
+                directxMax_TextBlock.Text = GameMaxSysReqs.Directx;
+                storageMax_TextBlock.Text = GameMaxSysReqs.Storage;
+            }
 
             buyGame_Label.Content = $"Купить {Game.Name}";
             buyGame_Button.Content = $"{Game.UsdPrice} руб.";
@@ -324,7 +330,7 @@ namespace Mist.Pages.MainWindowPages
 
         private void buyGame_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            PageManager.MainFrame.Navigate(new BuyGamePage(Game));
         }
 
         private void developer_Label_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

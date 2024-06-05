@@ -45,8 +45,8 @@ namespace Mist.Windows
         public void SetUserData()
         {
             pfp_Image.Source = ImageHelper.GetImage(App.CurrentUser.Pfp);
-            nickname_Label.Content = CurrentUser.Nickname + "  ∨";
-            balance_Label.Content = CurrentUser.Balance.ToString() + " $";
+            nickname_Label.Content = CurrentUser.Nickname + "  ▼";
+            balance_Label.Content = CurrentUser.Balance.ToString() + " руб.";
         }
 
         public void AddLabelEvents()

@@ -16,4 +16,12 @@ public partial class UserGame
     public virtual Game Game { get; set; } = null!;
 
     public virtual User User { get; set; } = null!;
+
+    public UserGame() { }
+    public UserGame(int userId, int gameId, DateTime acquiredAt)
+    {
+        UserId = userId;
+        GameId = gameId;
+        AcquiredAt = acquiredAt;
+    }
 }

@@ -7,18 +7,153 @@
       mc:Ignorable="d"
       d:DesignHeight="900"
       d:DesignWidth="1920"
-      Title="BuyGamePage">
-
+      Title="BuyGamePage"
+      SizeChanged="Page_SizeChanged">
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Padding"
+                    Value="0" />
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="{StaticResource font_regular}"/>
+            <Setter Property="Background" Value="#264963"/>
+            <Setter Property="Foreground" Value="#6abcd9"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="FontSize" Value="21"/>
+        </Style>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <ControlTemplate x:Key="ButtonTemplate1" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0, 0.5"
+                             EndPoint="1, 0.5">
+            <GradientStop Color="#1b2838"
+                          Offset="0" />
+            <GradientStop Color="#273a4b"
+                          Offset="0.25" />
+            <GradientStop Color="#273a4b"
+                          Offset="0.75" />
+            <GradientStop Color="#1b2838"
+                          Offset="1" />
+        </LinearGradientBrush>
+    </Page.Background>
     <Grid x:Name="main_Grid"
           Margin="480,15,480,0">
         <StackPanel Orientation="Vertical">
             <Label x:Name="buyGame_Label"
-                   Content="Купить игру" />
+                   Content="Купить игру"
+                   Padding="50,50"
+                   Background="Gray"
+                                              FontFamily="{StaticResource font_light}"
+                           FontSize="20"/>
             <Grid>
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Вы собираетесь купить игру:" />
-                    
+                <Grid.Background>
+                    <SolidColorBrush Color="Black"
+                                     Opacity="0.3" />
+                </Grid.Background>
+                <StackPanel Orientation="Vertical"
+                            Margin="20">
+                    <Label Content="Вы собираетесь купить игру:"
+                           Margin="0,0,0,15"
+                           FontFamily="{StaticResource font_light}"
+                           FontSize="20"/>
+                    <Grid Margin="0,0,0,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.75*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="game_Image" />
+                        <Grid
+                                    Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Label x:Name="gameName_Label"
+                               Content="GameName"
+                               Margin="20,0,0,0"
+                               FontFamily="{StaticResource font_regular}"
+                               FontSize="26"/>
+                            <TextBlock x:Name="bio_TextBlock"
+                                       Text="Описание"
+                                       Foreground="White"
+                                       TextWrapping="Wrap"
+                                       Margin="20,0,0,0"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="{StaticResource font_light}"
+                                       FontSize="14"/>
+                        </Grid>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,0,0,10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+                                    <Setter Property="FontSize" Value="17"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Label Content="Цена игры:"/>
+                            <Label Content="Ваш баланс:"/>
+                            <Label Content="Остаток после покупки:"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
+                                    <Setter Property="FontSize" Value="17"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Label x:Name="gamePrice_Label"
+                                   Foreground="#25b833"/>
+                            <Label x:Name="userBalance_Label"/>
+                            <Label x:Name="remainingBalance_Label"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button Template="{DynamicResource ButtonTemplate1}" x:Name="buy_Button"
+                            Content="Купить"
+                            HorizontalAlignment="Left"
+                            Padding="10,5"
+                            Margin="5,0,0,0"
+                            Click="buy_Button_Click"/>
                 </StackPanel>
+                
             </Grid>
         </StackPanel>
     </Grid>
