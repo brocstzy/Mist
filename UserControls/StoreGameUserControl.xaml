@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Mist.UserControls.StoreGameUserControl"
+﻿<UserControl Style="{DynamicResource UserControlStyle1}" x:Class="Mist.UserControls.StoreGameUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,9 +7,49 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="960"
              PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown"
+             
              >
-    <Grid
-        Background="CadetBlue">
+    <UserControl.Resources>
+        <Style x:Key="GridStyle1"
+               TargetType="{x:Type Grid}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Black"
+                                             Opacity="0.5" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="UserControlStyle1"
+               TargetType="{x:Type UserControl}">
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type UserControl}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Style="{DynamicResource GridStyle1}" 
+        >
+        <Grid.Background>
+            <SolidColorBrush Color="Black"
+                             Opacity="0.3" />
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="20*" />
@@ -24,7 +64,8 @@
                Grid.Column="1"
                VerticalContentAlignment="Center"/>
         <Label x:Name="releaseDate_Label"
-               Grid.Column="2"/>
+               Grid.Column="2"
+               VerticalContentAlignment="Center"/>
         <Image x:Name="review_Image"
                Grid.Column="3"/>
         <Label x:Name="salePercent_Label"

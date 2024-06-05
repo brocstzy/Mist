@@ -4,6 +4,7 @@ using Mist.Pages.MainWindowPages;
 using Pomelo.EntityFrameworkCore.MySql.Storage.Internal;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -47,10 +48,10 @@ namespace Mist.UserControls
                 game_Image.Source = image;
             }
             gameName_Label.Content = Game.Name;
-            releaseDate_Label.Content = Game.ReleaseDate;
-            price_Label.Content = Game.UsdPrice;
+            releaseDate_Label.Content = Game.ReleaseDate.Day + $" {CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(Game.ReleaseDate.Month).Substring(0, 3)} " + Game.ReleaseDate.Year;
+            price_Label.Content = Game.UsdPrice + " руб.";
         }
-
+            
         private void UserControl_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             PageManager.MainFrame.Navigate(new GamePage(Game));

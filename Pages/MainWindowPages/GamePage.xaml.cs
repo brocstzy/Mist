@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Mist.Helper;
+using Mist.Model;
+using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,8 +9,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using Mist.Helper;
-using Mist.Model;
 
 namespace Mist.Pages.MainWindowPages
 {
@@ -65,7 +63,7 @@ namespace Mist.Pages.MainWindowPages
             front_Image.Source = ImageHelper.GetImage(Game.FrontImage);
             bio_TextBlock.Text = Game.Bio;
             description_TextBlock.Text = Game.Description;
-            releaseDate_Label.Content = Game.ReleaseDate;
+            releaseDate_Label.Content = Game.ReleaseDate.Day + $" {CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(Game.ReleaseDate.Month).Substring(0, 3)}, " + Game.ReleaseDate.Year;
             developer_Label.Content = App.Context.Developers.Where(x => x.Id == Game.DeveloperId).First().Name;
 
             osMin_TextBlock.Text = GameMinSysReqs.Os;
@@ -88,7 +86,7 @@ namespace Mist.Pages.MainWindowPages
             string videoFilePath = SaveVideoToFile(GameVideos.First(), "video.mp4");
             PlayVideo(videoFilePath);
             video_MediaElement.Play();
-            Thread.Sleep(2);
+            Task.Delay(3).Wait();
             video_MediaElement.Pause();
         }
 
@@ -109,21 +107,21 @@ namespace Mist.Pages.MainWindowPages
                 theGrid.MouseEnter += Screenshot_MouseEnter;
                 theGrid.MouseLeave += Screenshot_MouseLeave;
                 theVideo.PreviewMouseLeftButtonDown += VideoSmall_PreviewMouseLeftButtonDown;
-                playImage.PreviewMouseLeftButtonDown += (sender, e) => PlayImage_PreviewMouseLeftButtonDown(sender,e, theVideo);
+                playImage.PreviewMouseLeftButtonDown += (sender, e) => PlayImage_PreviewMouseLeftButtonDown(sender, e, theVideo);
 
                 media_StackPanel.Children.Add(theGrid);
-                
+
                 videosPathMini.Add(SaveVideoToFile(video, $"{Guid.NewGuid()}.mp4"));
                 theVideo.Source = new Uri(videosPathMini.Last());
                 theVideo.LoadedBehavior = MediaState.Manual;
                 theVideo.UnloadedBehavior = MediaState.Manual;
                 theVideo.Play();
-                Thread.Sleep(2);
+                Task.Delay(3).Wait();
                 theVideo.Pause();
                 theVideo.Margin = new Thickness(0);
 
                 if (video == GameVideos.First())
-                    theGrid.Margin = new Thickness(0,10,0,10);
+                    theGrid.Margin = new Thickness(0, 10, 0, 10);
 
             }
             foreach (var image in GameImages)
@@ -229,12 +227,32 @@ namespace Mist.Pages.MainWindowPages
             pause_Button.Visibility = Visibility.Collapsed;
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        private async void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             video_MediaElement.Stop();
             video_MediaElement.Close();
             timer.Stop();
             timer.Dispose();
+
+            await Task.Run(() =>
+            {
+                Parallel.ForEach(videosPathMini, (file) =>
+                {
+                    File.Delete(file);
+                });
+
+                File.Delete(Path.Combine(Path.GetTempPath(), "video.mp4"));
+
+                Dispatcher.Invoke(() =>
+                {
+                    foreach (var child in media_StackPanel.Children.OfType<Grid>())
+                    {
+                        child.Children.OfType<MediaElement>().First().Close();
+                    }
+                });
+            });
+
+
         }
 
         private void volume_Button_MouseEnter(object sender, MouseEventArgs e)
@@ -285,7 +303,7 @@ namespace Mist.Pages.MainWindowPages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void media_ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -300,8 +318,18 @@ namespace Mist.Pages.MainWindowPages
                 media_ScrollViewer.LineRight();
                 media_ScrollViewer.LineRight();
             }
-                
+
             e.Handled = true;
+        }
+
+        private void buyGame_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void developer_Label_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

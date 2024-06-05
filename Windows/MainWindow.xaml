@@ -149,6 +149,7 @@
             <Label x:Name="addGame_Label"
                    PreviewMouseLeftButtonDown="addGame_Label_PreviewMouseLeftButtonDown"
                    VerticalContentAlignment="Center"
+                   HorizontalAlignment="Left"
                    Margin="10,0,0,0">
                 <Label.Content>
                     <Grid>

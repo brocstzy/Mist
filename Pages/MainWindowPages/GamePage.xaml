@@ -20,6 +20,14 @@
         <Style TargetType="TextBlock">
             <Setter Property="Foreground"
                     Value="White" />
+            <Setter Property="FontFamily"
+                    Value="{StaticResource font_regular}" />
+            <Setter Property="FontSize"
+                    Value="16" />
+            <Setter Property="Foreground"
+                    Value="#adadad" />
+            <Setter Property="LineHeight"
+                    Value="25" />
         </Style>
         <Style TargetType="Button"
                x:Key="mediaPlayer_Buttons">
@@ -49,10 +57,12 @@
             <Setter Property="Foreground"
                     Value="White" />
             <Setter Property="FontFamily"
-                    Value="{StaticResource font_bold}" />
+                    Value="{StaticResource font_light}" />
             <Setter Property="FontSize"
                     Value="20" />
-            
+            <Setter Property="Padding"
+                    Value="0,5" />
+
         </Style>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -94,8 +104,21 @@
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                                <Setter Property="Background"
+                                        TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0.5"
+                                                             EndPoint="1,0.5">
+                                            <GradientStop Color="#8ed629"
+                                                          Offset="0" />
+                                            <GradientStop Color="#6aa621"
+                                                          Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                
+                                <Setter Property="Cursor"
+                                        Value="Hand" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
@@ -128,11 +151,12 @@
     </Page.Background>
     <ScrollViewer>
         <StackPanel x:Name="main_Grid"
-                    Margin="480,15,465,0">
+                    Margin="480,15,465,35">
             <TextBlock x:Name="gameName_Label"
                        Text="Game Name"
                        FontSize="26"
-                       Margin="0,0,0,20">
+                       Margin="0,0,0,20"
+                       Foreground="White">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="Black"
                                       Direction="320"
@@ -279,37 +303,70 @@
                     <TextBlock x:Name="bio_TextBlock"
                                TextWrapping="Wrap"
                                Grid.Row="1"
-                               Margin="0,10,0,0" />
+                               Margin="0,10,0,0"
+                               LineHeight="1"
+                               Foreground="#e6e6e6"
+                               FontSize="15"/>
                     <Grid Grid.Row="2"
                           VerticalAlignment="Bottom"
                           Margin="0,0,0,30">
+                        <Grid.Resources>
+                            <Style TargetType="Label"
+                                   x:Key="zxc123key">
+                                <Setter Property="Foreground"
+                                        Value="White" />
+                                <Setter Property="HorizontalAlignment"
+                                        Value="Left" />
+                            </Style>
+                        </Grid.Resources>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.35*" />
-                            <ColumnDefinition Width="0.65*" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="1*" />
-                        </Grid.RowDefinitions>
-                        <Label Content="Отзывы игроков:"
-                               Grid.Row="0"
-                               Style="{StaticResource dark_Label}" />
-                        <Label Content="Дата выпуска:"
-                               Grid.Row="1"
-                               Style="{StaticResource dark_Label}" />
-                        <Label Content="Разработчик:"
-                               Grid.Row="2"
-                               Style="{StaticResource dark_Label}" />
-                        <Label x:Name="reviews_Label"
-                               Content="Позитивные"
-                               Grid.Column="1" />
-                        <Label x:Name="releaseDate_Label"
-                               Grid.Row="1"
-                               Grid.Column="1" />
-                        <Label x:Name="developer_Label"
-                               Grid.Row="2"
-                               Grid.Column="1" />
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel.Resources>
+                                <Style TargetType="Label"
+                                       BasedOn="{StaticResource zxc123key}">
+                                    <Setter Property="Foreground"
+                                            Value="Gray" />
+                                    <Setter Property="FontFamily"
+                                            Value="{StaticResource font_light}"/>
+                                    <Setter Property="FontSize"
+                                            Value="14" />
+                                </Style>
+                            </StackPanel.Resources>
+                            <Label Content="Отзывы игроков:" />
+                            <Label Content="Дата выпуска:" />
+                            <Label Content="Разработчик:" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical"
+                                    Grid.Column="1"
+                                    Margin="15,0,0,0">
+                            <Label x:Name="reviews_Label"
+                                   Content="Позитивные" />
+                            <Label x:Name="releaseDate_Label"
+                                   Content="1 янв 1900" />
+                            <Label x:Name="developer_Label"
+                                   Content="Developer"
+                                   PreviewMouseLeftButtonDown="developer_Label_PreviewMouseLeftButtonDown">
+                                <Label.Style>
+                                    <Style TargetType="Label"
+                                           BasedOn="{StaticResource zxc123key}">
+                                        <Setter Property="Foreground"
+                                                Value="LightBlue" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Cursor"
+                                                        Value="Hand" />
+                                                <Setter Property="Foreground"
+                                                        Value="White" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Label.Style>
+                            </Label>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </Grid>
@@ -335,11 +392,26 @@
                            Margin="25,0,0,0"
                            FontSize="18"
                            FontFamily="{StaticResource font_medium}"/>
-                    <Button Style="{DynamicResource BuyButtonStyle}" x:Name="buyGame_Button"
+                    <Button Style="{DynamicResource BuyButtonStyle}"
+                            x:Name="buyGame_Button"
                             Content="1000 руб."
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
-                            Margin="0,0,25,0"/>
+                            Margin="0,0,25,0"
+                            Padding="15,7.5"
+                            Foreground="White"
+                            FontFamily="{StaticResource font_light}"
+                            Click="buyGame_Button_Click">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0.5"
+                                                 EndPoint="1,0.5">
+                                <GradientStop Color="#75b022"
+                                              Offset="0" />
+                                <GradientStop Color="#588a1b"
+                                              Offset="1" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                 </Grid>
             </Border>
             <Label Content="ОБ ИГРЕ"
@@ -360,7 +432,8 @@
                        TextWrapping="Wrap"
                        HorizontalAlignment="Left"
                        Width="610"
-                       Padding="5"
+                       Padding="0,5"
+                       Margin="0,0,0,15"
                        />
             <Label Content="СИСТЕМНЫЕ ТРЕБОВАНИЯ"
                    Style="{StaticResource pseudoHeader_Label}"/>
@@ -412,7 +485,7 @@
                            Grid.Row="5" />
                 <TextBlock Text="Диск:"
                            Grid.Row="6" />
-                <Label Content="Минимальные: "
+                <TextBlock Text="Минимальные: "
                        Grid.Column="1" />
                 <TextBlock x:Name="osMin_TextBlock"
                            Grid.Row="1"
@@ -445,7 +518,7 @@
                            Foreground="White"
                            FontFamily="{StaticResource font_regular}" />
 
-                <Label Content="Рекомендованные: "
+                <TextBlock Text="Рекомендованные: "
                        Grid.Column="2" />
                 <TextBlock x:Name="osMax_TextBlock"
                            Grid.Row="1"

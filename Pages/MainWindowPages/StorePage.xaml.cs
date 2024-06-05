@@ -25,6 +25,7 @@ namespace Mist.Pages.MainWindowPages
         {
             InitializeComponent();
             RefreshGames();
+            sort_ComboBox.SelectedIndex = 0;
         }
 
         public void RefreshGames()
