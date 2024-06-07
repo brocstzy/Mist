@@ -1,14 +1,407 @@
 ﻿<Page x:Class="Mist.Pages.MainWindowPages.LibraryPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Mist.Pages.MainWindowPages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="LibraryPage">
-
+      mc:Ignorable="d"
+      d:DesignHeight="900"
+      d:DesignWidth="1920"
+      Title="LibraryPage"
+      SizeChanged="Page_SizeChanged">
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground"
+                    Value="Gray" />
+        </Style>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true"
+                                CornerRadius="3">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="#3deb49" Offset="0"/>
+                                            <GradientStop Color="#34c93e" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="#3deb49" Offset="0"/>
+                                            <GradientStop Color="#34c93e" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FocusVisual1">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background1" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border1" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background1" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border1" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background1" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border1" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background1" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border1" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground1" Color="#FF838383"/>
+        <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual1}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true"
+                                CornerRadius="3">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="#ededed"
+                                                         Opacity="0.7"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background1}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border1}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground1}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0"
+              Background="#30343b">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Border CornerRadius="5"
+                    Background="#25272c"
+                    Margin="5,5,10,5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Assets/search-icon.png"
+                           Width="27"
+                           Margin="5,5,10,5" />
+                    <TextBox Name="search_TextBox"
+                             Grid.Column="1"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             MaxLength="25"
+                             VerticalContentAlignment="Center"
+                             Foreground="White"
+                             FontSize="17"
+                             Padding="0,0,0,1"
+                             FontFamily="{StaticResource font_light}" />
+                </Grid>
+            </Border>
+            <ListBox x:Name="games_ListBox"
+                     Grid.Row="1"
+                     Background="#24282f"
+                     BorderThickness="0"
+                     Padding="0,5,0,0"
+                     SelectionChanged="games_ListBox_SelectionChanged" />
+        </Grid>
+        <ScrollViewer Grid.Column="1"
+                      VerticalScrollBarVisibility="Auto">
+            <Grid x:Name="gamePage_Grid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"
+                                   MinHeight="200"
+                                   MaxHeight="330"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid x:Name="images_Grid">
+                    <Image x:Name="background_Image"
+                           Stretch="UniformToFill"
+                           StretchDirection="Both"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+                    <Image x:Name="logo_Image"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Margin="50,25,0,0" />
+                </Grid>
+                <StackPanel Orientation="Vertical"
+                            Grid.Row="1"
+                            Margin="15,10">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="Label">
+                                <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Foreground" Value="#cbccc0"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{DynamicResource ButtonStyle1}" x:Name="play_Button"
+                                MaxHeight="50"
+                                MaxWidth="190"
+                                Width="190"
+                                MinHeight="30"
+                                BorderThickness="0"
+                                HorizontalAlignment="Left"
+                                >
+                            <Button.Background>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#36d141" Offset="0"/>
+                                    <GradientStop Color="#2cab34" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Assets/play-game.png"
+                                       Height="22"
+                                       Margin="0,0,5,0"/>
+                                <TextBlock Text="ИГРАТЬ"
+                                           Foreground="White"
+                                           FontFamily="{StaticResource font_regular}"
+                                           FontSize="18"/>
+                            </StackPanel>
+                        </Button>
+                        <StackPanel Orientation="Vertical"
+                                    Grid.Column="1"
+                                    Margin="10,0,0,0">
+                            <Label Content="ПОСЛЕДНИЙ ЗАПУСК"
+                                   FontFamily="{StaticResource font_bold}"
+                                   Margin="0,3,0,0"/>
+                            <Label x:Name="lastPlayedAt_Label"
+                                   Content="Никогда"
+                                   Margin="0,0,0,3"/>
+                        </StackPanel>
+                        <Grid Grid.Column="2"
+                              Margin="10,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Assets/timer.png" 
+                                   Margin="0,0,5,0"/>
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Column="1">
+                                <Label Content="ВСЕГО НАИГРАНО"
+                                       FontFamily="{StaticResource font_medium}"
+                                       Margin="0,3,0,0"/>
+                                <Label x:Name="totalPlayTime_Label"
+                                       Content="0.0 часов"
+                                       Margin="0,0,0,3"/>
+                            </StackPanel>
+                        </Grid>
+                        <Button Style="{DynamicResource ButtonStyle2}" x:Name="info_Button"
+                                Click="info_Button_Click"
+                                Grid.Column="3"
+                                HorizontalAlignment="Right"
+                                Height="32"
+                                BorderThickness="0">
+                            <Button.Background>
+                                <SolidColorBrush Color="#d6d6d6"
+                                                 Opacity="0.3"/>
+                            </Button.Background>
+                            <Image Source="/Assets/info.png"
+                                   Margin="3"/>
+                        </Button>
+                    </Grid>
+                    <Grid x:Name="info_Grid"
+                          Visibility="Collapsed">
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="verticalInfo_Image" />
+                            <TextBlock x:Name="bio_textBlock"
+                                       TextWrapping="Wrap"
+                                       Grid.Column="1" />
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Column="2">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Разработчик:" />
+                                    <Label x:Name="developerName_Label" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Дата выпуска:" />
+                                    <Label x:Name="releaseDate_Label" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal"
+                                Background="Gray"
+                                Margin="0,10,0,0">
+                        <Button x:Name="storePage_Button"
+                                Content="Страница в магазине"
+                                Margin="10"
+                                Padding="5"/>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="Вам понравилась эта игра?" />
+                            <Separator Background="Black" />
+                            <Label Name="reviewWrite_Label"
+                                   Content="Напишите отзыв для игры" />
+                            <TextBlock Text="Напишите, что вам понравилось или не понравилось об этой игре и рекомендуете ли вы её другим людям." />
+                            <TextBlock Text="Будьте уважительны и следуйте нашим правилам и условиям использования." />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Image x:Name="pfp_Image" />
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*" />
+                                        <RowDefinition Height="1*" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock x:Name="reviewText_TextBlock"
+                                               Grid.Column="1" />
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                            <ColumnDefinition Width="1*" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical">
+                                            <Label Content="Вы рекомендуете эту игру?" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button x:Name="recommend_Button">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image Source="/Assets/thumbs-up.png" />
+                                                        <TextBlock Text="Да" />
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button x:Name="notRecommend_Button">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image Source="/Assets/thumbs-down.png" />
+                                                        <TextBlock Text="Да" />
+                                                    </StackPanel>
+                                                </Button>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Button x:Name="postReview_Button"
+                                            Content="Оставить отзыв"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Right" />
+                                </Grid>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical"
+                                    Grid.Column="1">
+                            <Label x:Name="friendsWhoHave_Label"
+                                   Content="Друзья, у которых есть игра" />
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel.Background>
+                                    <SolidColorBrush Color="Gray" />
+                                </StackPanel.Background>
+                                <StackPanel Orientation="Vertical">
+                                    <ListBox x:Name="friendsWhoPlay_ListBox" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+        <Grid x:Name="tiles_Grid"
+              Grid.Column="1"
+              Visibility="Collapsed"></Grid>
     </Grid>
 </Page>
