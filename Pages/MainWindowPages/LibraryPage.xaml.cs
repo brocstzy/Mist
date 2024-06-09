@@ -3,6 +3,7 @@ using Mist.Model;
 using Mist.UserControls;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Mist.Pages.MainWindowPages
 {
@@ -16,6 +17,7 @@ namespace Mist.Pages.MainWindowPages
         public Game SelectedGame;
         private Size oldSize;
         private Thickness logoMargin;
+        public Button SelectedReviewButton;
         public LibraryPage()
         {
             InitializeComponent();
@@ -43,14 +45,27 @@ namespace Mist.Pages.MainWindowPages
         public void RefreshSelectedGame()
         {
             background_Image.Source = ImageHelper.GetImage(SelectedGame.BackgroundLibraryImage);
+            backgroundBlur_Image.Source = ImageHelper.GetImage(SelectedGame.BackgroundLibraryImage);
             logo_Image.Source = ImageHelper.GetImage(SelectedGame.LibraryLogo);
 
+            verticalInfo_Image.Source = ImageHelper.GetImage(SelectedGame.VerticalLibraryImage);
+            bio_textBlock.Text = SelectedGame.Bio;
+            using (MistContext mc = new MistContext())
+            {
+                developerName_Label.Content = mc.Developers.Where(x => x.Id == SelectedGame.DeveloperId).First().Name;
+            }
+            releaseDate_Label.Content = SelectedGame.ReleaseDate;
             reviewWrite_Label.Content = $"Напишите отзыв для {SelectedGame.Name}";
+            pfp_Image.Source = ImageHelper.GetImage(App.CurrentUser.Pfp);
+            friendsWhoHave_Label.Text = $"Друзья, у которых есть {SelectedGame.Name}";
         }
 
         private void info_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            if (info_Grid.Visibility == Visibility.Collapsed)
+                info_Grid.Visibility = Visibility.Visible;
+            else
+                info_Grid.Visibility = Visibility.Collapsed;
         }
 
         private void games_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -75,6 +90,51 @@ namespace Mist.Pages.MainWindowPages
 
             //oldSize = new Size(this.ActualWidth, this.ActualHeight);
 
+        }
+
+        private void recommend_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (checkYes_Image.Visibility == Visibility.Collapsed)
+            {
+                if (checkNo_Image.Visibility == Visibility.Visible)
+                {
+                    checkNo_Image.Visibility = Visibility.Collapsed;
+                    thumbsDown_Image.Opacity = 1;
+                }
+                checkYes_Image.Visibility = Visibility.Visible;
+                thumbsUp_Image.Opacity = 0.3;
+            }
+            else
+            {
+                checkYes_Image.Visibility = Visibility.Collapsed;
+                thumbsUp_Image.Opacity = 1;
+            }
+        }
+
+        private void notRecommend_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (checkNo_Image.Visibility == Visibility.Collapsed)
+            {
+                if (checkYes_Image.Visibility == Visibility.Visible)
+                {
+                    checkYes_Image.Visibility= Visibility.Collapsed;
+                    thumbsUp_Image.Opacity = 1;
+                }
+                checkNo_Image.Visibility = Visibility.Visible;
+                thumbsDown_Image.Opacity = 0.3;
+            }
+            else
+            {
+                checkNo_Image.Visibility = Visibility.Collapsed;
+                thumbsDown_Image.Opacity = 1;
+            }
+        }
+
+        private void storePage_Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Cursor = Cursors.Hand;
+            PageManager.MainFrame.Navigate(new GamePage(SelectedGame));
+            this.Cursor = null;
         }
 
         //private void Page_Loaded(object sender, RoutedEventArgs e)

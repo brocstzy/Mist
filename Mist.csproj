@@ -11,10 +11,12 @@
 
   <ItemGroup>
     <None Remove="Assets\add-game.png" />
+    <None Remove="Assets\check.png" />
     <None Remove="Assets\close-white.png" />
     <None Remove="Assets\close.png" />
     <None Remove="Assets\default-pfp.png" />
     <None Remove="Assets\friends.png" />
+    <None Remove="Assets\info-white.png" />
     <None Remove="Assets\info.png" />
     <None Remove="Assets\maximize-white.png" />
     <None Remove="Assets\maximize.png" />
@@ -32,10 +34,13 @@
     <None Remove="Assets\restore-white.png" />
     <None Remove="Assets\restore.png" />
     <None Remove="Assets\search-icon.png" />
+    <None Remove="Assets\thumbs-down-white.png" />
     <None Remove="Assets\thumbs-down.png" />
+    <None Remove="Assets\thumbs-up-white.png" />
     <None Remove="Assets\thumbs-up.png" />
     <None Remove="Assets\timer.png" />
     <None Remove="Assets\volume.png" />
+    <None Remove="Assets\white.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -59,6 +64,9 @@
     <Resource Include="Assets\add-game.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\close-white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -69,6 +77,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\friends.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\info-white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\info.png">
@@ -122,7 +133,13 @@
     <Resource Include="Assets\search-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\thumbs-down-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\thumbs-down.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\thumbs-up-white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\thumbs-up.png">
@@ -132,6 +149,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\volume.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
