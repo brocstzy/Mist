@@ -54,6 +54,19 @@ namespace Mist
             var mainGrid = (Grid)((Page)sender).FindName("main_Grid");
             mainGrid.Margin = margin;
         }
+        //protected override async void OnStartup(StartupEventArgs e)
+        //{
+        //    base.OnStartup(e);
+
+        //    // Ensure the application shuts down when the main window is closed
+        //    //this.ShutdownMode = ShutdownMode.OnLastWindowClose;
+
+        //    while (true)
+        //    {
+        //        var zxc = App.Current.Windows;
+        //        await Task.Delay(5000);
+        //    }
+        //}
     }
 
 }

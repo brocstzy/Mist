@@ -330,6 +330,20 @@ namespace Mist.Pages.MainWindowPages
 
         private void buyGame_Button_Click(object sender, RoutedEventArgs e)
         {
+            using (MistContext mc = new MistContext()) 
+            {
+                var ownedGame = mc.UserGames.Where(x => x.GameId == Game.Id && x.UserId == App.CurrentUser.Id).FirstOrDefault();
+                if (ownedGame != null)
+                {
+                    PageManager.MainFrame.Navigate(new BuyPageError(false, Game));
+                    return;
+                }
+                if (Game.UsdPrice > App.CurrentUser.Balance)
+                {
+                    PageManager.MainFrame.Navigate(new BuyPageError(true, Game));
+                    return;
+                }
+            }
             PageManager.MainFrame.Navigate(new BuyGamePage(Game));
         }
 

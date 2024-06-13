@@ -8,7 +8,7 @@ namespace Mist.Windows
 {
     partial class MainWindowStyles : ResourceDictionary
     {
-        Window _mw = new Window();
+        Window _mw = null;
         public MainWindowStyles()
         {
             InitializeComponent();

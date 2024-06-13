@@ -19,6 +19,7 @@
         PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"
         MinWidth="1080"
         MinHeight="675"
+        Closing="Window_Closing"
         >
     <Window.Resources>
         <ResourceDictionary Source="MainWindowStyles.xaml"/>

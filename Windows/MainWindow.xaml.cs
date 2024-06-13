@@ -2,20 +2,10 @@
 using Mist.Model;
 using Mist.Pages.MainWindowPages;
 using Mist.Pages.MainWindowPages.CommunityPagePages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Mist.Windows
 {
@@ -39,7 +29,6 @@ namespace Mist.Windows
             FillHelperLists();
             SetUserData();
             AddLabelEvents();
-            
         }
 
         public void SetUserData()
@@ -107,7 +96,7 @@ namespace Mist.Windows
             {
                 _mw.DragMove();
             }
-            
+
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -129,7 +118,9 @@ namespace Mist.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            store_Label_MouseLeftButtonDown(null, null);
+            activeLabel = store_Label;
+            SetLabelColor();
         }
 
         private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -186,6 +177,12 @@ namespace Mist.Windows
         private void friends_Label_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _mw = null;
+            Application.Current.Shutdown();
         }
     }
 }

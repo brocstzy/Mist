@@ -1,6 +1,8 @@
-﻿using Mist.Helper;
+﻿using iTextSharp.text.io;
+using Mist.Helper;
 using Mist.Model;
 using Mist.UserControls;
+using Mist.Windows;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -31,6 +33,7 @@ namespace Mist.Pages.MainWindowPages
             RefreshGameList();
             logoMargin = logo_Image.Margin;
             logo_Image.Height = 200;
+            RefreshTiles();
         }
 
         public void RefreshGameList()
@@ -58,6 +61,10 @@ namespace Mist.Pages.MainWindowPages
             reviewWrite_Label.Content = $"Напишите отзыв для {SelectedGame.Name}";
             pfp_Image.Source = ImageHelper.GetImage(App.CurrentUser.Pfp);
             friendsWhoHave_Label.Text = $"Друзья, у которых есть {SelectedGame.Name}";
+
+            tiles_ScrollViewer.Visibility = Visibility.Collapsed;
+            gamePage_ScrollViewer.Visibility = Visibility.Visible;
+            
         }
 
         private void info_Button_Click(object sender, RoutedEventArgs e)
@@ -90,6 +97,39 @@ namespace Mist.Pages.MainWindowPages
 
             //oldSize = new Size(this.ActualWidth, this.ActualHeight);
 
+
+            if (tiles_ScrollViewer.Visibility == Visibility.Visible)
+            {
+                var width = this.ActualWidth;
+                var zxc = new UserControl();
+                if (width > 1580)
+                {
+                    foreach (var item in tiles_WrapPanel.Children)
+                    {
+                        ((UserControl)item).Width = 222;
+                        ((UserControl)item).Height = 333;
+                    }
+                    return;
+                }
+                if (width > 1280 && width < 1580)
+                {
+                    foreach (var item in tiles_WrapPanel.Children)
+                    {
+                        ((UserControl)item).Width = 170;
+                        ((UserControl)item).Height = 255;
+                    }
+                    return;
+                }
+                if (width < 1280)
+                {
+                    foreach (var item in tiles_WrapPanel.Children)
+                    {
+                        ((UserControl)item).Width = 140;
+                        ((UserControl)item).Height = 210;
+                    }
+                    return;
+                }
+            }
         }
 
         private void recommend_Button_Click(object sender, RoutedEventArgs e)
@@ -135,6 +175,33 @@ namespace Mist.Pages.MainWindowPages
             this.Cursor = Cursors.Hand;
             PageManager.MainFrame.Navigate(new GamePage(SelectedGame));
             this.Cursor = null;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().ResetLabelColor();
+            Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().activeLabel =
+                Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().library_Label;
+            Application.Current.Windows.OfType<MainWindow>().FirstOrDefault().SetLabelColor();
+        }
+
+        public void RefreshTiles()
+        {
+            tiles_ScrollViewer.Visibility = Visibility.Visible;
+            gamePage_ScrollViewer.Visibility = Visibility.Collapsed;
+            foreach (var game in GameList)
+            {
+                var uc = new VerticalTileUserControl(game);
+                uc.PreviewMouseLeftButtonDown += Uc_PreviewMouseLeftButtonDown;
+                tiles_WrapPanel.Children.Add(uc);
+                
+            }
+        }
+
+        private void Uc_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            SelectedGame = ((VerticalTileUserControl)sender).Game;
+            RefreshSelectedGame();
         }
 
         //private void Page_Loaded(object sender, RoutedEventArgs e)

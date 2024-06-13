@@ -8,7 +8,8 @@
       d:DesignHeight="900"
       d:DesignWidth="1920"
       Title="LibraryPage"
-      SizeChanged="Page_SizeChanged">
+      SizeChanged="Page_SizeChanged"
+      Loaded="Page_Loaded">
     <Page.Resources>
         <Style TargetType="Label">
             <Setter Property="Foreground"
@@ -538,7 +539,8 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0"
-              Background="#30343b">
+              Background="#30343b"
+              >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="1*" />
@@ -572,9 +574,23 @@
                      BorderThickness="0"
                      Padding="0,5,0,0"
                      SelectionChanged="games_ListBox_SelectionChanged" />
+            <Rectangle Width="1"
+                       Stroke="Black"
+                       Grid.RowSpan="2"
+                       HorizontalAlignment="Right"/>
         </Grid>
+        <ScrollViewer x:Name="tiles_ScrollViewer"
+                      Grid.Column="1"
+                      VerticalScrollBarVisibility="Auto"
+                      Background="#24282f">
+            <WrapPanel x:Name="tiles_WrapPanel"
+                       Margin="30"
+                       
+                       />
+        </ScrollViewer>
         <ScrollViewer Grid.Column="1"
-                      VerticalScrollBarVisibility="Auto">
+                      VerticalScrollBarVisibility="Auto"
+                      x:Name="gamePage_ScrollViewer">
             <Grid x:Name="gamePage_Grid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"
@@ -587,11 +603,13 @@
                            Stretch="UniformToFill"
                            StretchDirection="Both"
                            HorizontalAlignment="Center"
-                           VerticalAlignment="Center" />
+                           VerticalAlignment="Center"
+                           />
                     <Image x:Name="logo_Image"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
-                           Margin="50,25,0,0" />
+                           Margin="50,75,0,0"
+                           Width="300"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.Background>
@@ -934,8 +952,5 @@
                 </StackPanel>
             </Grid>
         </ScrollViewer>
-        <Grid x:Name="tiles_Grid"
-              Grid.Column="1"
-              Visibility="Collapsed"></Grid>
     </Grid>
 </Page>
