@@ -18,4 +18,9 @@ public partial class Review
     public virtual User Author { get; set; } = null!;
 
     public virtual Game Game { get; set; } = null!;
+
+    public Review()
+    {
+        
+    }
 }

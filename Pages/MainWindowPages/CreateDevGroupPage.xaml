@@ -8,40 +8,222 @@
       d:DesignHeight="900" d:DesignWidth="1920"
       Title="CreateDevGroupPage"
       SizeChanged="Page_SizeChanged">
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0, 0.5"
+                             EndPoint="1, 0.5">
+            <GradientStop Color="#1b2838"
+                          Offset="0" />
+            <GradientStop Color="#273a4b"
+                          Offset="0.25" />
+            <GradientStop Color="#273a4b"
+                          Offset="0.75" />
+            <GradientStop Color="#1b2838"
+                          Offset="1" />
+        </LinearGradientBrush>
+    </Page.Background>
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="{StaticResource font_regular}"/>
+            <Setter Property="Background" Value="#264963"/>
+            <Setter Property="Foreground" Value="#6abcd9"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="Width" Value="200"/>
+        </Style>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="#324965"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0.7"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="MaxLength" Value="20"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_regular}"/>
+            <Setter Property="Height" Value="27"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Setter Property="Padding" Value="5,0,0,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <EventSetter Event="TextChanged" Handler="TextBox_TextChanged"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <ControlTemplate x:Key="ButtonTemplate1" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="ButtonTemplate2" TargetType="{x:Type Button}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
 
     <Grid x:Name="main_Grid"
           Margin="480,15,480,0">
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Top">
+            <StackPanel.Background>
+                <SolidColorBrush Color="Black"
+                                 Opacity="0.3"/>
+            </StackPanel.Background>
             <Label Content="Создать группу разработчика"
                    Background="Gray"
-                   Padding="50,50"/>
-            <TextBlock Text="Группа разработчика нужна, чтобы вы смогли выкладывать свои игры на площадку Mist от её лица. Пользователи смогут подписаться на вашу группу, получая уведомления каждый раз, когда вы выпускаете новую игру, а также общаться с вами"
-                       TextWrapping="Wrap"/>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Имя группы:"/>
-                <TextBox x:Name="groupName_TextBox"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Аватар группы:"/>
-                <Button x:Name="choosePfp_Button"
+                   Padding="50,50"
+                   FontSize="22"
+                   FontFamily="{StaticResource font_regular}"/>
+            <StackPanel Orientation="Vertical"
+                        Margin="20">
+                <TextBlock Text="Группа разработчика нужна, чтобы вы смогли выкладывать свои игры на площадку Mist от её лица. Пользователи смогут подписаться на вашу группу, получая уведомления каждый раз, когда вы выпускаете новую игру, а также общаться с вами"
+                       TextWrapping="Wrap"
+                           Padding="10"
+                           Foreground="DarkGray"
+                           Margin="0,0,0,15"
+                           FontSize="15"/>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,10">
+                    <Label Content="Имя группы:"/>
+                    <TextBox x:Name="groupName_TextBox"
+                         Style="{DynamicResource TextBoxStyle1}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,10">
+                    <Label Content="Аватар группы:"/>
+                    <Button x:Name="choosePfp_Button"
                         Click="choosePfp_Button_Click"
-                        Content="Выбрать файл..."/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Изображение заднего фона группы:"/>
-                <Button x:Name="chooseBackgroundPfp_Button"
+                        Content="Выбрать файл..."
+                            Template="{DynamicResource ButtonTemplate1}"
+                            Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,10">
+                    <Label Content="Изображение заднего фона группы:"/>
+                    <Button x:Name="chooseBackgroundPfp_Button"
                         Click="chooseBackgroundPfp_Button_Click"
-                        Content="Выбрать файл..."/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Описание вашей компании:"/>
-                <TextBox x:Name="bio_TextBox"
-                         AcceptsReturn="True"/>
-
-            </StackPanel>
-            <Button x:Name="createDevGroup_Button"
+                        Content="Выбрать файл..."
+                            Template="{DynamicResource ButtonTemplate1}"
+                            Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Описание вашей компании:"/>
+                    <TextBox x:Name="bio_TextBox"
+                         AcceptsReturn="True"
+                         Style="{DynamicResource TextBoxStyle1}"
+                         HorizontalAlignment="Left"
+                         Height="100"
+                         Width="300"
+                         TextWrapping="Wrap"
+                         MaxLength="1000"
+                             Margin="0,10,0,15"
+                             VerticalContentAlignment="Top"
+                             Padding="5"/>
+                </StackPanel>
+                <Button x:Name="createDevGroup_Button"
                     Content="Создать"
-                    Click="createDevGroup_Button_Click"/>
+                    Click="createDevGroup_Button_Click"
+                        Template="{DynamicResource ButtonTemplate2}"
+                        Width="400"
+                        HorizontalAlignment="Center"
+                        Foreground="White"
+                        Height="40"
+                        FontSize="18"
+                        MouseEnter="createDevGroup_Button_MouseEnter"
+                        MouseLeave="createDevGroup_Button_MouseLeave"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

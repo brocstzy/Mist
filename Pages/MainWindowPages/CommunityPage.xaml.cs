@@ -71,7 +71,7 @@ namespace Mist.Pages.MainWindowPages
 
         private void createDevGroup_Button_Click(object sender, RoutedEventArgs e)
         {
-            PageManager.MainFrame.Navigate(new CreateDevGroupPage());
+            PageManager.MainFrame.Navigate(new CreateDevGroupPage(false));
         }
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)

@@ -7,15 +7,47 @@
              mc:Ignorable="d"
              d:DesignHeight="100"
              d:DesignWidth="790"
-             MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
-    <Grid>
+             MouseLeftButtonDown="UserControl_MouseLeftButtonDown"
+             Padding="15">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.Background>
+        <SolidColorBrush Color="Black"
+                         Opacity="0.4"/>
+    </UserControl.Background>
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition />
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
         <Image x:Name="Group_Image"
-               Height="100" />
+               Height="85"
+               Grid.RowSpan="2"/>
         <Label x:Name="GroupName_Label"
-               Grid.Column="1" />
+               Grid.Column="1"
+               Foreground="White"
+               FontSize="18"
+               Padding="0"
+               Margin="10,-3,0,0"/>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    VerticalAlignment="Bottom"
+                    Margin="10,0,0,0">
+            <Label x:Name="membersCount_Label"/>
+            <Label Content=" | "/>
+            <Label Content="0 в игре"/>
+            <Label Content=" | "/>
+            <Label Content="0 в сети"/>
+        </StackPanel>
     </Grid>
 </UserControl>

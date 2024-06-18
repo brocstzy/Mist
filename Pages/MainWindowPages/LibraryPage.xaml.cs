@@ -39,9 +39,18 @@ namespace Mist.Pages.MainWindowPages
         public void RefreshGameList()
         {
             games_ListBox.Items.Clear();
-            foreach (var game in GameList)
+            noGames_StackPanel.Visibility = Visibility.Collapsed;
+            if (GameList.Any())
             {
-                games_ListBox.Items.Add(new LibraryGameUserControl(game));
+                var sortedGameList = GameList.OrderBy(x => x.Name).ToList();
+                foreach (var game in sortedGameList)
+                {
+                    games_ListBox.Items.Add(new LibraryGameUserControl(game));
+                }
+            }
+            else
+            {
+                noGames_StackPanel.Visibility = Visibility.Visible;
             }
         }
 
@@ -189,12 +198,21 @@ namespace Mist.Pages.MainWindowPages
         {
             tiles_ScrollViewer.Visibility = Visibility.Visible;
             gamePage_ScrollViewer.Visibility = Visibility.Collapsed;
-            foreach (var game in GameList)
+            noGames_Stackpanel1.Visibility = Visibility.Collapsed;
+            if (GameList.Any())
             {
-                var uc = new VerticalTileUserControl(game);
-                uc.PreviewMouseLeftButtonDown += Uc_PreviewMouseLeftButtonDown;
-                tiles_WrapPanel.Children.Add(uc);
-                
+                foreach (var game in GameList)
+                {
+                    var uc = new VerticalTileUserControl(game);
+                    uc.PreviewMouseLeftButtonDown += Uc_PreviewMouseLeftButtonDown;
+                    tiles_WrapPanel.Children.Add(uc);
+
+                }
+            }
+            else
+            {
+                tiles_ScrollViewer.Visibility = Visibility.Collapsed;
+                noGames_Stackpanel1.Visibility = Visibility.Visible;
             }
         }
 
@@ -202,6 +220,11 @@ namespace Mist.Pages.MainWindowPages
         {
             SelectedGame = ((VerticalTileUserControl)sender).Game;
             RefreshSelectedGame();
+        }
+
+        private void TextBlock_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new StorePage());
         }
 
         //private void Page_Loaded(object sender, RoutedEventArgs e)

@@ -25,6 +25,7 @@ namespace Mist.Pages.MainWindowPages.CommunityPagePages
         {
             InitializeComponent();
             FillDevGroups();
+            ButtonPainter.SetButtonBackground(addGame_Button);
         }
         public (List<TextBox>, List<string>, List<List<byte[]>>) GetEmptyFields()
         {
@@ -159,7 +160,7 @@ namespace Mist.Pages.MainWindowPages.CommunityPagePages
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             var m = this.ActualWidth / 2 - 480;
-            var margin = new Thickness(m, 15, m, 0);
+            var margin = new Thickness(m, 15, m, 50);
             main_Grid.Margin = margin;
         }
 
@@ -313,6 +314,22 @@ namespace Mist.Pages.MainWindowPages.CommunityPagePages
                     }
                 }
             }
+        }
+
+        private void addGame_Button_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ButtonPainter.SetButtonBackgroundHover(sender);
+        }
+
+        private void addGame_Button_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ButtonPainter.SetButtonBackground(sender);
+        }
+
+        private void devGroups_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (((ComboBox)sender).SelectedIndex == 0)
+                PageManager.MainFrame.Navigate(new CreateDevGroupPage(true));
         }
     }
 }

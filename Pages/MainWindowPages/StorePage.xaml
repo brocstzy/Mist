@@ -9,7 +9,8 @@
       d:DesignWidth="1920"
       Title="StorePage"
       Loaded="Page_Loaded"
-      SizeChanged="Page_SizeChanged">
+      SizeChanged="Page_SizeChanged"
+      PreviewKeyDown="Page_PreviewKeyDown">
     <Page.Resources>
         <Style TargetType="Button">
             <Setter Property="FontFamily"
@@ -252,14 +253,16 @@
                     <Button Template="{DynamicResource ButtonTemplate1}" x:Name="search_Button"
                             
                             Content="Искать"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left" 
+                            Click="search_Button_Click"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"
                             Grid.Column="1"
                             HorizontalAlignment="Right">
                     <Label Content="Сортировать по:"
                             />
-                    <ComboBox x:Name="sort_ComboBox">
+                    <ComboBox x:Name="sort_ComboBox"
+                              SelectionChanged="sort_ComboBox_SelectionChanged">
                         <ComboBoxItem>По алфавиту</ComboBoxItem>
                         <ComboBoxItem>По цене (возрастающе)</ComboBoxItem>
                         <ComboBoxItem>По цене (убывающе)</ComboBoxItem>

@@ -20,4 +20,15 @@ public partial class Group
     public bool IsPrivate { get; set; }
 
     public virtual User Owner { get; set; } = null!;
+    
+    public Group() { }
+    public Group(int ownerId, string name, byte[]? pfp, string tag, string? bio, bool isPrivate)
+    {
+        OwnerId = ownerId;
+        Name = name;
+        Pfp = pfp;
+        Tag = tag;
+        Bio = bio;
+        IsPrivate = isPrivate;
+    }
 }

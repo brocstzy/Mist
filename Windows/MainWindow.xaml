@@ -9,7 +9,8 @@
         Title="MainWindow" Height="900" Width="1600"
         AllowsTransparency="True"
         Background="#192330"
-        BorderThickness="0"
+        BorderThickness="0.7,0,0.7,0.7"
+        BorderBrush="Black"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
         Activated="Window_Activated"
@@ -78,23 +79,23 @@
                            Background="#28394f"
                                Tag="Profile"
                                Margin="0,0,10,0">
-                        <Label.Content>
-                            <StackPanel Orientation="Horizontal"
+                    <Label.Content>
+                        <StackPanel Orientation="Horizontal"
                                         x:Name="profile_StackPanel"
                                         Tag="Profile">
-                                <Image x:Name="pfp_Image"
+                            <Image x:Name="pfp_Image"
                                Height="28"/>
-                                <Label x:Name="nickname_Label"
+                            <Label x:Name="nickname_Label"
                                Content="Sample_Nickname"
                                        Foreground="DeepSkyBlue"
                                        Margin="5,0,0,0"/>
-                                <Label x:Name="balance_Label"
+                            <Label x:Name="balance_Label"
                                        Content="0.00 руб."
                                        Foreground="LightGray"/>
-                            </StackPanel>
-                        </Label.Content>
-                    </Label>
-                    <StackPanel x:Name="resizeButtons_StackPanel"
+                        </StackPanel>
+                    </Label.Content>
+                </Label>
+                <StackPanel x:Name="resizeButtons_StackPanel"
                         Orientation="Horizontal"
                         HorizontalAlignment="Right">
                     <Button x:Name="minimizeWindow_Button"
@@ -134,62 +135,92 @@
             <Label Content="ПРОФИЛЬ"
                    x:Name="gigaProfile_Label"
                    MouseLeftButtonDown="gigaProfile_Label_MouseLeftButtonDown"/>
-            
+
         </StackPanel>
         <Frame x:Name="MainFrame"
                NavigationUIVisibility="Hidden"
                Grid.Row="2"
-               BorderBrush="Gray"
-               BorderThickness="1"
-               Margin="-1,0"/>
-        <Grid x:Name="bottom_Grid"
-              Height="50"
-              Grid.Row="3"
-              Background="#192330" Grid.ColumnSpan="2"
-              VerticalAlignment="Center">
-            <Label x:Name="addGame_Label"
-                   PreviewMouseLeftButtonDown="addGame_Label_PreviewMouseLeftButtonDown"
-                   VerticalContentAlignment="Center"
-                   HorizontalAlignment="Left"
-                   Margin="10,0,0,0">
-                <Label.Content>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition  />
-                        </Grid.ColumnDefinitions>
-                        <Image Source="/Assets/add-game.png"
-                               Height="16"
-                               VerticalAlignment="Center"/>
-                        <TextBlock Text="Добавить игру"
-                                   VerticalAlignment="Center"
-                                   FontFamily="{StaticResource font_light}"
-                                   FontSize="16"
-                                   Foreground="#bfbfbf"
-                                   Grid.Column="1"
-                                   Margin="5,0,0,0"/>
-                    </Grid>
-                </Label.Content>
-            </Label>
-            <Label x:Name="friendsWindow_Label"
-                   PreviewMouseLeftButtonDown="friends_Label_PreviewMouseLeftButtonDown"
-                   HorizontalAlignment="Right"
-                   VerticalContentAlignment="Center"
-                   Margin="0,0,20,0">
-                <Label.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Assets/friends.png"
-                               Height="16"/>
-                        <TextBlock Text="Друзья и чат"
-                                   FontFamily="{StaticResource font_light}"
-                                   FontSize="16"
-                                   Foreground="#bfbfbf"
-                                   Grid.Column="1"
-                                   Margin="5,0,0,0" />
-                    </StackPanel>
-                </Label.Content>
-            </Label>
-        </Grid>
+               Margin="1,0"/>
+        <Border BorderBrush="Gray" BorderThickness="0.5"
+                Grid.Row="3"
+                Margin="2,0,2,2">
+            <Grid x:Name="bottom_Grid"
+      Height="50"
+      Grid.Row="3"
+      Background="#192330" Grid.ColumnSpan="2"
+      VerticalAlignment="Center"
+      
+      >
+                <Label x:Name="addGame_Label"
+           PreviewMouseLeftButtonDown="addGame_Label_PreviewMouseLeftButtonDown"
+           VerticalContentAlignment="Center"
+           HorizontalAlignment="Left"
+           Margin="10,0,0,0"
+                       MouseEnter="addGame_Label_MouseEnter"
+                       MouseLeave="addGame_Label_MouseLeave">
+                    <Label.Content>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition  />
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="addGame_Image"
+                                Source="/Assets/add-game.png"
+                       Height="20"
+                       VerticalAlignment="Center"/>
+                            <TextBlock Text="Добавить игру"
+                           VerticalAlignment="Center"
+                           FontFamily="{StaticResource font_light}"
+                           FontSize="16"
+                           Foreground="#bfbfbf"
+                           Grid.Column="1"
+                           Margin="5,0,0,0"
+                                       x:Name="addGame_TextBlock"/>
+                        </Grid>
+                    </Label.Content>
+                    <Label.Style>
+                        <Style TargetType="Label">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+                <Label x:Name="friendsWindow_Label"
+           PreviewMouseLeftButtonDown="friends_Label_PreviewMouseLeftButtonDown"
+           HorizontalAlignment="Right"
+           VerticalContentAlignment="Center"
+           Margin="0,0,20,0"
+                       MouseEnter="friendsWindow_Label_MouseEnter"
+                       MouseLeave="friendsWindow_Label_MouseLeave">
+                    <Label.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="friends_Image"
+                                Source="/Assets/friends.png"
+                       Height="16"/>
+                            <TextBlock Text="Друзья и чат"
+                           FontFamily="{StaticResource font_light}"
+                           FontSize="16"
+                           Foreground="#bfbfbf"
+                           Grid.Column="1"
+                           Margin="5,0,0,0"
+                                       x:Name="friends_TextBlock"/>
+                        </StackPanel>
+                    </Label.Content>
+                    <Label.Style>
+                        <Style TargetType="Label">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+            </Grid>
+        </Border>
 
         <StackPanel x:Name="mist_Label_StackPanel"
                     Orientation="Vertical"

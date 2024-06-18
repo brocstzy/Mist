@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Mist.Windows
 {
@@ -183,6 +184,34 @@ namespace Mist.Windows
         {
             _mw = null;
             Application.Current.Shutdown();
+        }
+
+        private void addGame_Label_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Image theImage = (Image)((Label)sender).FindName("addGame_Image");
+            theImage.Source = new BitmapImage(new Uri("pack://application:,,,/Assets/add-game-white.png"));
+            addGame_TextBlock.Foreground = Brushes.White;
+        }
+
+        private void addGame_Label_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Image theImage = (Image)((Label)sender).FindName("addGame_Image");
+            theImage.Source = new BitmapImage(new Uri("pack://application:,,,/Assets/add-game.png"));
+            addGame_TextBlock.Foreground = new SolidColorBrush(Color.FromRgb(191, 191, 191));
+        }
+
+        private void friendsWindow_Label_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Image theImage = (Image)((Label)sender).FindName("friends_Image");
+            theImage.Source = new BitmapImage(new Uri("pack://application:,,,/Assets/friends-white.png"));
+            friends_TextBlock.Foreground = Brushes.White;
+        }
+
+        private void friendsWindow_Label_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Image theImage = (Image)((Label)sender).FindName("friends_Image");
+            theImage.Source = new BitmapImage(new Uri("pack://application:,,,/Assets/friends.png"));
+            friends_TextBlock.Foreground = new SolidColorBrush(Color.FromRgb(191, 191, 191));
         }
     }
 }

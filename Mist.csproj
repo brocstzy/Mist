@@ -10,12 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\add-game-white.png" />
     <None Remove="Assets\add-game.png" />
     <None Remove="Assets\check.png" />
     <None Remove="Assets\close-white.png" />
     <None Remove="Assets\close.png" />
     <None Remove="Assets\default-pfp.png" />
+    <None Remove="Assets\friends-white.png" />
     <None Remove="Assets\friends.png" />
+    <None Remove="Assets\gamepad.png" />
     <None Remove="Assets\info-white.png" />
     <None Remove="Assets\info.png" />
     <None Remove="Assets\maximize-white.png" />
@@ -61,6 +64,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\add-game-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\add-game.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -76,7 +82,13 @@
     <Resource Include="Assets\default-pfp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\friends-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\friends.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\gamepad.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\info-white.png">

@@ -11,6 +11,10 @@ namespace Mist.Helper
 {
     public static class ButtonPainter
     {
+        /// <summary>
+        /// I hate Niggers.
+        /// </summary>
+        /// <param name="sender"></param>
         public static void SetButtonBackground(object sender)
         {
             LinearGradientBrush bg = new LinearGradientBrush();

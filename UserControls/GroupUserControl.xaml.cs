@@ -27,6 +27,7 @@ namespace Mist.UserControls
         {
             InitializeComponent();
             Group = group;
+            RefreshGroup();
         }
 
         public void RefreshGroup()

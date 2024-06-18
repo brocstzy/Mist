@@ -50,7 +50,6 @@
                     <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
                 </Trigger>
                 <Trigger Property="IsPressed" Value="true">
-                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
                     <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="false">
@@ -187,7 +186,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <ListBox ItemContainerStyle="{DynamicResource ListBoxItemContainerStyle1}" x:Name="groups_ListBox">
+            <ListBox ItemContainerStyle="{DynamicResource ListBoxItemContainerStyle1}" x:Name="groups_ListBox"
+                     HorizontalContentAlignment="Stretch">
                 <ListBox.Background>
                     <SolidColorBrush Color="Black"
                                      Opacity="0.2" />
@@ -218,8 +218,10 @@
                 <Button Template="{DynamicResource ButtonTemplate1}" x:Name="createGroup_Button"
                         Content="Создать группу"
                         Click="createGroup_Button_Click"
-                        Margin="0,0,0,5"/>
+                        Margin="0,0,0,5"
+                        HorizontalAlignment="Stretch"/>
                 <Button x:Name="createDevGroup_Button"
+                        Template="{DynamicResource ButtonTemplate1}"
                         Content="Создать группу разработчика"
                         Click="createDevGroup_Button_Click" />
             </StackPanel>
