@@ -19,6 +19,8 @@ public partial class Group
 
     public bool IsPrivate { get; set; }
 
+    public virtual ICollection<GroupComment> GroupComments { get; set; } = new List<GroupComment>();
+
     public virtual ICollection<GroupMember> GroupMembers { get; set; } = new List<GroupMember>();
 
     public virtual User Owner { get; set; } = null!;

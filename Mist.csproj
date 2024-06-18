@@ -38,6 +38,7 @@
     <None Remove="Assets\restore-white.png" />
     <None Remove="Assets\restore.png" />
     <None Remove="Assets\search-icon.png" />
+    <None Remove="Assets\star.png" />
     <None Remove="Assets\thumbs-down-white.png" />
     <None Remove="Assets\thumbs-down.png" />
     <None Remove="Assets\thumbs-up-white.png" />
@@ -147,6 +148,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\search-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\star.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\thumbs-down-white.png">

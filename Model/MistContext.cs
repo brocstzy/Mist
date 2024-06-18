@@ -34,6 +34,8 @@ public partial class MistContext : DbContext
 
     public virtual DbSet<Group> Groups { get; set; }
 
+    public virtual DbSet<GroupComment> GroupComments { get; set; }
+
     public virtual DbSet<GroupMember> GroupMembers { get; set; }
 
     public virtual DbSet<Message> Messages { get; set; }
@@ -45,6 +47,8 @@ public partial class MistContext : DbContext
     public virtual DbSet<State> States { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<UserComment> UserComments { get; set; }
 
     public virtual DbSet<UserGame> UserGames { get; set; }
 
@@ -386,6 +390,39 @@ public partial class MistContext : DbContext
                 .HasConstraintName("fk_group_owner_id");
         });
 
+        modelBuilder.Entity<GroupComment>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("group_comments");
+
+            entity.HasIndex(e => e.GroupId, "fk_group_comments_group_id_idx");
+
+            entity.HasIndex(e => e.PosterId, "fk_group_comments_writer_id_idx");
+
+            entity.HasIndex(e => e.Id, "id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Comment)
+                .HasMaxLength(1000)
+                .HasColumnName("comment");
+            entity.Property(e => e.GroupId).HasColumnName("group_id");
+            entity.Property(e => e.PosterId).HasColumnName("poster_id");
+            entity.Property(e => e.Timestamp)
+                .HasColumnType("timestamp")
+                .HasColumnName("timestamp");
+
+            entity.HasOne(d => d.Group).WithMany(p => p.GroupComments)
+                .HasForeignKey(d => d.GroupId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_group_comments_group_id");
+
+            entity.HasOne(d => d.Poster).WithMany(p => p.GroupComments)
+                .HasForeignKey(d => d.PosterId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_group_comments_poster_id");
+        });
+
         modelBuilder.Entity<GroupMember>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -610,6 +647,39 @@ public partial class MistContext : DbContext
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_user_role_id");
+        });
+
+        modelBuilder.Entity<UserComment>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("user_comments");
+
+            entity.HasIndex(e => e.PosterId, "fk_user_comments_poster_id_idx");
+
+            entity.HasIndex(e => e.UserId, "fk_user_comments_user_id_idx");
+
+            entity.HasIndex(e => e.Id, "id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Comment)
+                .HasMaxLength(1000)
+                .HasColumnName("comment");
+            entity.Property(e => e.PosterId).HasColumnName("poster_id");
+            entity.Property(e => e.Timestamp)
+                .HasColumnType("datetime")
+                .HasColumnName("timestamp");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.Poster).WithMany(p => p.UserCommentPosters)
+                .HasForeignKey(d => d.PosterId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_user_comments_poster_id");
+
+            entity.HasOne(d => d.User).WithMany(p => p.UserCommentUsers)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_user_comments_user_id");
         });
 
         modelBuilder.Entity<UserGame>(entity =>

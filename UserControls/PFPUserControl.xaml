@@ -5,14 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Mist.UserControls"
              mc:Ignorable="d"
-             Height="100"
-             Width="100"
              >
     <Grid>
         <Border x:Name="status_Border"
-                BorderThickness="3"
+                BorderThickness="1.5"
                 BorderBrush="DeepSkyBlue">
-            <Image x:Name="pfp_Image"/>
+            <Image x:Name="pfp_Image"
+                   Margin="0.5"/>
         </Border>
     </Grid>
 </UserControl>
