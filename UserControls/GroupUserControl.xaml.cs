@@ -1,5 +1,6 @@
 ﻿using Mist.Helper;
 using Mist.Model;
+using Mist.Pages.MainWindowPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,11 +35,17 @@ namespace Mist.UserControls
         {
             Group_Image.Source = ImageHelper.GetImage(Group.Pfp);
             GroupName_Label.Content = Group.Name;
+            using (MistContext mc = new MistContext())
+            {
+                var members = mc.GroupMembers.Where(x => x.GroupId == Group.Id).Select(x => x.Member).ToList();
+                membersCount_Label.Content = members.Any() ? $"{members.Count} участников" : "0 участников";
+            }
+            groupType_Label.Content = Group.IsPrivate ? "Частная группа" : "Публичная группа";
         }
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            PageManager.MainFrame.Navigate(new GroupPage(Group));
         }
     }
 }

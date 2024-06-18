@@ -1,0 +1,125 @@
+﻿<Page x:Class="Mist.Pages.MainWindowPages.GroupPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mist.Pages.MainWindowPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1920"
+      Title="GroupPage"
+      SizeChanged="Page_SizeChanged">
+    <Page.Background>
+        #1b2838
+    </Page.Background>
+
+    <ScrollViewer>
+        <Grid x:Name="main_Grid"
+              Margin="480,15,480,0">
+            <StackPanel Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="groupPfp_Image"/>
+                    <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                Grid.Column="1">
+                        <Label Content="СООБЩЕСТВО MIST"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label x:Name="groupName_Label"/>
+                            <Label x:Name="groupTag_Label"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical">
+                        <Separator/>
+                        <Label x:Name="aboutGroup_Label"/>
+                        <TextBlock x:Name="groupBio_TextBlock"
+                                   TextWrapping="Wrap"/>
+                        <Separator/>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Assets/comments.png"
+                                   Width="15"/>
+                            <Label x:Name="commentsCount_Label"/>
+                            <Label Content="Комментариев"/>
+                        </StackPanel>
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="Black"
+                                                 Opacity="0.2"/>
+                            </Grid.Background>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="pfpUserControl_Grid"
+                                  Width="50"
+                                  Height="50">
+                                
+                            </Grid>
+                            <TextBox x:Name="comment_TextBox"
+                                       TextWrapping="Wrap"
+                                       Grid.Column="1"/>
+                            <Button x:Name="leaveComment_Button"
+                                    Content="Оставить комментарий"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Right"/>
+                        </Grid>
+                        <ListBox x:Name="comments_ListBox">
+                            
+                        </ListBox>
+                        <Separator/>
+                        <Label Content="УЧАСТНИКИ ГРУППЫ"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="10"/>
+                            <Label Content="Администраторы"/>
+                        </StackPanel>
+                        <Grid x:Name="adminUserControl_Grid"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                                Grid.Column="1">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <Label x:Name="membersCount_Label"/>
+                                <Label Content="УЧАСТНИКОВ"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <Label x:Name="onlineCount_Label"/>
+                                <Label Content="В СЕТИ"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <Label x:Name="inGameCount_Label"/>
+                                <Label Content="В ИГРЕ"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <Separator/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Дата создания"/>
+                            <Label x:Name="creationDate_Label"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Язык"/>
+                            <Label x:Name="groupLanguage_Label"/>
+                        </StackPanel>
+                        <Grid>
+                            <Button x:Name="leaveGroup_Button"
+                                    Content="Покинуть группу"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+
+</Page>

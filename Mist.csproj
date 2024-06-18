@@ -15,6 +15,7 @@
     <None Remove="Assets\check.png" />
     <None Remove="Assets\close-white.png" />
     <None Remove="Assets\close.png" />
+    <None Remove="Assets\comments.png" />
     <None Remove="Assets\default-pfp.png" />
     <None Remove="Assets\friends-white.png" />
     <None Remove="Assets\friends.png" />
@@ -77,6 +78,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\close.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\comments.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\default-pfp.png">

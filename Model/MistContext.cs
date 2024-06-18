@@ -34,6 +34,8 @@ public partial class MistContext : DbContext
 
     public virtual DbSet<Group> Groups { get; set; }
 
+    public virtual DbSet<GroupMember> GroupMembers { get; set; }
+
     public virtual DbSet<Message> Messages { get; set; }
 
     public virtual DbSet<Review> Reviews { get; set; }
@@ -258,7 +260,7 @@ public partial class MistContext : DbContext
                 .HasColumnType("mediumblob")
                 .HasColumnName("store_small_image");
             entity.Property(e => e.UsdPrice)
-                .HasPrecision(5, 2)
+                .HasPrecision(6, 2)
                 .HasColumnName("usd_price");
             entity.Property(e => e.VerticalLibraryImage)
                 .HasColumnType("mediumblob")
@@ -364,7 +366,7 @@ public partial class MistContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Bio)
-                .HasMaxLength(45)
+                .HasMaxLength(500)
                 .HasColumnName("bio");
             entity.Property(e => e.IsPrivate).HasColumnName("is_private");
             entity.Property(e => e.Name)
@@ -375,13 +377,43 @@ public partial class MistContext : DbContext
                 .HasColumnType("mediumblob")
                 .HasColumnName("pfp");
             entity.Property(e => e.Tag)
-                .HasMaxLength(45)
+                .HasMaxLength(15)
                 .HasColumnName("tag");
 
             entity.HasOne(d => d.Owner).WithMany(p => p.Groups)
                 .HasForeignKey(d => d.OwnerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_group_owner_id");
+        });
+
+        modelBuilder.Entity<GroupMember>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("group_member");
+
+            entity.HasIndex(e => e.GroupId, "fk_group_member_group_id_idx");
+
+            entity.HasIndex(e => e.MemberId, "fk_group_member_member_id_idx");
+
+            entity.HasIndex(e => e.Id, "id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.GroupId).HasColumnName("group_id");
+            entity.Property(e => e.JoinDate)
+                .HasColumnType("timestamp")
+                .HasColumnName("join_date");
+            entity.Property(e => e.MemberId).HasColumnName("member_id");
+
+            entity.HasOne(d => d.Group).WithMany(p => p.GroupMembers)
+                .HasForeignKey(d => d.GroupId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_group_member_group_id");
+
+            entity.HasOne(d => d.Member).WithMany(p => p.GroupMembers)
+                .HasForeignKey(d => d.MemberId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_group_member_member_id");
         });
 
         modelBuilder.Entity<Message>(entity =>

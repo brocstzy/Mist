@@ -35,9 +35,15 @@
         <Label x:Name="GroupName_Label"
                Grid.Column="1"
                Foreground="White"
-               FontSize="18"
+               FontSize="26"
                Padding="0"
                Margin="10,-3,0,0"/>
+        <Label x:Name="groupType_Label"
+               Foreground="DarkOrange"
+               Grid.Column="1"
+               Margin="10,30,0,0"
+               FontSize="14"
+               FontFamily="{StaticResource font_regular}"/>
         <StackPanel Orientation="Horizontal"
                     Grid.Row="1"
                     Grid.Column="1"

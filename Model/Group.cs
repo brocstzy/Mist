@@ -19,8 +19,10 @@ public partial class Group
 
     public bool IsPrivate { get; set; }
 
+    public virtual ICollection<GroupMember> GroupMembers { get; set; } = new List<GroupMember>();
+
     public virtual User Owner { get; set; } = null!;
-    
+
     public Group() { }
     public Group(int ownerId, string name, byte[]? pfp, string tag, string? bio, bool isPrivate)
     {
@@ -31,4 +33,5 @@ public partial class Group
         Bio = bio;
         IsPrivate = isPrivate;
     }
+
 }
