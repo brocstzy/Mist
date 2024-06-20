@@ -5,6 +5,10 @@ namespace Mist.Model;
 
 public partial class GroupMember
 {
+    public GroupMember()
+    {
+    }
+
     public int Id { get; set; }
 
     public int GroupId { get; set; }
@@ -16,4 +20,11 @@ public partial class GroupMember
     public virtual Group Group { get; set; } = null!;
 
     public virtual User Member { get; set; } = null!;
+
+    public GroupMember(int groupId, int memberId, DateTime joinDate)
+    {
+        GroupId = groupId;
+        MemberId = memberId;
+        JoinDate = joinDate;
+    }
 }

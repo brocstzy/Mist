@@ -1,10 +1,12 @@
 ﻿using Mist.Helper;
 using Mist.Model;
 using Mist.UserControls;
+using Mist.Windows;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 
 namespace Mist.Pages.MainWindowPages
 {
@@ -110,12 +112,36 @@ namespace Mist.Pages.MainWindowPages
 
         private void leaveGroup_Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            var confWin = new ConfirmationWindow();
+            confWin.text_TextBlock.Text = $"Вы уверены, что хотите покинуть группу {Group.Name}? Если это частная группа, вернуться обратно вы сможете только по приглашению администратора.";
+            confWin.ShowDialog();
+            if (confWin.Confirmed)
+            {
+                var zxc = App.Context.GroupMembers.Where(gm => gm.GroupId == Group.Id && gm.Member == App.CurrentUser).FirstOrDefault();
+                if (zxc != null)
+                {
+                    App.Context.GroupMembers.Remove(zxc);
+                }
+                App.Context.SaveChanges();
+                App.Context = new MistContext();
+                RefreshGroupInfo();
+                RefreshGroupComments();
+            }
         }
 
         private void enterGroup_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            var confWin = new ConfirmationWindow();
+            confWin.text_TextBlock.Text = $"Вы уверены, что хотите вступить в группу {Group.Name}?";
+            confWin.ShowDialog();
+            if (confWin.Confirmed)
+            {
+                App.Context.GroupMembers.Add(new GroupMember(Group.Id, App.CurrentUser.Id, DateTime.Now));
+                App.Context.SaveChanges();
+                App.Context = new MistContext();
+                RefreshGroupInfo();
+                RefreshGroupComments();
+            }
         }
     }
 }

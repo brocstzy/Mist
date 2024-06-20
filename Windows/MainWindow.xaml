@@ -33,6 +33,12 @@
             <RowDefinition />
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        <Rectangle x:Name="blackTint"
+                   Fill="Black"
+                   Opacity="0.5"
+                   Visibility="Collapsed"
+                   Grid.RowSpan="4"
+                   Panel.ZIndex="1"/>
         <Grid x:Name="titleBar_Grid"
               Height="32"
               Background="#192330"
