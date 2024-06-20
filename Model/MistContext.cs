@@ -53,8 +53,7 @@ public partial class MistContext : DbContext
     public virtual DbSet<UserGame> UserGames { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;user=root;password=1234;database=mist", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.37-mysql"));
+        => optionsBuilder.UseLazyLoadingProxies().UseMySql("server=localhost;user=root;password=1234;database=mist", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.37-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -372,6 +371,9 @@ public partial class MistContext : DbContext
             entity.Property(e => e.Bio)
                 .HasMaxLength(500)
                 .HasColumnName("bio");
+            entity.Property(e => e.CreationDate)
+                .HasColumnType("timestamp")
+                .HasColumnName("creation_date");
             entity.Property(e => e.IsPrivate).HasColumnName("is_private");
             entity.Property(e => e.Name)
                 .HasMaxLength(45)

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="600"
              >
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>    
             <ColumnDefinition />    
@@ -18,19 +18,28 @@
         </Grid.RowDefinitions>
         <Grid x:Name="pfpUserControl_Grid"
               Grid.RowSpan="2"
-              Width="50"
-              Height="50"
-              VerticalAlignment="Top">
+              Width="40"
+              Height="40"
+              VerticalAlignment="Top"
+              Margin="0,0,20,0">
             
         </Grid>
         <StackPanel Orientation="Horizontal"
                     Grid.Column="1">
-            <Label x:Name="userNickName_Label"/>
-            <Label x:Name="timestamp_Label"/>
+            <Label x:Name="userNickName_Label"
+                   FontSize="16"
+                   FontFamily="{StaticResource font_light}"/>
+            <Label x:Name="timestamp_Label"
+                   Foreground="#56707f"
+                   Margin="10,0,0,0"
+                   VerticalContentAlignment="Center"/>
         </StackPanel>
         <TextBlock x:Name="comment_TextBlock"
                    TextWrapping="Wrap"
                    Grid.Column="1"
-                   Grid.Row="1"/>
+                   Grid.Row="1"
+                   Foreground="#acb2b8"
+                   MaxWidth="500"
+                   Margin="0,5,0,0"/>
     </Grid>
 </UserControl>

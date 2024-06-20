@@ -209,6 +209,31 @@
                         Orientation="Vertical"
                         Grid.Column="1"
                         Margin="15,0,0,0">
+                <Label Content="Поиск групп:"
+                       Foreground="White"
+                       Padding="0,5"/>
+                <Grid Margin="0,0,0,5">
+                    <TextBox x:Name="search_TextBox"
+                             HorizontalAlignment="Left"
+                             Width="125"
+                             Foreground="White"
+                             FontFamily="{StaticResource font_regular}"
+                             Background="#222b35"
+                             BorderBrush="Black"
+                             MaxLength="40"
+                             VerticalContentAlignment="Center"
+                             TextChanged="search_TextBox_TextChanged"
+                             />
+                    <Button x:Name="search_Button"
+                            Content="Поиск"
+                            Click="search_Button_Click"
+                            HorizontalAlignment="Right"
+                            Padding="8,3"
+                            Template="{DynamicResource ButtonTemplate1}"/>
+                </Grid>
+                <Label Content="Показать:"
+                       Foreground="White"
+                       Padding="0,0,0,5"/>
                 <ComboBox x:Name="groupType_ComboBox"
                           SelectionChanged="groupType_ComboBox_SelectionChanged"
                           Margin="0,0,0,15">

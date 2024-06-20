@@ -12,7 +12,7 @@
         <LinearGradientBrush StartPoint="0,0.5"
                              EndPoint="1,0.5">
 
-            <GradientStop Color="#2f4e75"
+            <GradientStop Color="#23354a"
                           Offset="0.5" />
 
         </LinearGradientBrush>
@@ -21,115 +21,452 @@
     <Page.Resources>
         <Style TargetType="Label">
             <Setter Property="Padding" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+        </Style>
+        
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.5,0"
+                                         EndPoint="0.5,1">
+                        <GradientStop Color="#799905" Offset="0"/>
+                        <GradientStop Color="#526804" Offset="1"/>
+                        
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="#a4d007"/>
+            <Setter Property="Foreground" Value="#bde874"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_regular}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                                CornerRadius="3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#98b606"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FocusVisual1">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
+        <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
+        <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
+        <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
+        <Style x:Key="ListBoxItemContainerStyle1" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual1}"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.MouseOver.Border}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FocusVisual2">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background1" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border1" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background1" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border1" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background1" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border1" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background1" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border1" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground1" Color="#FF838383"/>
+        <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual2}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FontFamily"
+                    Value="{StaticResource font_regular}" />
+            <Setter Property="Background"
+                    Value="#264963" />
+            <Setter Property="Foreground"
+                    Value="#6abcd9" />
+            <Setter Property="BorderThickness"
+                    Value="0.5" />
+            <Setter Property="BorderBrush"
+                    Value="Black" />
+            <Setter Property="Padding"
+                    Value="8,5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border1}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border1}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background1}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border1}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground1}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Page.Resources>
 
     <ScrollViewer>
         <Grid x:Name="main_Grid"
-              Margin="480,15,480,0">
+              Margin="480,15,480,50">
             <StackPanel Orientation="Vertical">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-                    <Image x:Name="groupPfp_Image"/>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Assets/group-background.png"
+                                    Opacity="0.3"/>
+                    </Grid.Background>
+                    <Border BorderBrush="Black"
+                        BorderThickness="2"
+                                                       Margin="0,0,0,35">
+                        <Image x:Name="groupPfp_Image"
+                           />
+                    </Border>
+
                     <StackPanel Orientation="Vertical"
                                 VerticalAlignment="Center"
-                                Grid.Column="1">
-                        <Label Content="СООБЩЕСТВО MIST"/>
-                        <StackPanel Orientation="Horizontal">
-                            <Label x:Name="groupName_Label"/>
-                            <Label x:Name="groupTag_Label"/>
+                                Grid.Column="1"
+                                Margin="0,-29,0,0">
+                        <Label Content="СООБЩЕСТВО MIST"
+                               HorizontalAlignment="Left"
+                               Padding="15,5"
+                               Foreground="#bfbfbf">
+                            <Label.Background>
+                                <SolidColorBrush Color="Black"
+                                                 Opacity="1"/>
+                            </Label.Background>
+                        </Label>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Left"
+                                    >
+                            <StackPanel.Background>
+                                <SolidColorBrush Color="Black"
+                                                 Opacity="0.7"/>
+                            </StackPanel.Background>
+                            <Label x:Name="groupName_Label"
+                                   Foreground="White"
+                                   FontSize="32"
+                                   Padding="15,5,15,10"></Label>
+                            <Label x:Name="groupTag_Label"
+                                   Foreground="#bfbfbf"
+                                   VerticalAlignment="Center"
+                                   FontSize="24"
+                                   Padding="0,5,15,10"
+                                   Margin="0,5,0,0"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
-                <Grid>
+                <Grid Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="7*" />
+                        <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Vertical">
-                        <Separator/>
-                        <Label x:Name="aboutGroup_Label"/>
+                    <StackPanel Orientation="Vertical"
+                                Margin="0,0,25,0">
+                        <Separator />
+                        <Label x:Name="aboutGroup_Label"
+                               Margin="0,15,0,30"
+                               Foreground="#61686d"/>
                         <TextBlock x:Name="groupBio_TextBlock"
-                                   TextWrapping="Wrap"/>
-                        <Separator/>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Assets/comments.png"
-                                   Width="15"/>
-                            <Label x:Name="commentsCount_Label"/>
-                            <Label Content="Комментариев"/>
+                                   TextWrapping="Wrap"
+                                   Foreground="#c1cacf"/>
+                        <Separator Margin="0,10,0,10"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,0,0,0">
+                            <StackPanel.Background>
+                                <SolidColorBrush Color="Black"
+                                                 Opacity="0.3"/>
+                            </StackPanel.Background>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="10">
+                                <Image Source="/Assets/comments.png"
+                                   Width="24"/>
+                                <Label x:Name="commentsCount_Label" Margin="5,3,5,0"
+                                   Foreground="#8f98a0"
+                                   FontSize="16"/>
+                                <Label Content="Комментариев"
+                                   Foreground="#8f98a0"
+                                   FontSize="16"
+                                   x:Name="comments_Label"
+                                       Margin="0,3,0,0"/>
+                            </StackPanel>
+
                         </StackPanel>
                         <Grid>
                             <Grid.Background>
                                 <SolidColorBrush Color="Black"
-                                                 Opacity="0.2"/>
+                                                 Opacity="0.5"/>
                             </Grid.Background>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Grid x:Name="pfpUserControl_Grid"
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid x:Name="pfpUserControl_Grid"
                                   Width="50"
-                                  Height="50">
-                                
-                            </Grid>
-                            <TextBox x:Name="comment_TextBox"
+                                  Height="50"
+                                      VerticalAlignment="Top">
+
+                                </Grid>
+                                <TextBox x:Name="comment_TextBox"
                                        TextWrapping="Wrap"
                                        Grid.Column="1"
-                                     TextChanged="comment_TextBox_TextChanged"/>
-                            <Button x:Name="leaveComment_Button"
+                                     TextChanged="comment_TextBox_TextChanged"
+                                         Margin="10,0,0,0"
+                                         MinHeight="75"
+                                         MaxHeight="200"
+                                         MaxLength="500"
+                                         Foreground="White"
+                                         FontFamily="{StaticResource font_regular}"
+                                         Padding="5"
+                                         Background="#0e161f"
+                                         BorderBrush="#828282"
+                                         BorderThickness="1"/>
+                                <Button Style="{DynamicResource ButtonStyle1}" x:Name="leaveComment_Button"
                                     Content="Оставить комментарий"
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     HorizontalAlignment="Right"
-                                    Click="leaveComment_Button_Click"/>
+                                    Click="leaveComment_Button_Click"
+                                        Margin="0,15,0,5"/>
+                            </Grid>
+
                         </Grid>
-                        <ListBox x:Name="comments_ListBox">
-                            
+                        <ListBox ItemContainerStyle="{DynamicResource ListBoxItemContainerStyle1}" x:Name="comments_ListBox"
+                                 Margin="10,30,10,30"
+                                 MaxHeight="400"
+                                 ScrollViewer.VerticalScrollBarVisibility="auto"
+                                 Padding="0"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 ScrollViewer.CanContentScroll="False"
+                                 
+                                 >
+
                         </ListBox>
                         <Separator/>
-                        <Label Content="УЧАСТНИКИ ГРУППЫ"/>
-                        <StackPanel Orientation="Horizontal">
+                        <Label Content="УЧАСТНИКИ ГРУППЫ"
+                               FontFamily="{StaticResource font_medium}"
+                               FontSize="18"
+                               Margin="0,10,0,10"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,0,0,10">
                             <Image Width="15" Source="/Assets/star.png"/>
                             <Label Content="Администраторы"/>
                         </StackPanel>
-                        <Grid x:Name="adminUserControl_Grid"/>
+                        <Grid x:Name="adminUserControl_Grid"
+                              Width="50"
+                              HorizontalAlignment="Left"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"
-                                Grid.Column="1">
-                        <StackPanel Orientation="Horizontal">
+                                Grid.Column="1"
+                                VerticalAlignment="Top">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="Black"
+                                             Opacity="0.5"/>
+                        </StackPanel.Background>
+                        <StackPanel.Resources>
+                                <Style TargetType="Label">
+                                <Setter Property="HorizontalContentAlignment"
+                                            Value="Center"/>
+                                <Setter Property="Padding" Value="0"/>
+                            </Style>
+                            </StackPanel.Resources>
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Vertical">
-                                <Label x:Name="membersCount_Label"/>
-                                <Label Content="УЧАСТНИКОВ"/>
+                                <Label x:Name="membersCount_Label"
+                                       FontSize="32"
+                                       Foreground="#9a9a9a"/>
+                                <Label Content="УЧАСТНИКОВ"
+                                       x:Name="members_Label"
+                                       Foreground="#9a9a9a"
+                                       FontSize="14"/>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical">
-                                <Label x:Name="onlineCount_Label"/>
-                                <Label Content="В СЕТИ"/>
+                            <StackPanel Orientation="Vertical"
+                                            Grid.Column="1">
+                                <Label x:Name="onlineCount_Label" Content="0"
+                                       FontSize="32"
+                                       Foreground="#8bc53f"
+/>
+                                <Label Content="В СЕТИ"
+                                       Foreground="#8bc53f"
+                                       FontSize="14"/>
                             </StackPanel>
-                            <StackPanel Orientation="Vertical">
-                                <Label x:Name="inGameCount_Label"/>
-                                <Label Content="В ИГРЕ"/>
+                            <StackPanel Orientation="Vertical"
+                                            Grid.Column="2">
+                                <Label x:Name="inGameCount_Label" Content="0"
+                                       FontSize="32"
+                                       Foreground="#62a7e3"
+/>
+                                <Label Content="В ИГРЕ"
+                                       Foreground="#62a7e3"
+                                       FontSize="14"/>
                             </StackPanel>
-                        </StackPanel>
-                        <Separator/>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Дата создания"/>
-                            <Label x:Name="creationDate_Label"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Язык"/>
-                            <Label x:Name="groupLanguage_Label"/>
-                        </StackPanel>
-                        <Grid>
-                            <Button x:Name="leaveGroup_Button"
-                                    Content="Покинуть группу"/>
                         </Grid>
+                        <Separator/>
+                        <StackPanel Orientation="Vertical"
+                                    Margin="20">
+                            <StackPanel.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="Foreground" Value="#61686d"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+                                    <Setter Property="FontSize" Value="14"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Дата создания" Margin="0,0,15,0"/>
+                                <Label x:Name="creationDate_Label"
+                                       Margin="0,0,0,5"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Язык"/>
+                                <Label x:Name="groupLanguage_Label" Content="Английский"
+                                       Margin="75,0,0,0"/>
+                            </StackPanel>
+                            <Button x:Name="enterGroup_Button"
+                                    Click="enterGroup_Button_Click"
+                                    Content="Вступить в группу"
+                                    Style="{DynamicResource ButtonStyle2}"
+                                    Margin="0,20,0,0"/>
+                            <Grid>
+                                <Button Style="{DynamicResource ButtonStyle2}" x:Name="leaveGroup_Button"
+                                    Content="Покинуть группу"
+                                    Click="leaveGroup_Button_Click"
+                                        Margin="0,10,0,0"
+                                        />
+                            </Grid>     
+                        </StackPanel>
+
+                        <Popup x:Name="miniProfile_Popup" Placement="Mouse" AllowsTransparency="True" StaysOpen="True">
+
+                        </Popup>
+
                     </StackPanel>
                 </Grid>
             </StackPanel>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Mist.Model;
+﻿namespace Mist.Model;
 
 public partial class User
 {
@@ -90,5 +87,15 @@ public partial class User
         Balance = balance;
         CountryId = countryId;
         RoleId = roleId;
+    }
+
+    public bool IsInGroup(Group group)
+    {
+        using (MistContext mc = new MistContext())
+        {
+            if (mc.GroupMembers.Where(x => x.Group == group && x.MemberId == this.Id).FirstOrDefault() != null)
+                return true;
+            return false;
+        }
     }
 }

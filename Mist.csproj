@@ -20,6 +20,7 @@
     <None Remove="Assets\friends-white.png" />
     <None Remove="Assets\friends.png" />
     <None Remove="Assets\gamepad.png" />
+    <None Remove="Assets\group-background.png" />
     <None Remove="Assets\info-white.png" />
     <None Remove="Assets\info.png" />
     <None Remove="Assets\maximize-white.png" />
@@ -94,6 +95,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\gamepad.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\group-background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\info-white.png">

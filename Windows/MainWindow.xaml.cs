@@ -213,5 +213,10 @@ namespace Mist.Windows
             theImage.Source = new BitmapImage(new Uri("pack://application:,,,/Assets/friends.png"));
             friends_TextBlock.Foreground = new SolidColorBrush(Color.FromRgb(191, 191, 191));
         }
+
+        private void MainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            App.CurrentPage = MainFrame.Content as Page;
+        }
     }
 }

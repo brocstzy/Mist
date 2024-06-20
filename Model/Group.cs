@@ -19,6 +19,8 @@ public partial class Group
 
     public bool IsPrivate { get; set; }
 
+    public DateTime CreationDate { get; set; }
+
     public virtual ICollection<GroupComment> GroupComments { get; set; } = new List<GroupComment>();
 
     public virtual ICollection<GroupMember> GroupMembers { get; set; } = new List<GroupMember>();
@@ -36,4 +38,11 @@ public partial class Group
         IsPrivate = isPrivate;
     }
 
+    public int GetMembersCount()
+    {
+        using (MistContext mc = new MistContext())
+        {
+            return mc.GroupMembers.Where(x => x.GroupId == this.Id).Count();
+        }
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using Mist.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,7 +37,9 @@ namespace Mist.UserControls
         {
             pfpUserControl_Grid.Children.Add(new PFPUserControl(User));
             userNickName_Label.Content = User.Nickname;
-            timestamp_Label.Content = Comment.Timestamp;
+            timestamp_Label.Content = $"{Comment.Timestamp.Day}" +
+                $" {CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(Comment.Timestamp.Month).Substring(0, 3)}" +
+                $" в {Comment.Timestamp.Hour.ToString("D2")}:{Comment.Timestamp.Minute.ToString("D2")}";    
             comment_TextBlock.Text = Comment.Comment;
         }
     }

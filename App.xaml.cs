@@ -15,6 +15,10 @@ namespace Mist
 
         public static User CurrentUser { get; set; }
         public static Cursor Cursor { get; set; }
+        public static Page CurrentPage { 
+            get;
+            set; 
+        }
         private void TitleBarButton_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;
