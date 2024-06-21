@@ -35,7 +35,7 @@ namespace Mist.Pages.MainWindowPages
         {
             storeFront_Image.Source = ImageHelper.GetImage(Game.FrontImage);
             gamePrice_TextBlock.Text = $"{Game.UsdPrice} руб.";
-            releaseDate_Label.Content = $"Выпущена {Game.ReleaseDate.Day} {CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(Game.ReleaseDate.Month)}, {Game.ReleaseDate.Year}";
+            releaseDate_Label.Content = $"Выпущена {Game.ReleaseDate.Day} {CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(Game.ReleaseDate.Month).Substring(0,3)}, {Game.ReleaseDate.Year}";
             gameBio_TextBlock.Text = Game.Bio;
             List<byte[]> gameScreenshots = App.Context.GameImages.Where(x => x.Game == Game).Select(x => x.Image).ToList();
             if (gameScreenshots.Count > 3 )
@@ -46,6 +46,21 @@ namespace Mist.Pages.MainWindowPages
                     imageControl.Source = ImageHelper.GetImage(gameScreenshots[i]);
                 }
             }
+        }
+
+        private void Page_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new GamePage(Game));
+        }
+
+        private void Page_MouseEnter(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.Hand;
+        }
+
+        private void Page_MouseLeave(object sender, MouseEventArgs e)
+        {
+            this.Cursor = null;
         }
     }
 }

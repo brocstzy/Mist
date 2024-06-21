@@ -90,7 +90,7 @@ namespace Mist.Pages.MainWindowPages
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             var m = this.ActualWidth / 2 - 480;
-            var margin = new Thickness(m, 15, m, 50);
+            var margin = new Thickness(m, 0, m, 50);
             main_Grid.Margin = margin;
         }
 
