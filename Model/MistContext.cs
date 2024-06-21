@@ -22,6 +22,8 @@ public partial class MistContext : DbContext
 
     public virtual DbSet<Developer> Developers { get; set; }
 
+    public virtual DbSet<DeveloperFollower> DeveloperFollowers { get; set; }
+
     public virtual DbSet<Friendship> Friendships { get; set; }
 
     public virtual DbSet<Game> Games { get; set; }
@@ -192,6 +194,33 @@ public partial class MistContext : DbContext
                 .HasForeignKey(d => d.OwnerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_developer_group_owner_id");
+        });
+
+        modelBuilder.Entity<DeveloperFollower>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("developer_follower");
+
+            entity.HasIndex(e => e.DeveloperId, "fk_developer_follower_developer_id_idx");
+
+            entity.HasIndex(e => e.FollowerId, "fk_developer_follower_follower_id_idx");
+
+            entity.HasIndex(e => e.Id, "id_UNIQUE").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.DeveloperId).HasColumnName("developer_id");
+            entity.Property(e => e.FollowerId).HasColumnName("follower_id");
+
+            entity.HasOne(d => d.Developer).WithMany(p => p.DeveloperFollowers)
+                .HasForeignKey(d => d.DeveloperId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_developer_follower_developer_id");
+
+            entity.HasOne(d => d.Follower).WithMany(p => p.DeveloperFollowers)
+                .HasForeignKey(d => d.FollowerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_developer_follower_follower_id");
         });
 
         modelBuilder.Entity<Friendship>(entity =>

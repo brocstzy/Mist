@@ -1,4 +1,7 @@
-﻿namespace Mist.Model;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Mist.Model;
 
 public partial class User
 {
@@ -33,6 +36,8 @@ public partial class User
     public int RoleId { get; set; }
 
     public virtual Country Country { get; set; } = null!;
+
+    public virtual ICollection<DeveloperFollower> DeveloperFollowers { get; set; } = new List<DeveloperFollower>();
 
     public virtual ICollection<Developer> Developers { get; set; } = new List<Developer>();
 

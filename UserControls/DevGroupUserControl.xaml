@@ -9,14 +9,33 @@
              MouseLeftButtonDown="UserControl_MouseLeftButtonDown"
              Padding="15"
              >
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.Background>
+        <SolidColorBrush Color="Black"
+                         Opacity="0.4"/>
+    </UserControl.Background>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition  />
         </Grid.ColumnDefinitions>
         <Image x:Name="devGroup_Image"
-               Height="100"/>
+               Height="85"/>
         <Label x:Name="devGroupName_Label"
-               Grid.Column="1"/>
+               Grid.Column="1"
+                              Foreground="White"
+               FontSize="26"
+               Padding="0"
+               Margin="10,-3,0,0"/>
+        <Label x:Name="followersCount_Label"
+               VerticalAlignment="Bottom"
+               Grid.Column="1"
+               Margin="13,0,0,0"/>
     </Grid>
 </UserControl>

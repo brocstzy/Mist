@@ -29,6 +29,11 @@ namespace Mist.Helper
                 }
             }
         }
+
+        public static BitmapImage GetImageFromPath(string path)
+        {
+            return new BitmapImage(new Uri($"pack://application:,,,{path}"));
+        }
         public static byte[]? CreateImage(string path)
         {
             if (path == null)

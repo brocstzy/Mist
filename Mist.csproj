@@ -23,6 +23,8 @@
     <None Remove="Assets\group-background.png" />
     <None Remove="Assets\info-white.png" />
     <None Remove="Assets\info.png" />
+    <None Remove="Assets\left-arrow-gray.png" />
+    <None Remove="Assets\left-arrow.png" />
     <None Remove="Assets\maximize-white.png" />
     <None Remove="Assets\maximize.png" />
     <None Remove="Assets\minimize-white.png" />
@@ -38,6 +40,8 @@
     <None Remove="Assets\preview-play.png" />
     <None Remove="Assets\restore-white.png" />
     <None Remove="Assets\restore.png" />
+    <None Remove="Assets\right-arrow-gray.png" />
+    <None Remove="Assets\right-arrow.png" />
     <None Remove="Assets\search-icon.png" />
     <None Remove="Assets\star.png" />
     <None Remove="Assets\thumbs-down-white.png" />
@@ -47,6 +51,7 @@
     <None Remove="Assets\timer.png" />
     <None Remove="Assets\volume.png" />
     <None Remove="Assets\white.png" />
+    <None Remove="Assets\windows.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -106,6 +111,12 @@
     <Resource Include="Assets\info.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\left-arrow-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\left-arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\maximize-white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -151,6 +162,12 @@
     <Resource Include="Assets\restore.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\right-arrow-gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\right-arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\search-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -176,6 +193,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\windows.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -17,9 +17,12 @@ public partial class Developer
 
     public string Bio { get; set; } = null!;
 
+    public virtual ICollection<DeveloperFollower> DeveloperFollowers { get; set; } = new List<DeveloperFollower>();
+
     public virtual ICollection<Game> Games { get; set; } = new List<Game>();
 
     public virtual User Owner { get; set; } = null!;
+
     public Developer()
     {
 

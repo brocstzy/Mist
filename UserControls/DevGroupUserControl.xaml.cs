@@ -1,5 +1,6 @@
 ﻿using Mist.Helper;
 using Mist.Model;
+using Mist.Pages.MainWindowPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,16 +23,24 @@ namespace Mist.UserControls
     /// </summary>
     public partial class DevGroupUserControl : UserControl
     {
-        public DevGroupUserControl(Developer group)
+        public Developer Developer;
+        public DevGroupUserControl(Developer developer)
         {
             InitializeComponent();
-            devGroup_Image.Source = ImageHelper.GetImage(group.Pfp);
-            devGroupName_Label.Content = group.Name;
+            Developer = developer;
+            RefreshDevGroup();
+        }
+
+        public void RefreshDevGroup()
+        {
+            devGroup_Image.Source = ImageHelper.GetImage(Developer.Pfp);
+            devGroupName_Label.Content = Developer.Name;
+            followersCount_Label.Content = $"{Developer.DeveloperFollowers.Count} подписчиков";
         }
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            PageManager.MainFrame.Navigate(new DevGroupPage(Developer));
         }
     }
 }

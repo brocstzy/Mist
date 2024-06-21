@@ -1,0 +1,54 @@
+﻿<Page x:Class="Mist.Pages.MainWindowPages.GamePreviewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mist.Pages.MainWindowPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="940"
+      Width="940" Height="350"
+      Title="GamePreviewPage">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical"
+                    Margin="0,0,20,0">
+            <Image x:Name="storeFront_Image"
+                   Width="340"/>
+            <Grid>
+                <Image Source="/Assets/windows.png"
+                       HorizontalAlignment="Left"
+                       Height="16"/>
+                <TextBlock x:Name="gamePrice_TextBlock"
+                           Text="666 руб."
+                           HorizontalAlignment="Right"/>
+            </Grid>
+            <Label x:Name="releaseDate_Label"
+                   Content="Выпущена 29 июн, 2021"
+                   HorizontalAlignment="Right"/>
+            <TextBlock x:Name="gameBio_TextBlock"
+                       TextWrapping="Wrap"/>
+        </StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Image x:Name="scr0_Image"/>
+            <Image x:Name="scr1_Image"
+                   Grid.Column="1"/>
+            <Image x:Name="scr2_Image"
+                   Grid.Row="1"/>
+            <Image x:Name="scr3_Image"
+                   Grid.Column="1"
+                   Grid.Row="1"/>
+        </Grid>
+    </Grid>
+</Page>
