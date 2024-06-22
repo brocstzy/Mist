@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Mist.UserControls.ProfileGameUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mist.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="85" d:DesignWidth="630"
+             Width="630"
+             Height="85">
+    <UserControl.Background>
+        <SolidColorBrush Color="Black"
+                         Opacity="0.5"/>
+    </UserControl.Background>
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Foreground" Value="#969696"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="7.5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />    
+            <ColumnDefinition />    
+            <ColumnDefinition />    
+        </Grid.ColumnDefinitions>
+        <Image x:Name="game_Image"
+               Height="70"/>
+        <Label x:Name="gameName_Label"
+               Content="Dota 2"
+               Grid.Column="1"
+               HorizontalAlignment="Left"
+               Foreground="#ebebeb"/>
+        <StackPanel Orientation="Vertical"
+                    Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+            <Label Content="0 ч. всего"/>
+            <Label Content="последний запуск Никогда"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

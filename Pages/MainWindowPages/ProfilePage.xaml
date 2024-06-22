@@ -3,12 +3,183 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Mist.Pages.MainWindowPages"
+      xmlns:local="clr-namespace:Mist.Pages.MainWindowPages" xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ProfilePage">
+      d:DesignHeight="900" d:DesignWidth="1920"
+      Title="ProfilePage"
+      SizeChanged="Page_SizeChanged">
 
-    <Grid>
-        
-    </Grid>
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+        </Style>
+    </Page.Resources>
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid x:Name="main_Grid"
+              Margin="480,0,480,50">
+            <StackPanel Orientation="Vertical">
+                <Grid Margin="20,25,20,0"
+                  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border x:Name="status_Border"
+                        BorderThickness="2">
+                        <Image x:Name="pfp_Image"
+                           Width="168"
+                           Height="168"/>
+                    </Border>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label x:Name="nickname_Label"
+                               Content="Nickname"/>
+                        <StackPanel x:Name="country_StackPanel"
+                                    Orientation="Horizontal"
+                                    Grid.Row="1">
+                            <emoji:TextBlock x:Name="countryFlag_TextBlock" Text="🇺🇸"/>
+                            <TextBlock x:Name="city_TextBlock" Text="Уфа, "/>
+                            <TextBlock x:Name="state_TextBlock" Text="Респ. Башкортостан, "/>
+                            <TextBlock x:Name="country_TextBlock" Text="Россия"/>
+                        </StackPanel>
+                        <TextBlock x:Name="bio_TextBlock"
+                                   TextWrapping="Wrap"
+                                   Grid.Row="3"
+                                   VerticalAlignment="Bottom"
+                                   Text="No information given."/>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Top">
+                            <Label Content="Уровень"/>
+                            <Border Width="32"
+                                    Height="32"
+                                    CornerRadius="16"
+                                    BorderThickness="1.5"
+                                    BorderBrush="Red">
+                                <TextBlock x:Name="mistLevel_TextBlock"
+                                           Text="10"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Bottom">
+                            <Button x:Name="addFriend_Button"
+                                    Content="Добавить в друзья"
+                                    Click="addFriend_Button_Click"/>
+                            <Button x:Name="removeFriend_Button"
+                                    Content="Удалить из друзей"
+                                    Click="removeFriend_Button_Click"/>
+                            <Button x:Name="message_Button"
+                                    Content="Сообщение"
+                                    Click="message_Button_Click"/>
+                            <Button x:Name="editProfile_Button"
+                                    Content="Редактировать"
+                                    Click="editProfile_Button_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical"
+                                Grid.Column="0">
+                        <StackPanel Orientation="Vertical"
+                                x:Name="recentActivity_StackPanel">
+                            <Grid>
+                                <Label Content="Недавняя активность"
+                                   HorizontalAlignment="Left"/>
+                                <Label Content="0,0 ч. за последние 2 недели"
+                                   HorizontalAlignment="Right"/>
+                            </Grid>
+                            <Grid>
+                                <StackPanel Orientation="Vertical"
+                                        Margin="7.5,20"
+                                        x:Name="recentGames_StackPanel">
+
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="Коментарии"/>
+                            <StackPanel Orientation="Vertical"
+                                        Margin="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid x:Name="pfpUserControl_Grid"
+                                          Width="40"
+                                          Height="40"
+                                          VerticalAlignment="Top"/>
+                                    <TextBox x:Name="comment_TextBox"
+                                             Grid.Column="1"/>
+                                    <Button x:Name="leaveComment_Button"
+                                            Content="Оставить комментарий"
+                                            Grid.Column="1"
+                                            Grid.Row="1"
+                                            HorizontalAlignment="Right"/>
+                                </Grid>
+                                <ListBox x:Name="comments_ListBox"
+                                         ScrollViewer.CanContentScroll="False"
+                                         ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                                Grid.Column="1">
+                        <Label x:Name="status_Label"
+                               Content="В сети"/>
+                        <StackPanel Orientation="Horizontal"
+                                    x:Name="gameCount_StackPanel">
+                            <Label Content="Игры"/>
+                            <Label x:Name="gameCount_Label"
+                                   Content="25"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    x:Name="groupCount_StackPanel">
+                            <Label Content="Группы"/>
+                            <Label x:Name="groupCount_Label"
+                                   Content="5"/>
+                            
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical"
+                                    x:Name="groups_StackPanel">
+                            
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Друзья"/>
+                            <Label x:Name="friendsCount_Label"
+                                   Content="10"/>
+                            <ListBox x:Name="friends_ListBox"
+                                     ScrollViewer.CanContentScroll="False"
+                                     ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+                            
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>

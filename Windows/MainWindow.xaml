@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Mist.Windows"
         xmlns:helper="clr-namespace:Mist.Helper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1600"
+        Title="Mist" Height="900" Width="1600"
         AllowsTransparency="True"
         Background="#192330"
         BorderThickness="0.7,0,0.7,0.7"

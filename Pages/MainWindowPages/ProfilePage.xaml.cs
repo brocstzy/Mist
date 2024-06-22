@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mist.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,44 @@ namespace Mist.Pages.MainWindowPages
     /// </summary>
     public partial class ProfilePage : Page
     {
-        public ProfilePage()
+        public User User;
+        public ProfilePage(User user)
         {
             InitializeComponent();
+            User = user;
+            RefreshProfileInfo();
+        }
+
+        private void RefreshProfileInfo()
+        {
+
+        }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var m = this.ActualWidth / 2 - 480;
+            var margin = new Thickness(m, 0, m, 50);
+            main_Grid.Margin = margin;
+        }
+
+        private void addFriend_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void removeFriend_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void message_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void editProfile_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
