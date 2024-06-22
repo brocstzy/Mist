@@ -349,7 +349,7 @@ namespace Mist.Pages.MainWindowPages
 
         private void developer_Label_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            PageManager.MainFrame.Navigate(new DevGroupPage(Game.Developer));
         }
     }
 }

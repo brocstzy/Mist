@@ -41,6 +41,10 @@ namespace Mist.Pages.MainWindowPages
             groupName_Label.Content = Developer.Name;
             groupBio_TextBlock.Text = Developer.Bio;
             followersCount_Label.Content = App.Context.DeveloperFollowers.Where(df => df.Developer == Developer).Count();
+            if (Developer.Owner != App.CurrentUser)
+            {
+                settings_Button.Visibility = Visibility.Collapsed;
+            }
         }
 
         public void RefreshDevGames()
@@ -50,6 +54,10 @@ namespace Mist.Pages.MainWindowPages
             {
                 DeveloperGames = games;
                 games_Frame.Navigate(new GamePreviewPage(DeveloperGames[0]));
+            }
+            else
+            {
+                devGames_StackPanel.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -114,6 +122,11 @@ namespace Mist.Pages.MainWindowPages
         {
             CurrentGameIndex += 1;
             games_Frame.Navigate(new GamePreviewPage(DeveloperGames[CurrentGameIndex]));
+        }
+
+        private void settings_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

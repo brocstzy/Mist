@@ -61,8 +61,9 @@
                 <Grid.Resources>
                     <Style TargetType="Image">
                         <Setter Property="Width" Value="278"/>
-                        <Setter Property="Height" Value="186"/>
+                        <Setter Property="Height" Value="153"/>
                         <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+                        <Setter Property="Stretch" Value="Fill"/>
                     </Style>
                 </Grid.Resources>
                 <Image x:Name="scr0_Image"
