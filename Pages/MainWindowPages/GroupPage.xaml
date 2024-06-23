@@ -236,6 +236,8 @@
                         BorderThickness="2"
                                                        Margin="0,0,0,35">
                         <Image x:Name="groupPfp_Image"
+                               Width="184"
+                               Height="184"
                            />
                     </Border>
 

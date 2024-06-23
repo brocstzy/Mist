@@ -17,13 +17,94 @@
         WindowStartupLocation="CenterScreen"
         SizeChanged="Window_SizeChanged"
         Loaded="Window_Loaded"
-        PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"
+        MouseLeftButtonUp="Window_MouseLeftButtonUp"
         MinWidth="1080"
         MinHeight="675"
         Closing="Window_Closing"
         >
     <Window.Resources>
-        <ResourceDictionary Source="MainWindowStyles.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MainWindowStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="FocusVisual">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+            <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+            <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+            <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+            <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+            <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+            <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+            <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+            <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+            <Style x:Key="notificationsButton_Style" TargetType="{x:Type Button}">
+                <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="DarkGray"
+                                         Opacity="0.1"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="15,4"/>
+                <Setter Property="Margin" Value="0,4,15,0"/>
+                <Setter Property="Content">
+                    <Setter.Value>
+                        <Image Source="/Assets/bell.png"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="border" Background="{TemplateBinding Background}"
+                                    CornerRadius="2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsDefaulted" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Background" TargetName="border">
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="DarkGray"
+                                                             Opacity="0.2"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                                    <Setter Property="Content">
+                                        <Setter.Value>
+                                            <Image Source="/Assets/bell-white.png"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid
         >
@@ -78,6 +159,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
+                <Button Style="{DynamicResource notificationsButton_Style}" x:Name="notifications_Button"
+                        Click="notifications_Button_Click"/>
                 <Label x:Name="profile_Label"
                            VerticalAlignment="Bottom"
                            Height="28"
@@ -317,6 +400,41 @@
                    x:Name="accountDetails_Label"/>
             <Label Content="Мой кошелек: "
                    x:Name="myWallet_Label"/>
+        </StackPanel>
+        <StackPanel x:Name="notifications_Button_StackPanel"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Grid.RowSpan="4"
+                    Margin="0,35,311,0"
+                    Width="305"
+                    Visibility="Collapsed">
+            <Border BorderBrush="Black" BorderThickness="1">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0"
+                                         EndPoint="1,1">
+                        <GradientStop Offset="0" Color="#373d47"/>
+                        <GradientStop Offset="1" Color="#282b33"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <StackPanel>
+                    <Label Content="Уведомления"
+                           FontFamily="{StaticResource font_bold}"
+                           FontSize="18"
+                           Foreground="White"
+                           Padding="15,15"/>
+                    <StackPanel Orientation="Vertical"
+                                x:Name="notifications_StackPanel"
+                                Margin="5"/>
+                    <Label x:Name="noNotifications_Label"
+                           Content="У вас нет уведомлений."
+                           FontFamily="{StaticResource font_light}"
+                           FontSize="16"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Padding="0,20,0,25"/>
+                </StackPanel>
+            </Border>
         </StackPanel>
     </Grid>
 </Window>

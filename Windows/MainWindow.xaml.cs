@@ -2,6 +2,7 @@
 using Mist.Model;
 using Mist.Pages.MainWindowPages;
 using Mist.Pages.MainWindowPages.CommunityPagePages;
+using Mist.UserControls;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -30,6 +31,7 @@ namespace Mist.Windows
             FillHelperLists();
             SetUserData();
             AddLabelEvents();
+            RefreshNotifications();
         }
 
         public void SetUserData()
@@ -124,12 +126,13 @@ namespace Mist.Windows
             SetLabelColor();
         }
 
-        private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             foreach (var sp in stackpanels)
             {
                 sp.Visibility = Visibility.Collapsed;
             }
+            notifications_Button_StackPanel.Visibility = Visibility.Collapsed;
         }
 
         private void logOut_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -167,7 +170,7 @@ namespace Mist.Windows
 
         private void gigaProfile_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MainFrame.Navigate(new ProfilePage());
+            MainFrame.Navigate(new ProfilePage(App.CurrentUser));
         }
 
         private void addGame_Label_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -217,6 +220,37 @@ namespace Mist.Windows
         private void MainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             App.CurrentPage = MainFrame.Content as Page;
+        }
+
+        public void RefreshNotifications()
+        {
+            notifications_StackPanel.Children.Clear();
+            var friendships = App.Context.Friendships.Where(f => f.RecipientId == App.CurrentUser.Id && f.Pending).ToList();
+            if (friendships.Any())
+            {
+                notifications_Button.Content = new Image()
+                {
+                    Source = ImageHelper.GetImageFromPath("/Assets/bell-green.png")
+                };
+                noNotifications_Label.Visibility = Visibility.Collapsed;
+                foreach (var  friendship in friendships)
+                {
+                    notifications_StackPanel.Children.Add(new FriendNotificationUserControl(friendship.Sender));
+                }
+            }
+            else
+            {
+                noNotifications_Label.Visibility = Visibility.Visible;
+                notifications_Button.Content = new Image()
+                {
+                    Source = ImageHelper.GetImageFromPath("/Assets/bell.png")
+                };
+            }
+        }
+
+        private void notifications_Button_Click(object sender, RoutedEventArgs e)
+        {
+            notifications_Button_StackPanel.Visibility = Visibility.Visible;
         }
     }
 }

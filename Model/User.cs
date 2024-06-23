@@ -35,6 +35,8 @@ public partial class User
 
     public int RoleId { get; set; }
 
+    public bool Status { get; set; }
+
     public virtual Country Country { get; set; } = null!;
 
     public virtual ICollection<DeveloperFollower> DeveloperFollowers { get; set; } = new List<DeveloperFollower>();
@@ -101,6 +103,39 @@ public partial class User
             if (mc.GroupMembers.Where(x => x.Group == group && x.MemberId == this.Id).FirstOrDefault() != null)
                 return true;
             return false;
+        }
+    }
+
+    public bool IsFriendsWith(User user)
+    {
+        using (MistContext mc = new MistContext())
+        {
+            // Ensure that this and user are properly attached to the context
+            return mc.Friendships.Any(f => (f.Sender.Id == this.Id && f.Recipient.Id == user.Id && !f.Pending) || (f.Recipient.Id == this.Id && f.Sender.Id == user.Id && !f.Pending));
+        }
+    }
+
+    public List<User> GetFriends()
+    {
+        using (MistContext mc = new MistContext())
+        {
+            // Find friendships where the user is the sender or the recipient and the friendship is not pending
+            var friendships = mc.Friendships
+                .Where(f => (f.Sender.Id == this.Id || f.Recipient.Id == this.Id) && !f.Pending)
+                .ToList();
+
+            // Extract the other user in each friendship
+            var friends = friendships.Select(f => f.Sender.Id == this.Id ? f.Recipient : f.Sender).ToList();
+
+            return friends;
+        }
+    }
+
+    public List<Game> GetGames() 
+    {
+        using (MistContext mc = new MistContext())
+        {
+            return mc.UserGames.Where(ug => ug.UserId == this.Id).Select(ug => ug.Game).ToList();
         }
     }
 }

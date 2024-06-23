@@ -5,6 +5,10 @@ namespace Mist.Model;
 
 public partial class Friendship
 {
+    public Friendship()
+    {
+    }
+
     public int Id { get; set; }
 
     public int SenderId { get; set; }
@@ -18,4 +22,11 @@ public partial class Friendship
     public virtual User Recipient { get; set; } = null!;
 
     public virtual User Sender { get; set; } = null!;
+
+    public Friendship(int senderId, int recipientId, bool pending)
+    {
+        SenderId = senderId;
+        RecipientId = recipientId;
+        Pending = pending;
+    }
 }

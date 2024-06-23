@@ -28,7 +28,7 @@ public partial class Group
     public virtual User Owner { get; set; } = null!;
 
     public Group() { }
-    public Group(int ownerId, string name, byte[]? pfp, string tag, string? bio, bool isPrivate)
+    public Group(int ownerId, string name, byte[]? pfp, string tag, string? bio, bool isPrivate, DateTime creationDate)
     {
         OwnerId = ownerId;
         Name = name;
@@ -36,6 +36,7 @@ public partial class Group
         Tag = tag;
         Bio = bio;
         IsPrivate = isPrivate;
+        CreationDate = creationDate;
     }
 
     public int GetMembersCount()

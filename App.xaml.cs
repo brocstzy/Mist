@@ -1,4 +1,5 @@
 ﻿using Mist.Model;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,6 +20,24 @@ namespace Mist
             get;
             set; 
         }
+        public App()
+        {
+            this.Exit += OnApplicationExit;
+        }
+
+        private void OnApplicationExit(object sender, ExitEventArgs e)
+        {
+            if (CurrentUser != null)
+            {
+                using (MistContext mc = new MistContext())
+                {
+                    var curUser = mc.Users.Where(u => u.Id == CurrentUser.Id).First();
+                    curUser.Status = false;
+                    mc.SaveChanges();
+                }
+            }
+        }
+
         private void TitleBarButton_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;

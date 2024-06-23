@@ -12,6 +12,9 @@
   <ItemGroup>
     <None Remove="Assets\add-game-white.png" />
     <None Remove="Assets\add-game.png" />
+    <None Remove="Assets\bell-green.png" />
+    <None Remove="Assets\bell-white.png" />
+    <None Remove="Assets\bell.png" />
     <None Remove="Assets\check.png" />
     <None Remove="Assets\close-white.png" />
     <None Remove="Assets\close.png" />
@@ -79,6 +82,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\add-game.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\bell-green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\bell-white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\bell.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\check.png">

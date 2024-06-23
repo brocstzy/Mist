@@ -31,7 +31,10 @@
                Content="Dota 2"
                Grid.Column="1"
                HorizontalAlignment="Left"
-               Foreground="#ebebeb"/>
+               Foreground="#ebebeb"
+               FontSize="14"
+               FontFamily="{StaticResource font_medium}"
+               Margin="10,5,0,0"/>
         <StackPanel Orientation="Vertical"
                     Grid.Column="2"
                     HorizontalAlignment="Right"

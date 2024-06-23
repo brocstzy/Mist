@@ -7,6 +7,7 @@
              mc:Ignorable="d"
              MouseEnter="UserControl_MouseEnter"
              MouseLeave="UserControl_MouseLeave"
+             PreviewMouseLeftButtonUp="UserControl_PreviewMouseLeftButtonUp"
              >
     <Grid>
         <Border x:Name="status_Border"

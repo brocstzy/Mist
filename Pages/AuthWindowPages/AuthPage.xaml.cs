@@ -83,6 +83,7 @@ namespace Mist.Pages.AuthWindowPages
                 if (user != null)
                 {
                     App.CurrentUser = user;
+                    App.CurrentUser.Status = true;
                     new MainWindow().Show();
                     WindowManager.Close<AuthWindow>();
                 }

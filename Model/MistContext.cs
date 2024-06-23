@@ -55,7 +55,8 @@ public partial class MistContext : DbContext
     public virtual DbSet<UserGame> UserGames { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseLazyLoadingProxies().UseMySql("server=localhost;user=root;password=1234;database=mist", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.37-mysql"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.EnableSensitiveDataLogging().UseLazyLoadingProxies().UseMySql("server=localhost;user=root;password=1234;database=mist", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.37-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -656,6 +657,7 @@ public partial class MistContext : DbContext
                 .HasMaxLength(20)
                 .HasColumnName("phone");
             entity.Property(e => e.RoleId).HasColumnName("role_id");
+            entity.Property(e => e.Status).HasColumnName("status");
 
             entity.HasOne(d => d.Country).WithMany(p => p.UserCountries)
                 .HasForeignKey(d => d.CountryId)

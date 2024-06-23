@@ -63,14 +63,19 @@ namespace Mist.Pages.MainWindowPages
             }
             using (MistContext mc = new MistContext())
             {
-                mc.Groups.Add(new Group(App.CurrentUser.Id,
+                var group = new Group(App.CurrentUser.Id,
                                         groupName_TextBox.Text,
                                         GroupImage,
                                         tag_TextBox.Text,
                                         bio_TextBox.Text,
-                                        IsPrivate));
+                                        IsPrivate, DateTime.Now);
+                mc.Groups.Add(group);
                 mc.SaveChanges();
+                mc.GroupMembers.Add(new GroupMember(group.Id, App.CurrentUser.Id, DateTime.Now));
+                mc.SaveChanges();
+
             }
+            App.Context = new MistContext();
             PageManager.MainFrame.Navigate(new CommunityPage());
         }
 

@@ -188,7 +188,8 @@
             <Label Content="ПОДТВЕРЖДЕНИЕ"
                    Foreground="White"
                    FontFamily="{StaticResource font_bold}"
-                   FontSize="18"/>
+                   FontSize="18"
+                   x:Name="conf_Label"/>
             <TextBlock x:Name="text_TextBlock"
                    TextWrapping="Wrap"
                    Grid.Row="1"

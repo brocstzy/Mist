@@ -1,21 +1,9 @@
 ﻿using Mist.Helper;
 using Mist.Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using Mist.Pages.MainWindowPages;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Mist.UserControls
 {
@@ -51,17 +39,25 @@ namespace Mist.UserControls
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
             var popup = App.CurrentPage.FindName("miniProfile_Popup") as Popup;
-            var mp = popup.Child as MiniProfileUserControl;
-            if (mp != null)
+            if (popup != null)
             {
-                mp.fadeOutStoryboard.Completed += (s, _) =>
+                var mp = popup.Child as MiniProfileUserControl;
+                if (mp != null)
                 {
-                    popup.IsOpen = false;
-                    popup.Child = null;
-                };
-                mp.fadeOutStoryboard.Begin();
-                this.Cursor = null;
+                    mp.fadeOutStoryboard.Completed += (s, _) =>
+                    {
+                        popup.IsOpen = false;
+                        popup.Child = null;
+                    };
+                    mp.fadeOutStoryboard.Begin();
+                    this.Cursor = null;
+                }
             }
+        }
+
+        private void UserControl_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new ProfilePage(User));
         }
     }
 }
