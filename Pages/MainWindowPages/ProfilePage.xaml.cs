@@ -244,7 +244,7 @@ namespace Mist.Pages.MainWindowPages
 
         private void message_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            new MessengerWindow(User).Show();
         }
 
         private void editProfile_Button_Click(object sender, RoutedEventArgs e)

@@ -5,6 +5,10 @@ namespace Mist.Model;
 
 public partial class Message
 {
+    public Message()
+    {
+    }
+
     public int Id { get; set; }
 
     public int SenderId { get; set; }
@@ -20,4 +24,13 @@ public partial class Message
     public virtual User Recipient { get; set; } = null!;
 
     public virtual User Sender { get; set; } = null!;
+
+    public Message(int senderId, int recipientId, string message1, DateTime datetime, bool seen)
+    {
+        SenderId = senderId;
+        RecipientId = recipientId;
+        Message1 = message1;
+        Datetime = datetime;
+        Seen = seen;
+    }
 }

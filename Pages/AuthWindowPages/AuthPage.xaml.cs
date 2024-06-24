@@ -82,8 +82,10 @@ namespace Mist.Pages.AuthWindowPages
                 var user = App.Context.Users.Where(x => x.Login.Equals(login_textBox.Text) && x.Password.Equals(password_PasswordBox.Password)).FirstOrDefault();
                 if (user != null)
                 {
+                    user.Status = true;
+                    App.Context.SaveChanges();
+                    App.Context = new Model.MistContext();
                     App.CurrentUser = user;
-                    App.CurrentUser.Status = true;
                     new MainWindow().Show();
                     WindowManager.Close<AuthWindow>();
                 }

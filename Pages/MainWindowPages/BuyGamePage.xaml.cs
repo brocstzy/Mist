@@ -1,5 +1,6 @@
 ﻿using Mist.Helper;
 using Mist.Model;
+using Mist.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,8 @@ namespace Mist.Pages.MainWindowPages
                 mc.Users.Where(x => x.Id == App.CurrentUser.Id).First().Balance -= Game.UsdPrice;
                 mc.SaveChanges();
             }
+            App.Context = new MistContext();
+            ((MainWindow)WindowManager.GetWindow<MainWindow>()).balance_Label.Content = App.Context.Users.Where(u => u.Id == App.CurrentUser.Id).First().Balance + " руб.";
             PageManager.MainFrame.Navigate(new BuyGameSuccessPage(Game));
         }
     }

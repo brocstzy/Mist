@@ -126,19 +126,13 @@ namespace Mist.Windows
             SetLabelColor();
         }
 
-        private void Window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            foreach (var sp in stackpanels)
-            {
-                sp.Visibility = Visibility.Collapsed;
-            }
-            notifications_Button_StackPanel.Visibility = Visibility.Collapsed;
-        }
-
         private void logOut_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             WindowManager.Close<MainWindow>();
-            new MainWindow().Show();
+            App.Context.Users.Where(u => u.Id == App.CurrentUser.Id).First().Status = false;
+            App.Context.SaveChanges();
+            App.Context = new MistContext();
+            new AuthWindow().Show();
         }
 
         public void ResetLabelColor()
@@ -185,8 +179,7 @@ namespace Mist.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _mw = null;
-            Application.Current.Shutdown();
+
         }
 
         private void addGame_Label_MouseEnter(object sender, MouseEventArgs e)
@@ -251,6 +244,75 @@ namespace Mist.Windows
         private void notifications_Button_Click(object sender, RoutedEventArgs e)
         {
             notifications_Button_StackPanel.Visibility = Visibility.Visible;
+        }
+
+        private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            foreach (var sp in stackpanels)
+            {
+                sp.Visibility = Visibility.Collapsed;
+            }
+            notifications_Button_StackPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void myWallet_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new TopUpPage());
+        }
+
+        private void myProfile_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new ProfilePage(App.CurrentUser));
+        }
+
+        private void goToLibrary_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new LibraryPage());
+        }
+
+        private void friendsWindow_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new FriendsWindow(App.CurrentUser) { Owner = this }.Show();
+        }
+
+        private void goToLibrary_Label1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new LibraryPage());
+        }
+
+        private void friendsAndChat_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new FriendsWindow(App.CurrentUser).Show();
+        }
+
+        private void quitApp_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void viewFriendsList_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new FriendsWindow(App.CurrentUser).Show();
+        }
+
+        private void changeNameAndPfp_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new EditProfilePage(App.CurrentUser));
+        }
+
+        private void addFriend_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new SearchFriendsPage()) ;
+        }
+
+        private void system_Specs_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new PcSpecsWindow() { Owner = this}.Show();
+        }
+
+        private void aboutMist_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

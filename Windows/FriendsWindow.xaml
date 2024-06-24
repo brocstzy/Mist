@@ -1,0 +1,161 @@
+﻿<Window x:Class="Mist.Windows.FriendsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mist.Windows"
+                xmlns:helper="clr-namespace:Mist.Helper"
+        mc:Ignorable="d"
+        Title="Друзья" Height="520" Width="300"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        BorderThickness="1"
+        BorderBrush="Black"
+        >
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
+        <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
+        <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
+        <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
+        <Style x:Key="ListBoxItemContainerStyle1" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Padding" Value="4,1"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="Gray"
+                                                         Opacity="0.2"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Border}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.Effect>
+        <DropShadowEffect ShadowDepth="0"
+                          Direction="0"
+                          Color="Black"
+                          Opacity="0.5"/>
+    </Window.Effect>
+
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0.5"
+                             EndPoint="1,0.5">
+            <GradientStop Offset="0" Color="#294b5e"/>
+            <GradientStop Offset="1" Color="#1c232c"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="resize_Grid"
+              MouseDown="resize_Grid_MouseDown"
+              Background="Transparent">
+                <Button x:Name="closeWindow_Button"
+                        Style="{StaticResource close_Button}"
+                        helper:ButtonHelper.ButtonName="Close"
+                        Template="{DynamicResource closeButtonTemplate}"
+                        HorizontalAlignment="Right"/>
+            </Grid>
+            <Grid Grid.Row="1"
+                  Margin="15,0,15,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image x:Name="pfp_Image"
+                       Width="50"
+                       Height="50">
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="0"
+                          Direction="0"
+                          Color="Black"
+                          Opacity="0.5"/>
+                    </Image.Effect>
+                </Image>
+                <StackPanel Orientation="Vertical"
+                            Grid.Column="1"
+                            Margin="15,0,0,0">
+                    <Label x:Name="nickname_Label"
+                           Content="Nickname"
+                           Foreground="DeepSkyBlue"
+                           FontFamily="{StaticResource font_medium}"
+                           FontSize="20"
+                           Padding="0"/>
+                    <Label x:Name="status_Label"
+                           Content="В сети"
+                           Foreground="DeepSkyBlue"
+                           
+                           Padding="0"/>
+                </StackPanel>
+            </Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Grid.Row="2">
+            <ScrollViewer.Background>
+                <LinearGradientBrush StartPoint="0,0.5"
+                                     EndPoint="1,0.5">
+                    <GradientStop Offset="0" Color="#1d1f24"/>
+                    <GradientStop Offset="0.5" Color="#202227"/>
+                    <GradientStop Offset="1" Color="#1d1e23"/>
+                </LinearGradientBrush>
+            </ScrollViewer.Background>
+            <ListBox ItemContainerStyle="{DynamicResource ListBoxItemContainerStyle1}" x:Name="friends_ListBox1"
+                     ScrollViewer.CanContentScroll="False"
+                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                     Background="Transparent"
+                     HorizontalContentAlignment="Stretch"
+                     BorderThickness="0"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -1,0 +1,117 @@
+﻿<Window x:Class="Mist.Windows.PcSpecsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mist.Windows"
+        mc:Ignorable="d"
+                xmlns:helper="clr-namespace:Mist.Helper"
+        Title="Информация" Height="362" Width="500"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_medium}"/>
+            <Setter Property="FontSize" Value="17"/>
+
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Foreground" Value="#c4c4c4"/>
+            <Setter Property="FontFamily" Value="{StaticResource font_light}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="MaxWidth" Value="220"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="5,5"/>
+        </Style>
+    </Window.Resources>
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,1">
+            <GradientStop Offset="0" Color="#070f2b"/>
+            <GradientStop Offset="1" Color="Black"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="resize_Grid"
+              Background="Transparent"
+              Grid.ColumnSpan="2"
+              MouseDown="resize_Grid_MouseDown">
+            <Button x:Name="closeWindow_Button"
+                            Style="{StaticResource close_Button}"
+                            helper:ButtonHelper.ButtonName="Close"
+                            Template="{DynamicResource closeButtonTemplate}"
+                            HorizontalAlignment="Right"/>
+        </Grid>
+        <Image Source="/Assets/mist-white-tp.png"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"
+               Grid.Row="1"
+               Height="175"
+               Margin="20"
+               />
+        <StackPanel x:Name="specs_StackPanel"
+                    Orientation="Vertical"
+                    Grid.Row="1"
+                    Grid.Column="1">
+            <Label Content="СВЕДЕНИЯ О СИСТЕМЕ"
+                   HorizontalAlignment="Center"
+                   FontFamily="{StaticResource font_bold}"
+                   FontSize="22"
+                   Foreground="White"
+                   Margin="0,0,0,5"
+                   Padding="0"/>
+            <StackPanel Orientation="Vertical"
+                        Margin="10"
+                        >
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="ЦП:"/>
+                    <TextBlock x:Name="cpu_TextBlock"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Оперативная память:"/>
+                    <TextBlock x:Name="ram_TextBlock"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Видеокарта:"/>
+                    <TextBlock x:Name="gpu_TextBlock"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Место на диске:"/>
+                    <TextBlock x:Name="disk_TextBlock"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Версия Windows:"/>
+                    <TextBlock x:Name="win_TextBlock"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Язык Windows:"/>
+                    <TextBlock x:Name="winLanguage_TextBlock"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Монитор:"/>
+                    <TextBlock x:Name="monitor_TextBlock"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel x:Name="about_StackPanel"
+                    Orientation="Vertical"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Visibility="Collapsed">
+
+        </StackPanel>
+    </Grid>
+</Window>

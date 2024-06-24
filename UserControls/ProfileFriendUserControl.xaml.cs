@@ -1,6 +1,7 @@
 ﻿using Mist.Helper;
 using Mist.Model;
 using Mist.Pages.MainWindowPages;
+using Mist.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,9 +53,17 @@ namespace Mist.UserControls
             }
         }
 
-        private void UserControl_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void UserControl_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             PageManager.MainFrame.Navigate(new ProfilePage(User));
+        }
+
+        private void UserControl_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (((ListBox)Parent).Name.Equals("friends_ListBox1"))
+            {
+                new MessengerWindow(User).Show();
+            }
         }
     }
 }

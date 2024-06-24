@@ -1,0 +1,121 @@
+﻿<Page x:Class="Mist.Pages.MainWindowPages.SearchFriendsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Mist.Pages.MainWindowPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1920"
+      Title="SearchFriendsPage"
+      SizeChanged="Page_SizeChanged">
+    
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0,0.5"
+                             EndPoint="1,0.5">
+            <GradientStop Color="#1c2c40"
+                          Offset="0" />
+            <GradientStop Color="#2f4e75"
+                          Offset="0.5" />
+            <GradientStop Color="#1c2c40"
+                          Offset="1" />
+        </LinearGradientBrush>
+    </Page.Background>
+
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily"
+                    Value="{StaticResource font_regular}" />
+            <Setter Property="Background"
+                    Value="#264963" />
+            <Setter Property="Foreground"
+                    Value="#6abcd9" />
+            <Setter Property="BorderThickness"
+                    Value="0.5" />
+            <Setter Property="BorderBrush"
+                    Value="Black" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+            <Setter Property="Padding"
+                    Value="8,5" />
+        </Style>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <ControlTemplate x:Key="ButtonTemplate1" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver"
+                         Value="true">
+                    <Setter Property="Cursor"
+                            Value="Hand" />
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
+    
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid x:Name="main_Grid"
+              Margin="480,15,480,50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="Black"
+                    BorderThickness="1">
+                <StackPanel Orientation="Vertical"
+                        x:Name="friends_StackPanel">
+
+                </StackPanel>
+            </Border>
+
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="1"
+                        >
+                <Label Content="Введите никнейм:"
+                       Foreground="White"
+                       FontSize="16"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="nickname_TextBox"
+                             
+                             TextChanged="nickname_TextBox_TextChanged"
+                             Margin="5,0,10,0"
+                             Width="140"
+                                                          Foreground="White"
+                             FontFamily="{StaticResource font_regular}"
+                             Background="#222b35"
+                             BorderBrush="Black"
+                             MaxLength="40"
+                             VerticalContentAlignment="Center"/>
+                    <Button Template="{DynamicResource ButtonTemplate1}" x:Name="search_Button"
+                            Content="Поиск"
+                            HorizontalAlignment="Right"
+                            Click="search_Button_Click"
+                            Grid.Column="1"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

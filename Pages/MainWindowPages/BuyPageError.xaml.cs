@@ -62,7 +62,7 @@ namespace Mist.Pages.MainWindowPages
 
         private void topUp_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            PageManager.MainFrame.Navigate(new TopUpPage());
         }
     }
 }

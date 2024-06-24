@@ -17,7 +17,7 @@
         WindowStartupLocation="CenterScreen"
         SizeChanged="Window_SizeChanged"
         Loaded="Window_Loaded"
-        MouseLeftButtonUp="Window_MouseLeftButtonUp"
+        PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown"
         MinWidth="1080"
         MinHeight="675"
         Closing="Window_Closing"
@@ -284,7 +284,8 @@
            VerticalContentAlignment="Center"
            Margin="0,0,20,0"
                        MouseEnter="friendsWindow_Label_MouseEnter"
-                       MouseLeave="friendsWindow_Label_MouseLeave">
+                       MouseLeave="friendsWindow_Label_MouseLeave"
+                       MouseLeftButtonDown="friendsWindow_Label_MouseLeftButtonDown">
                     <Label.Content>
                         <StackPanel Orientation="Horizontal">
                             <Image x:Name="friends_Image"
@@ -320,14 +321,13 @@
                     Visibility="Collapsed"
                     Grid.RowSpan="4"
                     >
-            <Label Content="Войти в другой аккаунт"/>
             <Label Content="Выйти из аккаунта"
                    x:Name="logOut_Label"
                    MouseLeftButtonDown="logOut_Label_MouseLeftButtonDown"/>
             <Separator/>
-            <Label Content="Настройки"/>
-            <Separator/>
-            <Label Content="Выйти"/>
+            <Label Content="Выйти"
+                   x:Name="quitApp_Label"
+                   MouseLeftButtonDown="quitApp_Label_MouseLeftButtonDown"/>
         </StackPanel>
 
         <StackPanel x:Name="view_Label_StackPanel"
@@ -338,13 +338,14 @@
                     Visibility="Collapsed"
                     Grid.RowSpan="4"
                     >
-            <Label Content="Библиотека"/>
-            <Label Content="Загрузки"/>
+            <Label Content="Библиотека"
+                   x:Name="goToLibrary_Label1"
+                   MouseLeftButtonDown="goToLibrary_Label1_MouseLeftButtonDown"/>
             <Separator/>
-            <Label Content="Друзья и чат"/>
-            <Label Content="Инвентарь"/>
-            <Separator/>
-            <Label Content="Скриншоты"/>
+            <Label Content="Друзья и чат"
+                   x:Name="friendsAndChat_Label"
+                   MouseLeftButtonDown="friendsAndChat_Label_MouseLeftButtonDown"
+                   />
         </StackPanel>
         <StackPanel x:Name="friends_Label_StackPanel"
                     Orientation="Vertical"
@@ -354,14 +355,15 @@
                     Visibility="Collapsed"
                     Grid.RowSpan="4"
                     >
-            <Label x:Name="viewFriendsList_Label" Content="Список друзей"/>
+            <Label x:Name="viewFriendsList_Label" Content="Список друзей"
+                   MouseLeftButtonDown="viewFriendsList_Label_MouseLeftButtonDown"/>
             <Separator/>
-            <Label Content="Добавить друга"/>
-            <Label Content="Изменить имя профиля/аватар"/>
-            <Separator/>
-            <Label Content="В сети"/>
-            <Label Content="Нет на месте"/>
-            <Label Content="Невидимка"/>
+            <Label Content="Добавить друга"
+                   x:Name="addFriend_Label"
+                   MouseLeftButtonDown="addFriend_Label_MouseLeftButtonDown"/>
+            <Label Content="Изменить имя профиля/аватар"
+                   x:Name="changeNameAndPfp_Label"
+                   MouseLeftButtonDown="changeNameAndPfp_Label_MouseLeftButtonDown"/>
         </StackPanel>
         <StackPanel x:Name="games_Label_StackPanel"
                     Orientation="Vertical"
@@ -371,7 +373,9 @@
                     Visibility="Collapsed"
                     Grid.RowSpan="4"
                     >
-            <Label Content="Перейти в библиотеку"/>
+            <Label Content="Перейти в библиотеку"
+                   x:Name="goToLibrary_Label"
+                   MouseLeftButtonDown="goToLibrary_Label_MouseLeftButtonDown"/>
         </StackPanel>
         <StackPanel x:Name="help_Label_StackPanel"
                     Orientation="Vertical"
@@ -381,11 +385,13 @@
                     Visibility="Collapsed"
                     Grid.RowSpan="4"
                     >
-            <Label Content="Служба поддержки Mist"/>
+            <Label Content="Сведения о системе"
+                   x:Name="system_Specs_Label"
+                   MouseLeftButtonDown="system_Specs_Label_MouseLeftButtonDown"/>
             <Separator/>
-            <Label Content="Сведения о системе"/>
-            <Separator/>
-            <Label Content="О Mist"/>
+            <Label Content="О Mist"
+                   x:Name="aboutMist_Label"
+                   MouseLeftButtonDown="aboutMist_Label_MouseLeftButtonDown"/>
         </StackPanel>
         <StackPanel x:Name="profile_Label_StackPanel"
                     Orientation="Vertical"
@@ -395,11 +401,11 @@
                     Tag="DropDown"
                     Visibility="Collapsed">
             <Label Content="Мой профиль"
-                   x:Name="myProfile_Label"/>
-            <Label Content="Детали аккаунта: "
-                   x:Name="accountDetails_Label"/>
-            <Label Content="Мой кошелек: "
-                   x:Name="myWallet_Label"/>
+                   x:Name="myProfile_Label"
+                   MouseLeftButtonDown="myProfile_Label_MouseLeftButtonDown"/>
+            <Label Content="Мой кошелек"
+                   x:Name="myWallet_Label"
+                   MouseLeftButtonDown="myWallet_Label_MouseLeftButtonDown"/>
         </StackPanel>
         <StackPanel x:Name="notifications_Button_StackPanel"
                     Orientation="Vertical"
