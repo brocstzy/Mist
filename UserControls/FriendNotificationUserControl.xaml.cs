@@ -39,6 +39,11 @@ namespace Mist.UserControls
 
         private void UserControl_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+
+        }
+
+        private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
             var confWin = new ConfirmationWindow();
             confWin.text_TextBlock.Text = $"Вы уверены, что хотите добавить пользователя {User.Nickname} в друзья?";
             confWin.ShowDialog();

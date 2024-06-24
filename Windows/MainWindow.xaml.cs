@@ -312,7 +312,7 @@ namespace Mist.Windows
 
         private void aboutMist_Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            new PcSpecsWindow("zxc") { Owner = this }.Show();
         }
     }
 }

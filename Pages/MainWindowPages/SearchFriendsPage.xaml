@@ -89,7 +89,7 @@
 
             <StackPanel Orientation="Vertical"
                         Grid.Column="1"
-                        >
+                        Margin="10,0,0,0">
                 <Label Content="Введите никнейм:"
                        Foreground="White"
                        FontSize="16"/>

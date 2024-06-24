@@ -64,7 +64,7 @@ namespace Mist.Pages.MainWindowPages
             else bio_TextBlock.Text = "Пользователь не предоставил информации.";
             mistLevel_TextBlock.Text = $"{UserGames.Count}";
             gameCount_Label.Content = $"{UserGames.Count}";
-            groupCount_Label.Content = $"{User.Groups.Count}";
+            groupCount_Label.Content = $"{App.Context.GroupMembers.Where(gm => gm.MemberId == User.Id).Select(gm => gm.Group).ToList().Count}";
             friendsCount_Label.Content = $"{UserFriendShips.Count}";
             if (User.DisplayCountry!= null)
             {
@@ -153,7 +153,7 @@ namespace Mist.Pages.MainWindowPages
         public void RefreshGroups()
         {
             groups_StackPanel.Children.Clear();
-            var userGroups = User.Groups.ToList();
+            var userGroups = App.Context.GroupMembers.Where(gm => gm.MemberId == User.Id).Select(gm => gm.Group).ToList();
             if (userGroups.Any())
             {
                 foreach (var group in userGroups)

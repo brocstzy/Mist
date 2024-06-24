@@ -9,6 +9,7 @@
              MouseEnter="UserControl_MouseEnter"
              MouseLeave="UserControl_MouseLeave"
              PreviewMouseLeftButtonUp="UserControl_PreviewMouseLeftButtonUp"
+             MouseLeftButtonDown="UserControl_MouseLeftButtonDown"
              Height="65">
     <UserControl.Background>
         <SolidColorBrush Color="Gray"

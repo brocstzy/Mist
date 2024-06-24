@@ -65,7 +65,8 @@
         <StackPanel x:Name="specs_StackPanel"
                     Orientation="Vertical"
                     Grid.Row="1"
-                    Grid.Column="1">
+                    Grid.Column="1"
+                    Visibility="Visible">
             <Label Content="СВЕДЕНИЯ О СИСТЕМЕ"
                    HorizontalAlignment="Center"
                    FontFamily="{StaticResource font_bold}"
@@ -75,6 +76,7 @@
                    Padding="0"/>
             <StackPanel Orientation="Vertical"
                         Margin="10"
+                        Visibility="Visible"
                         >
                 <StackPanel Orientation="Horizontal">
                     <Label Content="ЦП:"/>
@@ -111,7 +113,18 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Visibility="Collapsed">
-
+            <Label Content="MIST"
+                   HorizontalAlignment="Center"
+                   FontSize="32"
+                   FontFamily="{StaticResource font_bold}"/>
+            <TextBlock Text="Информационная система для покупки, продажи компьютерных игр, взаимодействия пользователей друг с другом."
+                       HorizontalAlignment="Left"
+                       Width="320"
+                       MaxWidth="320"
+                       FontSize="20"/>
+            <Label Content="Версия: 1.0.0"
+                   Margin="0,80,0,0"/>
+            <Label Content="Разработчик: Аскар Галеев"/>
         </StackPanel>
     </Grid>
 </Window>

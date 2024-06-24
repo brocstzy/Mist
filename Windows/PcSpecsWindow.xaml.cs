@@ -29,6 +29,17 @@ namespace Mist.Windows
             InitializeComponent();
             RefreshSpecs();
         }
+        public PcSpecsWindow(string zxc)
+        {
+            InitializeComponent();
+            RefreshAbout();
+        }
+
+        private void RefreshAbout()
+        {
+            specs_StackPanel.Visibility = Visibility.Collapsed;
+            about_StackPanel.Visibility = Visibility.Visible;
+        }
 
         private void RefreshSpecs()
         {

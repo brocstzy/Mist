@@ -617,7 +617,7 @@
                                      Background="Transparent"
                                      BorderThickness="0"
                                      HorizontalContentAlignment="Stretch"
-                                     Height="100"
+                                     MaxHeight="200"
                                      Margin="-10,0"/>
                         </StackPanel>
 
